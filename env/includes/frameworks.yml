@@ -83,10 +83,11 @@ frameworks:
   # LMV - converts files to LMV
   tk-framework-lmv_v0.1.x:
     location:
-      type: dev
-      windows_path: Z:\dev\tk-framework-lmv
-      mac_path: /opt/shotgun/dev/tk-framework-lmv
-      version: 0.0.38
+      type: app_store
+      name: tk-framework-lmv
+      # windows_path: Z:\dev\tk-framework-lmv
+      # mac_path: /opt/shotgun/dev/tk-framework-lmv
+      version: v0.1.1
   
   # Forge
   tk-framework-forge_v0.1.x:
