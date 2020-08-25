@@ -110,9 +110,9 @@ engines.tk-vred.location:
 
 # Sketchbook
 engines.tk-sketchbook.location:
-  type: app_store
-  name: tk-sketchbook
-  version: v0.2.9
-  # type: dev
-  # mac_path: /Users/t_aitcr/git/tk-sketchbook
-  # windows_path: C:\Users\t_aitcradmin\git\tk-sketchbook
+  # name: tk-sketchbook
+  type: git_branch
+  branch: SKB-2230-qt-styles
+  path: https://github.com/shotgunsoftware/tk-sketchbook.git
+  version: 6e63b4c
+
