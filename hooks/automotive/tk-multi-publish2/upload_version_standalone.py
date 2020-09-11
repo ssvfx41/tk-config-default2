@@ -244,15 +244,11 @@ class UploadVersionPlugin(HookBaseClass):
                 #>>>>>translation job sent to do thumbnails but how to get them after and what to do with them?
 
                 ### DEBUG
-                import sys
-                # Change path to match where 'ptvsd' package
-                sys.path.append("/Users/oues/python_libs")
-                
-                import ptvsd
-                # Allow other computers to attach to ptvsd at this IP address and port
-                ptvsd.enable_attach(address=('localhost', 5678), redirect_output=True)
-                # Pause the program until a remote debugger is attached
-                ptvsd.wait_for_attach()
+                # import sys
+                # sys.path.append("/Users/oues/python_libs")
+                # import ptvsd
+                # ptvsd.enable_attach(redirect_output=True)
+                # ptvsd.wait_for_attach()
                 ### END DEBUG
 
                 framework_forge = self.load_framework("tk-framework-forge_v0.1.x")
@@ -295,7 +291,10 @@ class UploadVersionPlugin(HookBaseClass):
                     self.logger.error("Forge Cloud Translation -- manifest failed")
                 
                 forge_client._close_connection()
+
         else:
+            # 3D Version = False
+
             thumbnail_path = item.get_thumbnail_as_path()
             self.logger.debug("Using thumbnail image as Version media")
             if thumbnail_path:
