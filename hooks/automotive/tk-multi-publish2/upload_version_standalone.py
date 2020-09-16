@@ -182,115 +182,54 @@ class UploadVersionPlugin(HookBaseClass):
         :param item: Item to process
         """
 
+        ## DEBUG
+        # import sys
+        # sys.path.append("/Users/oues/python_libs")
+        # import ptvsd
+        # ptvsd.enable_attach(redirect_output=True)
+        # ptvsd.wait_for_attach()
+        # ## END DEBUG
+
         # create the Version in Shotgun
         super(UploadVersionPlugin, self).publish(settings, item)
-
 
         # generate the Version content: LMV file or simple 2D thumbnail
         if settings.get("3D Version").value is True:
             self.logger.debug("Creating LMV files from source file")
 
-            if settings.get("Translation Worker").value == "local":
-                # translate the file to lmv and upload the corresponding package to the Version
-                package_path, thumbnail_path, output_directory = self._translate_file_to_lmv(item)
+            # translate the file to lmv and upload the corresponding package to the Version
+            package_path, thumbnail_path, output_directory = self._translate_file_to_lmv(
+                item, settings.get("Translation Worker").value
+            )
 
-                self.logger.debug("Translation package path {}".format(package_path))
-                self.logger.debug("Translation thumbnail path {}".format(thumbnail_path))
+            self.logger.debug("Translation package path {}".format(package_path))
+            self.logger.debug("Translation thumbnail path {}".format(thumbnail_path))
+            self.logger.debug("Uploading LMV file to Shotgun")
+            self.logger.debug("parent {}, shotgun {}".format(self.parent, self.parent.shotgun))
 
-                self.logger.debug("Uploading LMV file to Shotgun")
-                self.logger.debug("parent {}, shotgun {}".format(self.parent, self.parent.shotgun))
-                self.parent.shotgun.upload(
+            self.parent.shotgun.update(
+                entity_type="Version",
+                entity_id=item.properties["sg_version_data"]["id"],
+                data={
+                    "sg_translation_type": "LMV"
+                }
+            )
+            self.parent.shotgun.upload(
+                entity_type="Version",
+                entity_id=item.properties["sg_version_data"]["id"],
+                path=package_path,
+                field_name="sg_uploaded_movie"
+            )
+            # if the Version thumbnail is empty, update it with the newly created thumbnail
+            if not item.get_thumbnail_as_path() and thumbnail_path:
+                self.parent.shotgun.upload_thumbnail(
                     entity_type="Version",
                     entity_id=item.properties["sg_version_data"]["id"],
-                    path=package_path,
-                    field_name="sg_uploaded_movie"
-                    # field_name="sg_translation_files"
+                    path=thumbnail_path
                 )
-                self.parent.shotgun.update(
-                    entity_type="Version",
-                    entity_id=item.properties["sg_version_data"]["id"],
-                    data={
-                        "sg_translation_type": "LMV"
-                    }
-                )
-                # if the Version thumbnail is empty, update it with the newly created thumbnail
-                if not item.get_thumbnail_as_path() and thumbnail_path:
-                    self.parent.shotgun.upload_thumbnail(
-                        entity_type="Version",
-                        entity_id=item.properties["sg_version_data"]["id"],
-                        path=thumbnail_path
-                    )
-                # delete the temporary folder on disk
-                self.logger.debug("Deleting temporary folder")
-                shutil.rmtree(output_directory)
-            
-            else:
-                # Use Forge Cloud Services for translation
-                #
-                # 1. set up http client and forge app credentials
-                #>>>>>will need to create an official forge app and store credentials better
-                #>>>>>http ... ok to use the tank_vendor HTTP class or should we use the forge python client?
-                # 2. authenticate with forge
-                # 3. create bucket for upload
-                #>>>>>how to choose bucket? is there a bucket that current is being used?
-                # 4. upload files to OSS
-                #>>>>>need to use the 'resumable' endpoint for files >100MB
-                # 5. kick off translation job
-                # 6. check manifest for status
-                #>>>>>this is what takes the longest -- don't need to wait for it since we already have the urn but on failure?
-                # 7. update the version fields?
-                #>>>>>add urn field? do we still need to upload the zip folder? (how to get the zip?)
-                # 8. if no version thumbnail, update it with the created thumbnail
-                #>>>>>translation job sent to do thumbnails but how to get them after and what to do with them?
-
-                ### DEBUG
-                # import sys
-                # sys.path.append("/Users/oues/python_libs")
-                # import ptvsd
-                # ptvsd.enable_attach(redirect_output=True)
-                # ptvsd.wait_for_attach()
-                ### END DEBUG
-
-                framework_forge = self.load_framework("tk-framework-forge_v0.1.x")
-                if not framework_forge:
-                    self.logger.error(
-                        "Could not load Forge framework"
-                    )
-
-                self.logger.debug("Forge framework {}".format(framework_forge))
-                
-                forge_api = framework_forge.import_module("forge_api")
-                forge_client = forge_api.ForgeClient()
-                forge_client._authenticate()
-                forge_client._create_bucket()
-                upload_data = forge_client.upload_file(item.properties.path, item.name)
-
-                # Should we use tank_endor representer.py instead?
-                urn = base64.urlsafe_b64encode(bytes(upload_data["objectId"].rstrip('=')))
-                self.logger.debug("base64 url safe {}".format(urn))
-                name = upload_data["objectKey"]
-                result = forge_client.post_job(urn, name)
-
-                # TODO: make this op async, or return right away since we don't really need to wait for the job complete,
-                # we already have the urn, but we would need to update the status once complete
-                job_finished = False
-                manifest = None
-                while not job_finished:
-                    manifest = forge_client.get_manifest(result["urn"])
-                    job_finished = manifest["status"] != "pending" and manifest["status"] != "inprogress"
-                
-                if manifest and manifest["status"] == "success":
-                    self.parent.shotgun.update(
-                        entity_type="Version",
-                        entity_id=item.properties["sg_version_data"]["id"],
-                        data={
-                            "sg_urn": manifest["urn"]
-                        }
-                    )
-                else:
-                    self.logger.error("Forge Cloud Translation -- manifest failed")
-                
-                forge_client._close_connection()
+            # delete the temporary folder on disk
+            self.logger.debug("Deleting temporary folder")
+            shutil.rmtree(output_directory)
 
         else:
             # 3D Version = False
@@ -322,7 +261,7 @@ class UploadVersionPlugin(HookBaseClass):
                 self.logger.debug("Deleting temporary folder")
                 shutil.rmtree(output_directory)
 
-    def _translate_file_to_lmv(self, item):
+    def _translate_file_to_lmv(self, item, translation_worker="local"):
         """
         Translate the current Alias file as an LMV package in order to upload it to Shotgun as a 3D Version
 
@@ -333,29 +272,197 @@ class UploadVersionPlugin(HookBaseClass):
             - The path to the temporary folder where the LMV files have been processed
         """
 
-        framework_lmv = self.load_framework("tk-framework-lmv_v0.1.x")
-        translator = framework_lmv.import_module("translator")
+        package_path = None
+        thumbnail_path = None
+        output_directory = None
 
-        # translate the file to lmv
-        lmv_translator = translator.LMVTranslator(item.properties.path)
-        self.logger.info("Converting file to LMV")
-        lmv_translator.translate()
+        if translation_worker == "local":
+            framework_lmv = self.load_framework("tk-framework-lmv_v0.1.x")
+            translator = framework_lmv.import_module("translator")
 
-        # package it up
-        self.logger.info("Packaging LMV files")
-        package_path, thumbnail_path = lmv_translator.package(
-            svf_file_name=str(item.properties["sg_version_data"]["id"]),
-            thumbnail_path=item.get_thumbnail_as_path()
-        )
+            # translate the file to lmv
+            lmv_translator = translator.LMVTranslator(item.properties.path)
+            self.logger.info("Converting file to LMV")
+            lmv_translator.translate()
 
-        if not thumbnail_path and item.type_spec == "file.vred":
-            thumbnail_path = os.path.join(
-                self.disk_location,
-                "icons",
-                "no_preview_vred.png"
+            # package it up
+            self.logger.info("Packaging LMV files")
+            package_path, thumbnail_path = lmv_translator.package(
+                svf_file_name=str(item.properties["sg_version_data"]["id"]),
+                thumbnail_path=item.get_thumbnail_as_path()
             )
 
-        return package_path, thumbnail_path, lmv_translator.output_directory
+            if not thumbnail_path and item.type_spec == "file.vred":
+                thumbnail_path = os.path.join(
+                    self.disk_location,
+                    "icons",
+                    "no_preview_vred.png"
+                )
+
+            # return package_path, thumbnail_path, lmv_translator.output_directory
+            output_directory = lmv_translator.output_directory
+        
+        elif translation_worker == "forge":
+            framework_forge = self.load_framework("tk-framework-forge_v0.1.x")            
+            forge_api = framework_forge.import_module("forge_api")
+            
+            forge_client = forge_api.ForgeClient()
+
+            # Authenticate with forge
+            forge_client._authenticate()
+
+            # Create the S3 bucket if not already created, to upload our files to
+            forge_client._create_bucket()
+
+            # Upload file pointed to at the item properties path, to forge
+            upload_data = forge_client.upload_file(item.properties.path, item.name)
+
+            # Get the object id from the payload returned from forge and base64 safe url encode it, to
+            # pass to post translation job (as URN)
+            # 
+            # NOTE: Should we use tank_endor representer.py instead?
+            urn = base64.urlsafe_b64encode(bytes(upload_data["objectId"].rstrip('=')))
+            result = forge_client.post_job(urn, upload_data["objectKey"])
+
+            # Poll the manifest for the job we kicked off to know when our job has completed
+            # 
+            # TODO: make this op async, or return right away since we don't really need to wait for the job complete,
+            # we already have the urn, but we would need to update the status once complete
+            job_finished = False
+            manifest = None
+            while not job_finished:
+                manifest = forge_client.get_manifest(result["urn"])
+                job_finished = manifest["status"] != "pending" and manifest["status"] != "inprogress"
+            
+            if manifest and manifest["status"] == "success":
+                # Forge Option #1:
+                # Set custom field on Version for "URN" value for SG to load in Forge Viewer
+                # Pro: fast operation to translate -- job is sent to Forge and we're free to go on
+                # Con: requires SG code change to load using URN, in addition to local URL. As well,
+                # a Forge App/credentials needs to be shared between Toolkit and SG
+                self.parent.shotgun.update(
+                    entity_type="Version",
+                    entity_id=item.properties["sg_version_data"]["id"],
+                    data={
+                        "sg_urn": manifest["urn"]
+                    }
+                )
+
+                # Forge Option #2:
+                # More of a proof of concept, but we can download the translation files from
+                # Forge, and then pass to SG API to upload to S3 for 3D Viewer to access in SG
+                # Pro: No code changes to SG, only toolkit
+                # Con: Redundancy in uploading to Forge, which uploads to S3 -- then we download the
+                # translation files to upload again to SG this time, which also stores it on S3
+                # NOTE: could we modify SG to point to Forge S3 location? Then we can get the best
+                # of #1 and #2, but uploading to Forge and minimal code change to SG to get S3 files
+
+                # Parse the manifest to extract the derviatives to download
+                (derivatives, thumbnails) = forge_client.parse_manifest(manifest['derivatives'])
+
+                # Set up directories to download derivatives and zip them up
+                # TODO: use temp dir and then remove it
+                version_id = str(item.properties["sg_version_data"]["id"])
+                zip_directory = "/opt/shotgun/forge-test/"
+
+                # The root directory to where derivatives will be downloaded to.
+                root_directory = "/opt/shotgun/forge-test/{}/".format(version_id)
+                if not os.path.isdir(root_directory):
+                    os.mkdir(root_directory) 
+
+                # Directory that derivatives will be downloaded to.
+                output_directory = os.path.join(root_directory, "1")
+                if not os.path.isdir(output_directory):
+                    os.mkdir(output_directory)
+
+                # Download all derivates from Forge, including any file dependencies
+                for derivative in derivatives:
+                    # Remember the SVF file name so that we can rename it later
+                    if forge_client.is_svf(derivative):
+                        derivative["root_filename"] = "{}.svf".format(version_id)
+            
+                    path = os.path.join(output_directory, derivative["root_filename"])
+                    forge_client.download_derivative(manifest["urn"], derivative["urn"], path)
+                    
+                    # Download any dependencies for the derivative
+                    for filename in derivative["files"]:
+                        derivative_urn = os.path.join(derivative["base_path"], filename)
+                        path = os.path.join(output_directory, filename)
+                        forge_client.download_derivative(manifest["urn"], derivative_urn, path)
+
+                # get the thumbnail data
+                thumbnail_data = None
+                thumbnail_source_path = item.get_thumbnail_as_path()
+                if thumbnail_source_path:
+                    with open(thumbnail_source_path, "rb") as fp:
+                        thumbnail_data = fp.read()
+                elif thumbnails:
+                    # Just take the first thumbnail for now.
+                    thumbnail_path = os.path.join(output_directory, thumbnails[-1]["root_filename"])
+                    with open(thumbnail_path, "rb") as fp:
+                        thumbnail_data = fp.read()
+
+                # write the thumbnails on disk
+                if thumbnail_data:
+                    images_dir_path = os.path.join(root_directory, "images")
+                    if not os.path.exists(images_dir_path):
+                        os.makedirs(images_dir_path)
+
+                    thumbnail_path = os.path.join(
+                        images_dir_path, "{}.jpg".format(version_id)
+                    )
+                    with open(thumbnail_path, "wb") as fp:
+                        fp.write(thumbnail_data)
+
+                if not thumbnail_path and item.type_spec == "file.vred":
+                    thumbnail_path = os.path.join(
+                        self.disk_location,
+                        "icons",
+                        "no_preview_vred.png"
+                    )
+                
+                # Zip the package
+                zip_path = shutil.make_archive(
+                    base_name=os.path.join(zip_directory, version_id),
+                    format="zip",
+                    root_dir=root_directory,
+                )
+
+                # Update the translation type to LMV and upload the zip folder, as we do for local translations.
+                self.parent.shotgun.update(
+                    entity_type="Version",
+                    entity_id=item.properties["sg_version_data"]["id"],
+                    data={
+                        "sg_translation_type": "LMV"
+                    }
+                )
+                self.parent.shotgun.upload(
+                    entity_type="Version",
+                    entity_id=item.properties["sg_version_data"]["id"],
+                    path=zip_path,
+                    field_name="sg_uploaded_movie"
+                )
+
+                # FIXME thumbnails only worked a few times? now they do not...
+                # if the Version thumbnail is empty, update it with the newly created thumbnail
+                if not item.get_thumbnail_as_path() and thumbnail_path:
+                    self.parent.shotgun.upload_thumbnail(
+                        entity_type="Version",
+                        entity_id=item.properties["sg_version_data"]["id"],
+                        path=thumbnail_path
+                    )
+
+            else:
+                self.logger.error("Forge Cloud Translation -- manifest failed")
+            
+            # Done. Close the forge connection.
+            forge_client._close_connection()
+    
+        else:
+            self.logger.error("Unknown Translation Worker Type")
+        
+        return package_path, thumbnail_path, output_directory
+
 
     def _get_thumbnail_from_lmv(self, item):
         """
