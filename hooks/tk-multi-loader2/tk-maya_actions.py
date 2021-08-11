@@ -329,14 +329,14 @@ class MayaActions(HookBaseClass):
         if not os.path.exists(path):
             raise Exception("File not found on disk - '%s'" % path)
 
-        if not cmds.pluginInfo('sceneAssembly.mll', querry=True, load=True):
+        if not cmds.pluginInfo('sceneAssembly.mll', query=True, loaded=True):
             cmds.loadPlugin('sceneAssembly.mll')
 
         namespace = self._get_namespace(sg_publish_data)
         asm_ref = cmds.assembly(name=namespace + '_ar', type='assemblyReference')
         cmds.setAttr(asm_ref + '.definition', path, type='string')
         cmds.namespace(ren=(
-            cmds.assembly(asm_ref, querry=True, rns=True),
+            cmds.assembly(asm_ref, query=True, rns=True),
             asm_ref.replace('_ar', '_ns')))
 
     def _do_import(self, path, sg_publish_data):
