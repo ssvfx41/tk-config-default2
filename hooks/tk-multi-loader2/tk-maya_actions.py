@@ -130,6 +130,16 @@ class MayaActions(HookBaseClass):
                 }
             )
 
+        if "assembly_reference" in actions:
+            action_instances.append(
+                {
+                    "name": "assembly_reference",
+                    "params": None,
+                    "caption": "Create Assembly Reference",
+                    "description": "Creates an assembly reference node for the selected item..",
+                }
+            )
+
         return action_instances
 
     def execute_multiple_actions(self, actions):
@@ -202,6 +212,9 @@ class MayaActions(HookBaseClass):
         if name == "reference":
             self._create_reference(path, sg_publish_data)
 
+        if name == "assembly_reference":
+            self._create_assembly_reference(path, sg_publish_data)
+
         if name == "import":
             self._do_import(path, sg_publish_data)
 
@@ -269,6 +282,13 @@ class MayaActions(HookBaseClass):
     ##############################################################################################################
     # helper methods which can be subclassed in custom hooks to fine tune the behaviour of things
 
+    def _get_namespace(self, sg_publish_data):
+        '''
+        Returns a namespce extracted from the sg_publish_data
+        '''
+        namespace = sg_publish_data.get('entity').get('name')
+        return namespace.replace(' ', '_')
+
     def _create_reference(self, path, sg_publish_data):
         """
         Create a reference with the same settings Maya would use
@@ -297,6 +317,27 @@ class MayaActions(HookBaseClass):
             mergeNamespacesOnClash=False,
             namespace=namespace,
         )
+
+    def _create_assembly_reference(self, path, sg_publish_data):
+        '''
+        Create an assembly reference with the same settings Maya would use
+        if you used the create settings dialog.
+
+        :param path: Path to file.
+        :param sg_publish_data: Shotgun data dictionary with all the standard publish fields.
+        '''
+        if not os.path.exists(path):
+            raise Exception("File not found on disk - '%s'" % path)
+
+        if not cmds.pluginInfo('sceneAssembly.mll', querry=True, load=True):
+            cmds.loadPlugin('sceneAssembly.mll')
+
+        namespace = self._get_namespace(sg_publish_data)
+        asm_ref = cmds.assembly(name=namespace + '_ar', type='assemblyReference')
+        cmds.setAttr(asm_ref + '.definition', path, type='string')
+        cmds.namespace(ren=(
+            cmds.assembly(asm_ref, querry=True, rns=True),
+            asm_ref.replace('_ar', '_ns')))
 
     def _do_import(self, path, sg_publish_data):
         """
