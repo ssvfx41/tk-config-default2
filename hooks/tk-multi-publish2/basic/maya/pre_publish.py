@@ -12,6 +12,9 @@ import sgtk
 from maya import cmds
 from PySide2.QtWidgets import QMessageBox
 
+from mayapy.maya_tools.sanity_checker import content_checker
+reload(content_checker)
+
 HookBaseClass = sgtk.get_hook_baseclass()
 
 
@@ -31,15 +34,13 @@ class PrePublishHook(HookBaseClass):
         # engine = sgtk.platform.current_engine()
 
         # Check for the right scene stuff
-        # TODO move this part to a checker module
-        # Check for the unknown reference nodes
-        for ref_node in cmds.ls(type='reference'):
-            try:
-                cmds.referenceQuery(ref_node, filename=True)
-            except Exception as e:
-                cmds.lockNode(ref_node, lock=False)
-                cmds.delete(ref_node)
+        ctx = sgtk.platform.current_engine().context
+        asset_checker = content_checker.AssetChecker()
+        errors = asset_checker.check_context(ctx)
+        if errors:
+            return False
 
+        # Check if geometry groups selected to publish for certain tasks
         message = None
         # Get groups only
         groups = [a for a in cmds.ls(assemblies=True) if not cmds.listRelatives(a, shapes=1)]
