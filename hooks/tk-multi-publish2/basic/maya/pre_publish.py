@@ -36,8 +36,7 @@ class PrePublishHook(HookBaseClass):
         # Check for the right scene stuff
         ctx = sgtk.platform.current_engine().context
         asset_checker = content_checker.AssetChecker()
-        errors = asset_checker.check_context(ctx)
-        if errors:
+        if not asset_checker.check_context(ctx):
             return False
 
         # Check if geometry groups selected to publish for certain tasks
