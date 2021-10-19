@@ -300,8 +300,12 @@ class MayaShaderPublishPlugin(HookBaseClass):
         # we want to override the {name} token of the publish path with the
         # name of the object being exported. get the name stored by the
         # collector and remove any non-alphanumeric characters
-        object_display = re.sub(r'[\W_]+', '', object_name)
-        work_fields["name"] = object_display
+        object_display = object_name.rsplit(':', 1)[-1]
+        object_display = re.sub(r'[\W_]+', '-', object_display)
+        if work_fields.get("name"):
+            work_fields["name"] = work_fields["name"] + '-' + object_display
+        else:
+            work_fields["name"] = object_display
 
         # set the display name as the name to use in SG to represent the publish
         item.properties["publish_name"] = object_display
