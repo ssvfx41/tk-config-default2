@@ -10,7 +10,8 @@
 
 import os
 import maya.cmds as cmds
-import maya.mel as mel
+# import maya.mel as mel
+
 import sgtk
 
 from tank_vendor import six
@@ -154,8 +155,8 @@ class MayaArnoldStandinPublishPlugin(HookBaseClass):
 
         # we've validated the publish template. add it to the item properties
         # for use in subsequent methods
-        item.local_properties.publish_template = publish_template
         # item.properties["publish_template"] = publish_template
+        item.local_properties.publish_template = publish_template
 
         # because a publish template is configured, disable context change. This
         # is a temporary measure until the publisher handles context switching
@@ -202,8 +203,8 @@ class MayaArnoldStandinPublishPlugin(HookBaseClass):
 
         # get the configured work file template
         work_template = item.parent.properties.get("work_template")
-        publish_template = item.local_properties.publish_template
         # publish_template = item.properties.get("publish_template")
+        publish_template = item.local_properties.publish_template
 
         # get the current scene path and extract fields from it using the work
         # template:
@@ -271,7 +272,8 @@ class MayaArnoldStandinPublishPlugin(HookBaseClass):
 
         # set the publish type in the item's properties. the base plugin will
         # use this when registering the file with Shotgun
-        item.properties["publish_type"] = "Standin"
+        # item.properties["publish_type"] = "Standin"
+        item.local_properties["publish_type"] = "Standin"
         # Now that the path has been generated, hand it off to the
         super(MayaArnoldStandinPublishPlugin, self).publish(settings, item)
 
