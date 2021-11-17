@@ -39,7 +39,6 @@ keys:
 
     camera:
         type: str
-        filter_by: alphanumeric
         default: main_cam
 
     houdini_ext:
