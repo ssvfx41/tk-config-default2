@@ -36,7 +36,12 @@ keys:
         type: str
         filter_by: alphanumeric
         default: rgba
-        
+
+    camera:
+        type: str
+        filter_by: alphanumeric
+        default: main_cam
+
     houdini_ext:
         type: str
         filter_by: '^(geo|bgeo|ifd|vdb)(\.gz|\.sc)?$'
