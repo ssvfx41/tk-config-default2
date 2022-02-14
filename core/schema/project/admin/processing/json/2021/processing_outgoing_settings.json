@@ -60,6 +60,7 @@
                         "raw": true
                     },
                     "main_write": {
+                        "knob_order": [],
                         "create_directories": true,
                         "raw": true
                     }
@@ -119,6 +120,7 @@
                         "raw": true
                     },
                     "main_write": {
+                        "knob_order": [],
                         "create_directories": true,
                         "raw": true
                     }
@@ -182,6 +184,7 @@
                         "colorspace": "linear"
                     },
                     "main_write": {
+                        "knob_order": [],
                         "create_directories": true,
                         "raw": true
                     }
