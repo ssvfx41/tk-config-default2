@@ -15,6 +15,7 @@ to set environment variables or run scripts as part of the app initialization.
 """
 import os
 import sys
+import sgtk
 
 roots = [os.getenv('SSVFX_PIPELINE_DEV'), os.getenv('SSVFX_PIPELINE'), "//10.80.8.252/VFX_Pipeline"]
 for root_path in roots:
@@ -26,6 +27,11 @@ for root_path in roots:
         break
 
 from ss_config.hooks.tk_multi_launchapp.before_app_launch import SsBeforeAppLaunch
+
+# Synchronizing folder structure to fix any naming mismatches
+project = sgtk.platform.current_engine().context.project
+tk = sgtk.sgtk_from_entity(entity_type=project["type"], entity_id=project["id"])
+tk.synchronize_filesystem_structure(full_sync=True)
 
 
 class BeforeAppLaunch(SsBeforeAppLaunch):
