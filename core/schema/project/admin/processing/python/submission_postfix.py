@@ -60,6 +60,14 @@ def dict_nav(dictionary, sequence):
 
 
 def run_post_fix(json_filepath):
+    """
+        Default submission post-fix process
+        Args:
+            json_filepath: Full path to a valid pump json file.
+
+        Returns: 0 if process completes without errors.
+
+        """
     logger.info("Loading json data...")
     with open(json_filepath, "r") as file_read:
         json_data = json_reader.json_load_version_check(file_read)

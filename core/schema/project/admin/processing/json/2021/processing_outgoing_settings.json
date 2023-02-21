@@ -21,6 +21,7 @@
                 "process_settings":{
                     "title" : "V000 Thumbnail",
                     "description" : "Creates a thumbnail for version zero in Shotgrid",
+                    "process_type": "vzero",
                     "output_root": "primary",
                     "output_directory": "editorial/v000/{entity}",
                     "output_file": "{output_file}",
@@ -75,6 +76,7 @@
             "client-version-dnxhd":{
                 "process_settings":{
                     "title" : "Client DNxHD",
+                    "process_type": "movie",
                     "output_root": "primary",
                     "output_directory": "{entity}",
                     "output_file": "{output_file}",
@@ -130,6 +132,7 @@
             "client-version-exr":{
                 "process_settings":{
                     "title" : "EXRs",
+                    "process_type": "seq",
                     "output_root": "primary",            
                     "output_directory": "{output_file}/4448x3096",
                     "output_file": "{output_file}",
