@@ -191,6 +191,7 @@ def run_post_fix(json_filepath):
                 nuke_settings["color_switch"] = {"which": 2}
                 logger.info(">>>>> color_switch: %s" % nuke_settings["color_switch"])
 
+    logger.info("---")
     logger.info(">>>>> Completed Postfix Process, writing json...")
 
     # re-write JSON file

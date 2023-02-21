@@ -86,6 +86,7 @@ def run_post_fix(json_filepath):
 
         logger.info(">>>>> Completed revisions for %s" % job_key)
 
+    logger.info("---")
     logger.info(">>>>> Completed Postfix Process, writing json...")
 
     # re-write JSON file
