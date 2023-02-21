@@ -28,6 +28,7 @@ for repo in repos:
         )
 
 from general.basic_utils import get_logger
+from general.file_functions import json_reader
 
 logger = get_logger(__name__)
 
@@ -61,10 +62,10 @@ def dict_nav(dictionary, sequence):
 def run_post_fix(json_filepath):
     logger.info("Loading json data...")
     with open(json_filepath, "r") as file_read:
-        file_str = file_read.read()
-        file_read.close()
+        json_data = json_reader.json_load_version_check(file_read)
 
-    json_data = json.loads(file_str)
+    logger.info("Loaded Json data successfully.")
+    logger.info("---")
 
     processes = json_data["processes"]
     if not processes:
