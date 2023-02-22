@@ -21,7 +21,7 @@
                 "process_settings":{
                     "title" : "V000 Thumbnail",
                     "description" : "Creates a thumbnail for version zero in Shotgrid",
-                    "process_type": "vzero",
+                    "process_type": "zerothumb",
                     "output_root": "primary",
                     "output_directory": "editorial/v000/{entity}",
                     "output_file": "{output_file}",
