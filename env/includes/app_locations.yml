@@ -141,3 +141,8 @@ apps.tk-mari-projectmanager.location:
   type: app_store
   version: v1.3.0
 frameworks: '@frameworks'
+
+# studio tools
+apps.ssvfx-multi-resourcecollector.location:
+  type: dev 
+  path: \\10.80.8.252\VFX_Pipeline\Pipeline\Configs\vhuba_dev\Pipeline\bundle_cache\ssvfx-multi-resourcecollector

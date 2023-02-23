@@ -123,7 +123,7 @@ settings.tk-houdini.shot_step:
     tk-multi-workfiles2: "@settings.tk-multi-workfiles2.houdini.shot_step"
     tk-houdini-alembicnode: "@settings.tk-houdini-alembicnode.shot_step"
     tk-houdini-mantranode: "@settings.tk-houdini-mantranode.shot_step"
-    #tk-houdini-geometrynode: "@settings.tk-houdini-geometrynode.asset_step"
+    tk-houdini-geometrynode: "@settings.tk-houdini-geometrynode.shot_step"
     tk-houdini-arnoldnode: "@settings.tk-houdini-arnoldnode.shot_step"
   menu_favourites:
   - {app_instance: tk-multi-workfiles2, name: File Open...}
