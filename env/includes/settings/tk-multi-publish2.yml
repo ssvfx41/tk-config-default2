@@ -203,7 +203,7 @@ settings.tk-multi-publish2.maya.asset_step:
   - name: Begin file versioning
     hook: "{engine}/tk-multi-publish2/basic/start_version_control.py"
     settings: {}
-  - name: Publish Session
+  - name: Version Up
     hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/maya/publish_session.py"
     settings:
         Publish Template: maya_asset_publish
@@ -233,6 +233,10 @@ settings.tk-multi-publish2.maya.asset_step:
     hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/maya/publish_obj.py"
     settings:
       Publish Template: maya_asset_cache_obj_file
+  - name: Publish maya file
+    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/maya/publish_ma_file.py"
+    settings:
+      Publish Template: maya_asset_publish
   help_url: *help_url
   location: "@apps.tk-multi-publish2.location"
 
