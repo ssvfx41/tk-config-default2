@@ -69,8 +69,6 @@ def swap_paths(json_data):
     Returns: Nothing, updates json data to sanitize paths.
 
     """
-    logger.info("-----------------------------")
-    logger.info("Updating paths...")
     for key, value in json_data.items():
         # recursively fix paths in dictionaries
         if isinstance(value, dict):
@@ -83,9 +81,6 @@ def swap_paths(json_data):
         if value.startswith("\\") or value.startswith("/"):
             new_value = basic_utils.swap_render_path_root(value)
             json_data[key] = os.path.abspath(new_value)
-
-    logger.info("Update complete.")
-    logger.info("-----------------------------")
 
 
 def run_post_fix(json_filepath):
@@ -104,7 +99,11 @@ def run_post_fix(json_filepath):
     logger.info("Loaded Json data successfully.")
     logger.info("---")
 
+    logger.info("-----------------------------")
+    logger.info("Updating paths for Windows...")
     swap_paths(json_data)
+    logger.info("Update complete.")
+    logger.info("-----------------------------")
 
     # Get shared variables from entity_info
     seq_ccc_path = dict_nav(
