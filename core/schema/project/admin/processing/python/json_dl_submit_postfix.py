@@ -4,13 +4,21 @@ import os
 import pprint
 import sys
 
-
 from general import basic_utils
 
 logger = basic_utils.get_logger(__name__)
 
 
 def run_post_fix(json_data):
+    """
+    Postfix main process
+    Args:
+        json_data(dict): Data loaded from json deadline submission. Must be
+            constructed using json_dl_submit_tools.py.
+
+    Returns: Updated json_data dictionary
+
+    """
     processes = json_data.get("processes")
     if not processes:
         _error = (
@@ -46,7 +54,7 @@ def run_post_fix(json_data):
 
 def get_parser():
     """
-    Get argument parser for Pump project post-fix.
+    Get argument parser for json deadline submit postfix.
     Returns: argparse.ArgumentParser object
     """
     parser = argparse.ArgumentParser(
@@ -127,6 +135,7 @@ def main():
             outfile.write(json_object)
             outfile.close()
         logger.info("Updated json data saved.")
+
     else:
         # Log process data
         logger.info("+++++ DRY RUN +++++")
@@ -137,6 +146,7 @@ def main():
             logger.info(f"\n{pprint.pformat(data)}")
             logger.info("----------")
         logger.info("+++++++++++++++++++")
+
     return 0
 
 
