@@ -4,6 +4,9 @@
             "resolve-version":{
                 "process_settings":{
                     "title" : "Dailies Render",
+                    "description" : "Artist Dailies Reviewable",
+                    "config_type": "shot_submit",
+                    "process_type": "primary",
                     "output_type": "movie",
                     "output_root": "primary",
                     "output_file_ext": "mov",
@@ -32,15 +35,6 @@
                     "transform_switch": {"which":0},
                     "slate_switch": {"disable":false},
                     "burnin_switch": {"disable":false},
-                    "content_vendor_burnin":{"disable":true},            
-                    "format":{
-                        "name": "delivery_format"
-                    },     
-                    "quicktime_codec":{
-                        "type": "CustomNonProjectEntity08",
-                        "id": 37,
-                        "name": "ProRes422Proxy"
-                    },      
                     "main_read": {
                         "knob_order": ["file"],
                         "raw": true
@@ -68,6 +62,9 @@
             "delivery-graded-version":{
                 "process_settings":{
                     "title" : "Dailies Graded and Cropped Version",
+                    "description" : "Artist Client Graded Reviewable",
+                    "config_type": "shot_submit",
+                    "process_type": "primary",
                     "output_type": "movie",
                     "output_root": "primary",
                     "output_file_ext": "mov",
@@ -96,22 +93,6 @@
                     "transform_switch": {"which":1},
                     "slate_switch": {"disable":false},
                     "burnin_switch": {"disable":false},
-                    "content_vendor_burnin":{"disable":true},
-                    "main_lut": {
-                        "colorspaceIn": "linear",          
-                        "colorspaceOut": "linear"
-                    },                          
-                    "main_ocio": {},               
-                    "format":{
-                        "type": "CustomNonProjectEntity01",
-                        "id": 5,
-                        "name": "FHD"
-                    },     
-                    "quicktime_codec":{
-                        "type": "CustomNonProjectEntity08",
-                        "id": 37,
-                        "name": "ProRes422Proxy"
-                    },       
                     "main_read": {
                         "knob_order": ["file"],
                         "raw": true
@@ -143,6 +124,9 @@
             "resolve-version":{
                 "process_settings":{
                     "title" : "Dailies Render",
+                    "description" : "Artist Dailies Reviewable",
+                    "config_type": "shot_submit",
+                    "process_type": "secondary",
                     "output_type": "movie",
                     "output_root": "primary",
                     "output_file_ext": "mov",
@@ -171,15 +155,6 @@
                     "transform_switch": {"which":0},
                     "slate_switch": {"disable":false},
                     "burnin_switch": {"disable":false},
-                    "content_vendor_burnin":{"disable":true},            
-                    "format":{
-                        "name": "delivery_format"
-                    },     
-                    "quicktime_codec":{
-                        "type": "CustomNonProjectEntity08",
-                        "id": 37,
-                        "name": "ProRes422Proxy"
-                    },      
                     "main_read": {
                         "knob_order": ["file"],
                         "raw": true
@@ -211,6 +186,9 @@
             "resolve-version":{
                 "process_settings":{
                     "title" : "Dailies Render",
+                    "description" : "Artist Dailies Reviewable",
+                    "config_type": "shot_submit",
+                    "process_type": "3d",
                     "output_type": "movie",
                     "output_root": "primary",
                     "output_file_ext": "mov",
@@ -239,15 +217,6 @@
                     "transform_switch": {"which":0},
                     "slate_switch": {"disable":false},
                     "burnin_switch": {"disable":false},
-                    "content_vendor_burnin":{"disable":true},            
-                    "format":{
-                        "name": "delivery_format"
-                    },     
-                    "quicktime_codec":{
-                        "type": "CustomNonProjectEntity08",
-                        "id": 37,
-                        "name": "ProRes422Proxy"
-                    },      
                     "main_read": {
                         "knob_order": ["file"],
                         "raw": true
