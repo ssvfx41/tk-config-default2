@@ -4,16 +4,16 @@
             "version_zero_thumbnail":{
                 "process_settings":{
                     "title" : "V000 Thumbnail",
-                    "description" : "Creates a thumbnail for version zero in Shotgrid",
+                    "description" : "Creates a thumbnail for version zero in Flow",
+                    "output_type": "zerothumb",
                     "config_type": "outgoing",
                     "process_type": "primary",
-                    "output_type": "zerothumb",
                     "output_root": "primary",
                     "output_directory": "editorial/v000/{Entity}",
                     "output_file": "{output_file}",
                     "output_file_ext": "mov",
                     "create_version": false,
-                    "update_version": true,
+                    "update_version": false,
                     "update_version_media": false,
                     "create_publish": false,
                     "update_client_version": false,
@@ -58,7 +58,7 @@
                     "publish_file_type": null
                 }
             },
-            "client-version-dnxhd":{
+            "client-dnxhd":{
                 "process_settings":{
                     "title" : "Client DNxHD",
                     "description" : "Client DNxHD deliverable media.",
@@ -66,23 +66,22 @@
                     "process_type": "primary",
                     "output_type": "movie",
                     "output_root": "primary",
-                    "output_directory": "{Entity}/DNXHD",
+                    "output_directory": "DNXHD",
                     "output_file": "{output_file}",
                     "output_file_ext": "mov",
                     "add_to_review_playlist": false,
-                    "version_start_number": 0,
                     "create_version": false,
                     "update_version": true,
                     "create_publish": false,                    
                     "update_client_version": false,                       
                     "color_required": true,
                     "client_process": true,
-                    "batch_dependencies": false,
                     "plugin_name": "Nuke",
                     "plugin_path": "C:/Program Files/Nuke14.0v5/Nuke14.0.exe",
                     "plugin_version": "14.0",
                     "plugin_in_script": "admin/processing/nuke_scripts/nuke14/pump_DNxHD.nk",
                     "dependencies": false,
+                    "batch_dependencies": false,
                     "dependent_pool": "",
                     "dependent_job_suffix": "",
                     "dependent_output_directory": "",
@@ -116,7 +115,7 @@
                     "publish_file_type": null
                 }
             },
-            "client-version-dnxhr":{
+            "client-dnxhr":{
                 "process_settings":{
                     "title" : "Client DNxHR",
                     "description" : "Client DNxHR deliverable media.",
@@ -124,22 +123,21 @@
                     "process_type": "primary",
                     "output_type": "movie",
                     "output_root": "primary",
-                    "output_directory": "{Entity}/DNXHR",
+                    "output_directory": "DNXHR",
                     "output_file": "{output_file}",
                     "output_file_ext": "mov",
                     "add_to_review_playlist": false,
-                    "version_start_number": 0,
                     "create_version": false,
-                    "update_version": true,
+                    "update_version": false,
                     "create_publish": false,
                     "update_client_version": false,
                     "color_required": true,
                     "client_process": true,
-                    "batch_dependencies": false,
                     "plugin_name": "Nuke",
                     "plugin_path": "C:/Program Files/Nuke14.0v5/Nuke14.0.exe",
                     "plugin_version": "14.0",
                     "plugin_in_script": "admin/processing/nuke_scripts/nuke14/pump_DNxHR.nk",
+                    "batch_dependencies": false,
                     "dependencies": false,
                     "dependent_pool": "",
                     "dependent_job_suffix": "",
@@ -174,7 +172,7 @@
                     "publish_file_type": null
                 }
             },
-            "client-version-h264":{
+            "client-h264":{
                 "process_settings":{
                     "title" : "Client H264",
                     "description" : "Client H264 deliverable media.",
@@ -182,22 +180,21 @@
                     "process_type": "primary",
                     "output_type": "movie",
                     "output_root": "primary",
-                    "output_directory": "{Entity}/H264",
+                    "output_directory": "H264",
                     "output_file": "{output_file}",
                     "output_file_ext": "mov",
                     "add_to_review_playlist": false,
-                    "version_start_number": 0,
                     "create_version": false,
-                    "update_version": true,
+                    "update_version": false,
                     "create_publish": false,
                     "update_client_version": false,
                     "color_required": true,
                     "client_process": true,
-                    "batch_dependencies": false,
                     "plugin_name": "Nuke",
                     "plugin_path": "C:/Program Files/Nuke14.0v5/Nuke14.0.exe",
                     "plugin_version": "14.0",
                     "plugin_in_script": "admin/processing/nuke_scripts/nuke14/pump_H.264.nk",
+                    "batch_dependencies": false,
                     "dependencies": false,
                     "dependent_pool": "",
                     "dependent_job_suffix": "",
@@ -232,7 +229,7 @@
                     "publish_file_type": null
                 }
             },
-            "client-version-prores":{
+            "client-prores":{
                 "process_settings":{
                     "title" : "Client ProRes",
                     "description" : "Client Prores deliverable media.",
@@ -240,22 +237,21 @@
                     "process_type": "primary",
                     "output_type": "movie",
                     "output_root": "primary",
-                    "output_directory": "{Entity}/PRORES",
+                    "output_directory": "PRORES",
                     "output_file": "{output_file}",
                     "output_file_ext": "mov",
                     "add_to_review_playlist": false,
-                    "version_start_number": 0,
                     "create_version": false,
                     "update_version": true,
                     "create_publish": false,
                     "update_client_version": false,
                     "color_required": true,
                     "client_process": true,
-                    "batch_dependencies": false,
                     "plugin_name": "Nuke",
                     "plugin_path": "C:/Program Files/Nuke14.0v5/Nuke14.0.exe",
                     "plugin_version": "14.0",
                     "plugin_in_script": "admin/processing/nuke_scripts/nuke14/pump_PRORES.nk",
+                    "batch_dependencies": false,
                     "dependencies": false,
                     "dependent_pool": "",
                     "dependent_job_suffix": "",
@@ -290,7 +286,7 @@
                     "publish_file_type": null
                 }
             },
-            "client-version-exr":{
+            "client-exr":{
                 "process_settings":{
                     "title" : "Client EXRs",
                     "description" : "Client EXR deliverable media.",
@@ -298,7 +294,7 @@
                     "process_type": "primary",
                     "output_type": "seq",
                     "output_root": "primary",            
-                    "output_directory": "{Entity}/EXR",
+                    "output_directory": "EXR/{output_file}",
                     "output_file": "{output_file}",
                     "output_file_ext": "exr",
                     "create_version": false,
@@ -314,13 +310,12 @@
                     "plugin_in_script": "admin/processing/nuke_scripts/nuke14/pump_processing.nk",
                     "batch_dependencies": false,
                     "dependencies": false,
-                    "dependent_job_suffix": "support_files",
-                    "dependent_linked_files": ["sg_shot_lut", "sg_shot_ccc"],
-                    "dependent_output_directory": "{Entity}/EXR/support_files",
-                    "dependent_output_file": "{output_file}",
+                    "dependent_job_suffix": "",
+                    "dependent_linked_files": [],
+                    "dependent_output_directory": "",
+                    "dependent_output_file": "",
                     "dependent_output_file_ext": "",
-                    "dependent_output_source": "{entity_root}/lut",
-                    "dependent_script_file":"//ssvfx_pipeline/pipeline_repo/master/ssvfx_scripts/thinkbox/python/dependencies/support_file_transfer.py"
+                    "dependent_script_file":""
                 },
                 "nuke_settings":{
                     "plate_switch": {"which":2},
@@ -357,7 +352,7 @@
                     "process_type": "primary",
                     "output_type": "seq",
                     "output_root": "primary",
-                    "output_directory": "{Entity}/JPEG",
+                    "output_directory": "JPEG/{output_file}",
                     "output_file": "{output_file}",
                     "output_file_ext": "jpeg",
                     "create_version": false,
@@ -414,7 +409,7 @@
                     "process_type": "primary",
                     "output_type": "seq",
                     "output_root": "primary",
-                    "output_directory": "{Entity}/DPX",
+                    "output_directory": "DPX/{output_file}",
                     "output_file": "{output_file}",
                     "output_file_ext": "dpx",
                     "create_version": false,

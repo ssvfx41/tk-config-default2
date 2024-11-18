@@ -62,13 +62,13 @@
             },
             "incoming-version": {
                 "process_settings": {
-                    "title": "Internal",
+                    "title": "Incoming Version",
                     "description": "Internal version Zero",
                     "config_type": "incoming",
                     "process_type": "primary",
                     "output_type": "zerothumb",
-                    "output_root": "secondary",
-                    "output_directory": "editorial/v000",
+                    "output_root": "primary",
+                    "output_directory": "editorial/v000/{entity}",
                     "output_file": "{Source}_v000",
                     "output_file_ext": "mov",
                     "create_version": true,
