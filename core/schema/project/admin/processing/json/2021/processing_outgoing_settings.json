@@ -72,8 +72,8 @@
                     "add_to_review_playlist": false,
                     "create_version": false,
                     "update_version": true,
-                    "create_publish": false,                    
-                    "update_client_version": false,                       
+                    "create_publish": false,
+                    "update_client_version": false,
                     "color_required": true,
                     "client_process": true,
                     "plugin_name": "Nuke",
@@ -293,14 +293,14 @@
                     "config_type": "outgoing",
                     "process_type": "primary",
                     "output_type": "seq",
-                    "output_root": "primary",            
+                    "output_root": "primary",
                     "output_directory": "EXR/{output_file}",
                     "output_file": "{output_file}",
                     "output_file_ext": "exr",
                     "create_version": false,
                     "update_version": false,
-                    "create_publish": false,                    
-                    "update_client_version": false,                      
+                    "create_publish": false,
+                    "update_client_version": false,
                     "add_to_review_playlist": false,
                     "color_required": false,
                     "client_process": true,
@@ -466,5 +466,4 @@
         }
     },
     "secondary":{}
-
 }
