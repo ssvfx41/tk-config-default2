@@ -4418,7 +4418,7 @@ Write {
  ypos 3132
  postage_stamp true
 }
-push $Nfa2a2800
+push $Na36b1400
 Viewer {
  frame_range 1000-1195
  rgb_only true
