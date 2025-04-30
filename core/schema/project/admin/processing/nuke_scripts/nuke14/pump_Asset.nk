@@ -3,7 +3,7 @@
 version 14.0 v5
 define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
 <layout version="1.0">
-    <window x="0" y="0" w="1917" h="968" screen="0">
+    <window x="0" y="0" w="1917" h="1026" screen="0">
         <splitter orientation="1">
             <split size="40"/>
             <dock id="" hideTitles="1" activePageId="Toolbar.1">
@@ -11,19 +11,19 @@ define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
             </dock>
             <split size="1254" stretch="1"/>
             <splitter orientation="2">
-                <split size="393"/>
+                <split size="578"/>
                 <dock id="" activePageId="Viewer.1">
                     <page id="Viewer.1"/>
                 </dock>
-                <split size="533"/>
-                <dock id="" activePageId="DAG.1" focus="true">
+                <split size="406"/>
+                <dock id="" activePageId="DAG.1">
                     <page id="DAG.1"/>
                     <page id="Curve Editor.1"/>
                     <page id="DopeSheet.1"/>
                 </dock>
             </splitter>
             <split size="615"/>
-            <dock id="" activePageId="Properties.1">
+            <dock id="" activePageId="Properties.1" focus="true">
                 <page id="Properties.1"/>
                 <page id="uk.co.thefoundry.backgroundrenderview.1"/>
                 <page id="Scenegraph.1"/>
@@ -34,7 +34,7 @@ define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
 }
 Root {
  inputs 0
- name C:/Users/khogg/DEV/master/tk-config-default2/core/schema/project/admin/processing/nuke_scripts/nuke14/pump_Asset.nk
+ name //pix_artist/tech_records/tech_records/pump_configs/Show_Setups_Media/pump_vanilla/pump_Asset.nk
  frame 1000
  first_frame 1000
  last_frame 1195
@@ -50,7 +50,7 @@ Root {
  int16Lut sRGB
  logLut Cineon
  floatLut linear
- free_type_font_path //10.80.8.252/VFX_Pipeline/Pipeline/ssvfx_scripts/fonts/gotham/
+ free_type_font_path //ssvfx_pipeline/pipeline_repo/master/ssvfx_scripts/fonts/gotham/
  addUserKnob {20 Deadline}
  addUserKnob {1 FrameListMode l frameListMode}
  FrameListMode Custom
@@ -1300,7 +1300,7 @@ Dot {
  xpos -1027
  ypos -3395
 }
-set Nfa482c00 [stack 0]
+set Nc3bc9800 [stack 0]
 Dot {
  name Dot25
  xpos -1548
@@ -1322,7 +1322,7 @@ Dot {
  xpos -1675
  ypos -2172
 }
-push $Nfa482c00
+push $Nc3bc9800
 Switch {
  inputs 2
  name slap_switch
@@ -1334,26 +1334,26 @@ Dot {
  xpos -1027
  ypos -1888
 }
-set Nfa649400 [stack 0]
+set Nc3c15000 [stack 0]
 Dot {
  name Dot14
  xpos -1027
  ypos -1781
 }
-set Nfa649000 [stack 0]
+set Nc3c15400 [stack 0]
 Dot {
  name Dot10
  xpos -518
  ypos -1781
 }
-set Nfa648c00 [stack 0]
+set Nc3c15800 [stack 0]
 Dot {
  name Dot33
  xpos -110
  ypos -1781
 }
 OCIOFileTransform {
- file //10.80.8.252/VFX_Pipeline/Pipeline/external_scripts/OpenColorIO-Configs/aces_1.0.3/luts/ACES_to_ACEScg.spimtx
+ file //ssvfx_pipeline/pipeline_repo/master/external_scripts/OpenColorIO-Configs/aces_1.0.3/luts/ACES_to_ACEScg.spimtx
  invert true
  working_space scene_linear
  name OCIOFileTransform11
@@ -1362,7 +1362,7 @@ OCIOFileTransform {
  ypos -1693
 }
 OCIOFileTransform {
- file //10.80.8.252/VFX_Pipeline/Pipeline/external_scripts/OpenColorIO-Configs/aces_1.0.3/luts/Arri_Wide_Gamut_to_ACES_ap0.spimtx
+ file //ssvfx_pipeline/pipeline_repo/master/external_scripts/OpenColorIO-Configs/aces_1.0.3/luts/Arri_Wide_Gamut_to_ACES_ap0.spimtx
  invert true
  working_space scene_linear
  name OCIOFileTransform12
@@ -1375,9 +1375,9 @@ Dot {
  xpos -110
  ypos -1474
 }
-push $Nfa648c00
+push $Nc3c15800
 OCIOFileTransform {
- file //10.80.8.252/VFX_Pipeline/Pipeline/external_scripts/OpenColorIO-Configs/aces_1.0.3/luts/Arri_Wide_Gamut_to_ACES_ap0.spimtx
+ file //ssvfx_pipeline/pipeline_repo/master/external_scripts/OpenColorIO-Configs/aces_1.0.3/luts/Arri_Wide_Gamut_to_ACES_ap0.spimtx
  working_space scene_linear
  name OCIOFileTransform14
  label "AWG -> AP0\n\[value direction]"
@@ -1385,7 +1385,7 @@ OCIOFileTransform {
  ypos -1720
 }
 OCIOFileTransform {
- file //10.80.8.252/VFX_Pipeline/Pipeline/external_scripts/OpenColorIO-Configs/aces_1.0.3/luts/ACES_to_ACEScg.spimtx
+ file //ssvfx_pipeline/pipeline_repo/master/external_scripts/OpenColorIO-Configs/aces_1.0.3/luts/ACES_to_ACEScg.spimtx
  working_space scene_linear
  name OCIOFileTransform15
  label "AP0 -> AP1\n\[value direction]"
@@ -1397,7 +1397,7 @@ Dot {
  xpos -518
  ypos -1544
 }
-push $Nfa649000
+push $Nc3c15400
 Switch {
  inputs 3
  name plate_switch
@@ -1412,7 +1412,7 @@ Dot {
  xpos -1027
  ypos -1377
 }
-set Nfa618800 [stack 0]
+set Nc3c3dc00 [stack 0]
 Dot {
  name Dot31
  xpos 1691
@@ -1455,7 +1455,7 @@ Dot {
  xpos -280
  ypos 3235
 }
-push $Nfa649400
+push $Nc3c15000
 Dot {
  name Dot16
  xpos -1539
@@ -1472,73 +1472,73 @@ Dot {
  xpos -1539
  ypos 1830
 }
-push $Nfa618800
+push $Nc3c3dc00
 Dot {
  name Dot32
  xpos -1027
  ypos -1093
 }
-set Nfa5e6000 [stack 0]
+set Nc3c8c400 [stack 0]
 Dot {
  name Dot36
  xpos -731
  ypos -1093
 }
-set Nfff4fc00 [stack 0]
+set Nc3c8c800 [stack 0]
 Dot {
  name Dot42
  xpos -323
  ypos -1093
 }
-set Nfff4f800 [stack 0]
+set Nc3c8cc00 [stack 0]
 Dot {
  name Dot45
  xpos 101
  ypos -1093
 }
-set Nfff4f400 [stack 0]
+set Nc3c8d000 [stack 0]
 Dot {
  name Dot47
  xpos 514
  ypos -1093
 }
-set Nfff4f000 [stack 0]
+set Nc3c8d400 [stack 0]
 Dot {
  name Dot49
  xpos 957
  ypos -1093
 }
-set Nfff4ec00 [stack 0]
+set Nc3c8d800 [stack 0]
 Dot {
  name Dot51
  xpos 1405
  ypos -1093
 }
-set Nfff4e800 [stack 0]
+set Nc3c8dc00 [stack 0]
 Dot {
  name Dot53
  xpos 1976
  ypos -1093
 }
-set Nfff4e400 [stack 0]
+set Nc3cf4000 [stack 0]
 Dot {
  name Dot3
  xpos 2487
  ypos -1093
 }
-set Nfff4e000 [stack 0]
+set Nc3cf4400 [stack 0]
 Dot {
  name Dot4
  xpos 2982
  ypos -1093
 }
-set Nfff17c00 [stack 0]
+set Nc3cf4800 [stack 0]
 Dot {
  name Dot34
  xpos 3508
  ypos -1093
 }
-set Nfff17800 [stack 0]
+set Nc3cf4c00 [stack 0]
 Dot {
  name Dot56
  xpos 4042
@@ -1551,7 +1551,7 @@ Dot {
  xpos 4042
  ypos 423
 }
-push $Nfff17800
+push $Nc3cf4c00
 Dot {
  name Dot29
  label 10
@@ -1559,7 +1559,7 @@ Dot {
  xpos 3508
  ypos 334
 }
-push $Nfff17c00
+push $Nc3cf4800
 Dot {
  name Dot22
  label 9
@@ -1567,7 +1567,7 @@ Dot {
  xpos 2982
  ypos 145
 }
-push $Nfff4e000
+push $Nc3cf4400
 Dot {
  name Dot9
  label 8
@@ -1575,7 +1575,7 @@ Dot {
  xpos 2487
  ypos 38
 }
-push $Nfff4e400
+push $Nc3cf4000
 Dot {
  name Dot54
  label 7
@@ -1583,7 +1583,7 @@ Dot {
  xpos 1976
  ypos 2
 }
-push $Nfff4e800
+push $Nc3c8dc00
 Dot {
  name Dot52
  label 6
@@ -1591,7 +1591,7 @@ Dot {
  xpos 1405
  ypos -56
 }
-push $Nfff4ec00
+push $Nc3c8d800
 Dot {
  name Dot50
  label 5
@@ -1599,7 +1599,7 @@ Dot {
  xpos 957
  ypos -133
 }
-push $Nfff4f000
+push $Nc3c8d400
 Colorspace {
  colorspace_out AlexaV3LogC
  name Colorspace32
@@ -1621,7 +1621,7 @@ Dot {
  xpos 514
  ypos -224
 }
-push $Nfff4f400
+push $Nc3c8d000
 Colorspace {
  colorspace_out AlexaV3LogC
  name Colorspace16
@@ -1643,7 +1643,7 @@ Dot {
  xpos 101
  ypos -287
 }
-push $Nfff4f800
+push $Nc3c8cc00
 Colorspace {
  colorspace_out AlexaV3LogC
  name Colorspace14
@@ -1665,7 +1665,7 @@ Dot {
  xpos -323
  ypos -306
 }
-push $Nfff4fc00
+push $Nc3c8c800
 Colorspace {
  colorspace_out AlexaV3LogC
  name Colorspace12
@@ -1687,7 +1687,7 @@ Dot {
  xpos -731
  ypos -346
 }
-push $Nfa5e6000
+push $Nc3c8c400
 Switch {
  inputs 12
  name camera_switch
@@ -1701,20 +1701,20 @@ Dot {
  xpos -1027
  ypos 424
 }
-set N17dc00 [stack 0]
+set Nc3d74400 [stack 0]
 Dot {
  name Dot21
  xpos -805
  ypos 424
 }
-set N44000 [stack 0]
+set Nc3d74800 [stack 0]
 Dot {
  name Dot38
  xpos -538
  ypos 424
 }
 OCIOFileTransform {
- file //10.80.8.252/VFX_Pipeline/Pipeline/external_scripts/OpenColorIO-Configs/aces_1.0.3/luts/ACES_to_ACEScg.spimtx
+ file //ssvfx_pipeline/pipeline_repo/master/external_scripts/OpenColorIO-Configs/aces_1.0.3/luts/ACES_to_ACEScg.spimtx
  version 3
  invert true
  working_space linear
@@ -1724,7 +1724,7 @@ OCIOFileTransform {
  ypos 707
 }
 OCIOFileTransform {
- file //10.80.8.252/VFX_Pipeline/Pipeline/external_scripts/OpenColorIO-Configs/aces_1.0.3/luts/Log2_48_nits_Shaper_to_linear.spi1d
+ file //ssvfx_pipeline/pipeline_repo/master/external_scripts/OpenColorIO-Configs/aces_1.0.3/luts/Log2_48_nits_Shaper_to_linear.spi1d
  version 3
  invert true
  working_space linear
@@ -1733,7 +1733,7 @@ OCIOFileTransform {
  ypos 761
 }
 OCIOFileTransform {
- file //10.80.8.252/VFX_Pipeline/Pipeline/external_scripts/OpenColorIO-Configs/aces_1.0.3/luts/Log2_48_nits_Shaper.RRT.Rec.709.spi3d
+ file //ssvfx_pipeline/pipeline_repo/master/external_scripts/OpenColorIO-Configs/aces_1.0.3/luts/Log2_48_nits_Shaper.RRT.Rec.709.spi3d
  interpolation tetrahedral
  working_space linear
  name OCIOFileTransform16
@@ -1745,7 +1745,7 @@ Dot {
  xpos -538
  ypos 1124
 }
-push $N44000
+push $Nc3d74800
 Colorspace {
  colorspace_out AlexaV3LogC
  name Colorspace5
@@ -1773,7 +1773,7 @@ Dot {
  xpos -805
  ypos 1052
 }
-push $N17dc00
+push $Nc3d74400
 Switch {
  inputs 3
  which 2
@@ -1788,13 +1788,13 @@ Dot {
  xpos -1027
  ypos 1263
 }
-set Nfa67ec00 [stack 0]
+set Nc3da1800 [stack 0]
 Dot {
  name Dot23
  xpos -678
  ypos 1263
 }
-set Nfa67e800 [stack 0]
+set Nc3da1c00 [stack 0]
 Dot {
  name Dot39
  xpos -154
@@ -1827,7 +1827,7 @@ Dot {
  xpos -154
  ypos 1824
 }
-push $Nfa67e800
+push $Nc3da1c00
 Colorspace {
  colorspace_out AlexaV3LogC
  name Colorspace3
@@ -1880,7 +1880,7 @@ Dot {
  xpos -678
  ypos 1776
 }
-push $Nfa67ec00
+push $Nc3da1800
 Switch {
  inputs 3
  which 2
@@ -1900,7 +1900,7 @@ Dot {
  xpos -1027
  ypos 1928
 }
-set N2ee000 [stack 0]
+set Nc3e56400 [stack 0]
 Dot {
  name Dot5
  xpos -1541
@@ -1909,7 +1909,6 @@ Dot {
 Group {
  name SSVFX_SLATE
  label v1.2.2
- selected true
  xpos -1575
  ypos 2221
  addUserKnob {20 Slate}
@@ -2141,7 +2140,7 @@ Group {
   xpos 5464
   ypos -1482
  }
-set Nfd89d400 [stack 0]
+set Nc3e82c00 [stack 0]
  Reformat {
   type "to box"
   box_width {{SLATE_REFORMAT.width}}
@@ -2180,7 +2179,7 @@ set Nfd89d400 [stack 0]
   xpos 5464
   ypos 2727
  }
-push $Nfd89d400
+push $Nc3e82c00
  Shuffle {
   red black
   green black
@@ -2210,13 +2209,13 @@ push $Nfd89d400
   xpos 562
   ypos -1349
  }
-set Ne274b000 [stack 0]
+set Nc3ea9c00 [stack 0]
  Dot {
   name Dot2
   xpos 1615
   ypos -1349
  }
-set Ne274ac00 [stack 0]
+set Nc3eca000 [stack 0]
  Dot {
   name Dot3
   xpos 1730
@@ -2232,175 +2231,175 @@ set Ne274ac00 [stack 0]
   xpos 2473
   ypos 731
  }
-set Ne274a000 [stack 0]
+set Nc3ecac00 [stack 0]
  Dot {
   name Dot16
   xpos 2604
   ypos 731
  }
-set Ne26e5c00 [stack 0]
+set Nc3ecb000 [stack 0]
  Dot {
   name Dot24
   xpos 2714
   ypos 731
  }
-set Ne26e5800 [stack 0]
+set Nc3ecb400 [stack 0]
  Dot {
   name Dot25
   xpos 2845
   ypos 731
  }
-set Ne26e5400 [stack 0]
+set Nc3ecb800 [stack 0]
  Dot {
   name Dot8
   xpos 2963
   ypos 731
  }
-set Ne26e5000 [stack 0]
+set Nc3ecbc00 [stack 0]
  Dot {
   name Dot17
   xpos 3120
   ypos 731
  }
-set Ne26e4c00 [stack 0]
+set Nc3ee0000 [stack 0]
  Dot {
   name Dot9
   xpos 3274
   ypos 731
  }
-set Ne26e4800 [stack 0]
+set Nc3ee0400 [stack 0]
  Dot {
   name Dot18
   xpos 3430
   ypos 731
  }
-set Ne26e4400 [stack 0]
+set Nc3ee0800 [stack 0]
  Dot {
   name Dot10
   xpos 3586
   ypos 731
  }
-set Ne26e4000 [stack 0]
+set Nc3ee0c00 [stack 0]
  Dot {
   name Dot19
   xpos 3742
   ypos 731
  }
-set N865c00 [stack 0]
+set Nc3ee1000 [stack 0]
  Dot {
   name Dot12
   xpos 3898
   ypos 731
  }
-set N865800 [stack 0]
+set Nc3ee1400 [stack 0]
  Dot {
   name Dot20
   xpos 4054
   ypos 731
  }
-set N865400 [stack 0]
+set Nc3ee1800 [stack 0]
  Dot {
   name Dot13
   xpos 4210
   ypos 731
  }
-set N865000 [stack 0]
+set Nc3ee1c00 [stack 0]
  Dot {
   name Dot21
   xpos 4366
   ypos 731
  }
-set N864c00 [stack 0]
+set Nc3efc000 [stack 0]
  Dot {
   name Dot14
   xpos 4522
   ypos 731
  }
-set N864800 [stack 0]
+set Nc3efc400 [stack 0]
  Dot {
   name Dot22
   xpos 4678
   ypos 731
  }
-set N864400 [stack 0]
+set Nc3efc800 [stack 0]
  Dot {
   name Dot29
   xpos 4841
   ypos 732
  }
-set N864000 [stack 0]
+set Nc3efcc00 [stack 0]
  Dot {
   name Dot30
   xpos 4997
   ypos 732
  }
-set Nfa2a3800 [stack 0]
+set Nc3efd000 [stack 0]
  Dot {
   name Dot31
   xpos 5181
   ypos 730
  }
-set Nfa4f9400 [stack 0]
+set Nc3efd400 [stack 0]
  Dot {
   name Dot32
   xpos 5337
   ypos 730
  }
-set Nfa4f9800 [stack 0]
+set Nc3efd800 [stack 0]
  Dot {
   name Dot33
   xpos 5623
   ypos 732
  }
-set Nfa4f9000 [stack 0]
+set Nc3efdc00 [stack 0]
  Dot {
   name Dot34
   xpos 5779
   ypos 732
  }
-set Nfa4f8c00 [stack 0]
+set Nc3f36000 [stack 0]
  Dot {
   name Dot35
   xpos 5987
   ypos 732
  }
-set Nfa4f8800 [stack 0]
+set Nc3f36400 [stack 0]
  Dot {
   name Dot36
   xpos 6143
   ypos 732
  }
-set Nfa4f8400 [stack 0]
+set Nc3f36800 [stack 0]
  Dot {
   name Dot37
   xpos 6335
   ypos 731
  }
-set Nfa4f8000 [stack 0]
+set Nc3f36c00 [stack 0]
  Dot {
   name Dot38
   xpos 6491
   ypos 731
  }
-set N5edc00 [stack 0]
+set Nc3f37000 [stack 0]
  Dot {
   name Dot39
   xpos 6691
   ypos 732
  }
-set N5ed800 [stack 0]
+set Nc3f37400 [stack 0]
  Dot {
   name Dot40
   xpos 6847
   ypos 732
  }
-set N5ed400 [stack 0]
+set Nc3f37800 [stack 0]
  Dot {
   name Dot15
   xpos 7358
   ypos 730
  }
-set N5ecc00 [stack 0]
+set Nc3f37c00 [stack 0]
  Dot {
   name Dot23
   xpos 7514
@@ -2441,7 +2440,7 @@ set N5ecc00 [stack 0]
   xpos 7480
   ypos 927
  }
-push $N5ecc00
+push $Nc3f37c00
  Text2 {
   font_size_toolbar 100
   font_width_toolbar 100
@@ -2491,7 +2490,7 @@ push $N5ecc00
   xpos 7354
   ypos 2064
  }
-push $N5ed400
+push $Nc3f37800
  Text2 {
   font_size_toolbar 100
   font_width_toolbar 100
@@ -2527,7 +2526,7 @@ push $N5ed400
   xpos 6813
   ypos 929
  }
-push $N5ed800
+push $Nc3f37400
  Text2 {
   font_size_toolbar 100
   font_width_toolbar 100
@@ -2574,7 +2573,7 @@ push $N5ed800
   addUserKnob {16 LINE t LINE}
   LINE {{-(c5_line)}}
  }
-push $N5edc00
+push $Nc3f37000
  Text2 {
   font_size_toolbar 100
   font_width_toolbar 100
@@ -2610,7 +2609,7 @@ push $N5edc00
   xpos 6457
   ypos 928
  }
-push $Nfa4f8000
+push $Nc3f36c00
  Text2 {
   font_size_toolbar 100
   font_width_toolbar 100
@@ -2657,7 +2656,7 @@ push $Nfa4f8000
   addUserKnob {16 LINE t LINE}
   LINE {{-(c4_line)}}
  }
-push $Nfa4f8400
+push $Nc3f36800
  Text2 {
   font_size_toolbar 100
   font_width_toolbar 100
@@ -2693,7 +2692,7 @@ push $Nfa4f8400
   xpos 6109
   ypos 929
  }
-push $Nfa4f8800
+push $Nc3f36400
  Text2 {
   font_size_toolbar 100
   font_width_toolbar 100
@@ -2740,7 +2739,7 @@ push $Nfa4f8800
   addUserKnob {16 LINE t LINE}
   LINE {{-(c3_line)}}
  }
-push $Nfa4f8c00
+push $Nc3f36000
  Text2 {
   font_size_toolbar 100
   font_width_toolbar 100
@@ -2776,7 +2775,7 @@ push $Nfa4f8c00
   xpos 5745
   ypos 929
  }
-push $Nfa4f9000
+push $Nc3efdc00
  Text2 {
   font_size_toolbar 100
   font_width_toolbar 100
@@ -2825,7 +2824,7 @@ push $Nfa4f9000
   addUserKnob {16 LINE t LINE}
   LINE {{-(c2_line)}}
  }
-push $Nfa4f9800
+push $Nc3efd800
  Text2 {
   font_size_toolbar 100
   font_width_toolbar 100
@@ -2861,7 +2860,7 @@ push $Nfa4f9800
   xpos 5303
   ypos 927
  }
-push $Nfa4f9400
+push $Nc3efd400
  Text2 {
   font_size_toolbar 100
   font_width_toolbar 100
@@ -2909,7 +2908,7 @@ push $Nfa4f9400
   addUserKnob {16 LINE t LINE}
   LINE {{-(c1_line)}}
  }
-push $Nfa2a3800
+push $Nc3efd000
  Text2 {
   font_size_toolbar 100
   font_width_toolbar 100
@@ -2945,7 +2944,7 @@ push $Nfa2a3800
   xpos 4963
   ypos 927
  }
-push $N864000
+push $Nc3efcc00
  Text2 {
   font_size_toolbar 100
   font_width_toolbar 100
@@ -2992,7 +2991,7 @@ push $N864000
   addUserKnob {16 LINE t LINE}
   LINE {{-(artist_line)}}
  }
-push $N864400
+push $Nc3efc800
  Text2 {
   font_size_toolbar 100
   font_width_toolbar 100
@@ -3029,7 +3028,7 @@ push $N864400
   xpos 4644
   ypos 928
  }
-push $N864800
+push $Nc3efc400
  Text2 {
   font_size_toolbar 100
   font_width_toolbar 100
@@ -3076,13 +3075,13 @@ push $N864800
   addUserKnob {16 LINE t LINE}
   LINE {{-(lens_line)}}
  }
-push $N864c00
+push $Nc3efc000
  Text2 {
   font_size_toolbar 100
   font_width_toolbar 100
   font_height_toolbar 100
   message "\[value parent.date]"
-  old_message {{50 48 50 53 45 48 52 45 49 55}
+  old_message {{50 48 50 52 45 48 50 45 48 49}
     }
   old_expression_markers {{0 9}
     }
@@ -3112,7 +3111,7 @@ push $N864c00
   xpos 4332
   ypos 910
  }
-push $N865000
+push $Nc3ee1c00
  Text2 {
   font_size_toolbar 100
   font_width_toolbar 100
@@ -3157,7 +3156,7 @@ push $N865000
   addUserKnob {16 LINE t LINE}
   LINE {{-(date_line)}}
  }
-push $N865400
+push $Nc3ee1800
  Text2 {
   font_size_toolbar 100
   font_width_toolbar 100
@@ -3193,7 +3192,7 @@ push $N865400
   xpos 4020
   ypos 928
  }
-push $N865800
+push $Nc3ee1400
  Text2 {
   font_size_toolbar 100
   font_width_toolbar 100
@@ -3240,7 +3239,7 @@ push $N865800
   addUserKnob {16 LINE t LINE}
   LINE {{-(frame_line)}}
  }
-push $N865c00
+push $Nc3ee1000
  Text2 {
   font_size_toolbar 100
   font_width_toolbar 100
@@ -3276,7 +3275,7 @@ push $N865c00
   xpos 3708
   ypos 892
  }
-push $Ne26e4000
+push $Nc3ee0c00
  Text2 {
   font_size_toolbar 100
   font_width_toolbar 100
@@ -3323,7 +3322,7 @@ push $Ne26e4000
   addUserKnob {16 LINE t LINE}
   LINE {{-(vendor_line)}}
  }
-push $Ne26e4400
+push $Nc3ee0800
  Text2 {
   font_size_toolbar 100
   font_width_toolbar 100
@@ -3359,7 +3358,7 @@ push $Ne26e4400
   xpos 3396
   ypos 892
  }
-push $Ne26e4800
+push $Nc3ee0400
  Text2 {
   font_size_toolbar 100
   font_width_toolbar 100
@@ -3406,7 +3405,7 @@ push $Ne26e4800
   addUserKnob {16 LINE t LINE}
   LINE {{-(version_line)}}
  }
-push $Ne26e4c00
+push $Nc3ee0000
  Text2 {
   font_size_toolbar 100
   font_width_toolbar 100
@@ -3442,7 +3441,7 @@ push $Ne26e4c00
   xpos 3084
   ypos 899
  }
-push $Ne26e5000
+push $Nc3ecbc00
  Text2 {
   font_size_toolbar 100
   font_width_toolbar 100
@@ -3489,7 +3488,7 @@ push $Ne26e5000
   addUserKnob {16 LINE t LINE}
   LINE {{-(shot_line)}}
  }
-push $Ne26e5400
+push $Nc3ecb800
  Text2 {
   font_size_toolbar 100
   font_width_toolbar 100
@@ -3525,7 +3524,7 @@ push $Ne26e5400
   xpos 2811
   ypos 910
  }
-push $Ne26e5800
+push $Nc3ecb400
  Text2 {
   font_size_toolbar 100
   font_width_toolbar 100
@@ -3570,7 +3569,7 @@ push $Ne26e5800
   addUserKnob {16 LINE t LINE}
   LINE {{-(ep_line)}}
  }
-push $Ne26e5c00
+push $Nc3ecb000
  Text2 {
   font_size_toolbar 100
   font_width_toolbar 100
@@ -3606,7 +3605,7 @@ push $Ne26e5c00
   xpos 2570
   ypos 910
  }
-push $Ne274a000
+push $Nc3ecac00
  Text2 {
   font_size_toolbar 100
   font_width_toolbar 100
@@ -3766,7 +3765,7 @@ push $Ne274a000
  Read {
   inputs 0
   file_type png
-  file //10.80.8.252/VFX_Pipeline/Pipeline/Icons/icon_ssvfx_strap.png
+  file //ssvfx_pipeline/pipeline_repo/Icons/icon_ssvfx_strap.png
   localizationPolicy off
   origset true
   premultiplied true
@@ -3849,7 +3848,7 @@ push $Ne274a000
   xpos 1730
   ypos 162
  }
-push $Ne274ac00
+push $Nc3eca000
  Shuffle1 {
   red black
   green black
@@ -3898,7 +3897,7 @@ push $Ne274ac00
  Read {
   inputs 0
   file_type png
-  file //10.80.8.252/VFX_Pipeline/Pipeline/Icons/icon_ssvfx_button.png
+  file //ssvfx_pipeline/pipeline_repo/Icons/icon_ssvfx_button.png
   localizationPolicy off
   format "891 891 0 0 891 891 1 "
   origset true
@@ -3953,7 +3952,7 @@ push $Ne274ac00
   xpos 1456
   ypos -765
  }
-push $Ne274b000
+push $Nc3ea9c00
  Grid {
   number {{CONTROL_NULL.GRID}}
   color 0.034
@@ -4028,7 +4027,7 @@ push $Ne274b000
  Read {
   inputs 0
   file_type png
-  file //10.80.8.252/VFX_Pipeline/Pipeline/Icons/icon_ssvfx_strap.png
+  file //ssvfx_pipeline/pipeline_repo/Icons/icon_ssvfx_strap.png
   localizationPolicy off
   origset true
   premultiplied true
@@ -4079,13 +4078,13 @@ push $Ne274b000
   GRID 32
  }
 end_group
-set Nfd8aab00 [stack 0]
+set Nc3c7c580 [stack 0]
 Dot {
  name Dot1
  xpos -1541
  ypos 2688
 }
-push $N2ee000
+push $Nc3e56400
 Dot {
  name Dot8
  xpos -342
@@ -4223,7 +4222,7 @@ Text2 {
  font_width_toolbar 100
  font_height_toolbar 100
  message "\[clock format \[clock seconds] -format %d/%m/%Y]"
- old_message {{49 55 47 48 52 47 50 48 50 53}
+ old_message {{48 49 47 48 50 47 50 48 50 52}
    }
  old_expression_markers {{0 9}
    }
@@ -4342,7 +4341,7 @@ Text2 {
  font_width_toolbar 100
  font_height_toolbar 100
  message "\[format %04d \[expr \[value frame]]] of \[format %04d \[expr \[value SSVFX_SLATE.end_frame]]]"
- old_message {{49 48 48 48 32 111 102 32 49 50 51 52}
+ old_message {{49 48 48 48 32 111 102 32 49 48 57 50 32}
    }
  old_expression_markers {{0 3 8 11}
    }
@@ -4351,7 +4350,6 @@ Text2 {
  yjustify bottom
  transforms {{0 2}
    }
- cursor_position 88
  font {{ Gotham Rounded : Book : GothamRnd-Book.otf : 0 }}
  global_font_scale {{format.height*content_textscalar_burnin.content_textscalar_burnin/100000}}
  scale {1 1}
@@ -4373,7 +4371,7 @@ Dot {
  xpos -204
  ypos 2530
 }
-push $N2ee000
+push $Nc3e56400
 Switch {
  inputs 2
  which 1
@@ -4395,10 +4393,11 @@ AddTimeCode {
  useFrame true
  name main_timecode
  label "\nCalculates timecode based on 0:00:00:00 starting at frame 0000. \nSo for clips starting at frame 1000, timecode would be 00:00:41:16\n\nPlease embed \"frame accurate\" timecode for both editorial and vfx quicktimes."
+ selected true
  xpos -1065
  ypos 2990
 }
-set Nfa569c00 [stack 0]
+set N716b400 [stack 0]
 Dot {
  name Dot57
  xpos -491
@@ -4415,7 +4414,7 @@ Dot {
  xpos -491
  ypos 3232
 }
-push $Nfd8aab00
+push $Nc3c7c580
 Viewer {
  frame_range 1000-1195
  rgb_only true
@@ -4425,7 +4424,7 @@ Viewer {
  xpos 19
  ypos 3306
 }
-push $Nfa569c00
+push $N716b400
 Write {
  colorspace linear
  raw true
