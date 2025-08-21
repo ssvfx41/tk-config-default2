@@ -33,6 +33,9 @@ includes:
 - ./includes/settings/tk-aftereffects.yml
 - ./includes/settings/tk-shell.yml
 - ./includes/settings/tk-shotgun.yml
+- ./includes/settings/tk-mari.yml
+
+- ./includes/settings/tk-3dequalizer.yml
 
 ################################################################################
 # configuration for all engines to load in a shot context
@@ -49,6 +52,9 @@ engines:
   tk-aftereffects: "@settings.tk-aftereffects.shot"
   tk-shell: "@settings.tk-shell.shot"
   tk-shotgun: "@settings.tk-shotgun.shot"
+  tk-mari: "@settings.tk-mari.shot"
+
+  tk-3dequalizer: "@settings.tk-3dequalizer.shot"
 
 ################################################################################
 # reference all of the common frameworks

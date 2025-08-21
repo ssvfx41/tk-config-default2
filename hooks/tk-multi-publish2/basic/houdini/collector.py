@@ -14,7 +14,7 @@ from ss_config.hooks.tk_multi_publish2.houdini.collector import SsHoudiniSession
 
 class HoudiniSessionCollector(SsHoudiniSessionCollector):
     """
-    Collector that operates on the maya session. Should inherit from the basic
+    Collector that operates on the Houdini session. Should inherit from the basic
     collector hook.
     """
     pass

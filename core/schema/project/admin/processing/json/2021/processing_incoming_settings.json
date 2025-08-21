@@ -21,13 +21,14 @@
                 "process_settings": {
                     "title": "Convert ACES",
                     "description": "Internal Plate Color Conversion",
-                    "process_type": "acescg",
+                    "output_type": "acescg",
                     "output_root": "primary",
-                    "output_directory": "shots/{Shot}/rushes/acescg/{Plate}/{Source}",
+                    "output_directory": "shots/{Entity}/rushes/acescg/{Plate}/{Source}",
                     "output_file": "{Source}",
                     "output_file_ext": "exr",
-                    "create_version": false,
-                    "update_version": false,
+                    "create_version": true,
+                    "update_version": true,
+                    "update_version_media": true,
                     "create_publish": true,
                     "update_client_version": false,
                     "dependencies": true,
@@ -35,13 +36,13 @@
                     "dependent_job_suffix": "update_sg",
                     "dependent_output_directory": "",
                     "dependent_output_file": "",
-                    "dependent_script_file": "//10.80.8.252/VFX_Pipeline/Pipeline/ssvfx_scripts/thinkbox/python/dependencies/update_sg.py",
+                    "dependent_script_file": "//ssvfx_pipeline/pipeline_repo/master/ssvfx_scripts/thinkbox/python/dependencies/update_sg.py",
                     "color_required": false,
                     "client_process": false,
                     "plugin_name": "Nuke",
-                    "plugin_path": "C:/Program Files/Nuke12.2v4/Nuke12.2.exe",
-                    "plugin_version": "12.2",
-                    "plugin_in_script": "admin/processing/nuke_scripts/2021/pump_processing.nk"
+                    "plugin_path": "C:/Program Files/Nuke14.0v5/Nuke14.0.exe",
+                    "plugin_version": "14.0",
+                    "plugin_in_script": "admin/processing/nuke_scripts/nuke14/pump_incoming.nk"
                 },
                 "nuke_settings": {
                     "plate_switch": {"which": 1},
@@ -77,6 +78,7 @@
                 "process_settings": {
                     "title": "Internal",
                     "description": "Internal version Zero",
+                    "output_type": "zerothumb",
                     "output_root": "secondary",
                     "output_directory": "editorial/v000",
                     "output_file": "{Source}_v000",
@@ -91,13 +93,13 @@
                     "dependent_job_suffix": "update_sg",
                     "dependent_output_directory": "",
                     "dependent_output_file": "",
-                    "dependent_script_file": "//10.80.8.252/VFX_Pipeline/Pipeline/ssvfx_scripts/thinkbox/python/dependencies/update_sg.py",
+                    "dependent_script_file": "//ssvfx_pipeline/pipeline_repo/master/ssvfx_scripts/thinkbox/python/dependencies/update_sg.py",
                     "color_required": true,
                     "client_process": false,
                     "plugin_name": "Nuke",
-                    "plugin_path": "C:/Program Files/Nuke12.2v4/Nuke12.2.exe",
-                    "plugin_version": "12.2",
-                    "plugin_in_script": "admin/processing/nuke_scripts/2021/pump_DNxHD.nk"
+                    "plugin_path": "C:/Program Files/Nuke14.0v5/Nuke14.0.exe",
+                    "plugin_version": "14.0",
+                    "plugin_in_script": "admin/processing/nuke_scripts/nuke14/pump_DNxHD.nk"
                 },
                 "nuke_settings": {
                     "plate_switch": {"which": 0},
@@ -154,8 +156,9 @@
                 "process_settings": {
                     "title": "Client DNxHD v000",
                     "description": "Client DNxHD v000",
+                    "output_type": "movie",
                     "output_root": "primary",
-                    "output_directory": "admin/outgoing/submissions/v000/{entity}",
+                    "output_directory": "admin/outgoing/submissions/v000/{Entity}",
                     "output_file": "{output_file}",
                     "output_file_ext": "mov",
                     "version_start_number": 0,
@@ -167,9 +170,9 @@
                     "color_required": true,
                     "client_process": true,
                     "plugin_name": "Nuke",
-                    "plugin_path": "C:/Program Files/Nuke12.2v4/Nuke12.2.exe",
-                    "plugin_version": "12.2",
-                    "plugin_in_script": "admin/processing/nuke_scripts/2021/pump_DNxHD.nk"
+                    "plugin_path": "C:/Program Files/Nuke14.0v5/Nuke14.0.exe",
+                    "plugin_version": "14.0",
+                    "plugin_in_script": "admin/processing/nuke_scripts/nuke14/pump_DNxHD.nk"
                 },
                 "nuke_settings": {
                     "plate_switch": {"which": 0},
@@ -220,8 +223,8 @@
         },
         "pump_settings": {
             "main_plates_exclude_from_loader_efl": true,
-            "postfix_file": "admin/processing/python/project_postfix.py",
-            "script_file": "//10.80.8.252/VFX_Pipeline/Pipeline/ssvfx_scripts/thinkbox/python/pump_processing/postfix_process_pump.py"
+            "postfix_file": "admin/processing/python/json_dl_submit_postfix.py",
+            "script_file": "//ssvfx_pipeline/pipeline_repo/master/ssvfx_scripts/general/json_dl_submit/json_dl_submit.py"
         }
     },
     "secondary": {}

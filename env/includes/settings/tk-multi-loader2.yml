@@ -71,12 +71,20 @@ settings.tk-multi-loader2.flame:
 settings.tk-multi-loader2.houdini:
   actions_hook: '{config}/tk-multi-loader2/tk-houdini_actions.py'
   action_mappings:
-    Alembic Cache: [import, copy_path]
-    Houdini Scene: [merge, copy_path]
-    Image: [file_cop, copy_path]
-    Photoshop Image: [file_cop, copy_path]
-    Rendered Image: [file_cop, copy_path]
-    Texture: [file_cop, copy_path]
+    Alembic Cache: [import_alembic, import_hierarchy_alembic, view_metadata, copy_path, shaded_alembic, hda_input]
+    Alembic Camera: [view_metadata, copy_path, import_abc_camera]
+    Houdini Geo: [import_geometry, view_metadata, copy_path, hda_input]
+    Node Preset: [set_preset, view_metadata, copy_path]
+    Node Network: [import_network, view_metadata, copy_path]
+    Standin: [import_arnold, view_metadata, copy_path, assign_shaders]
+    Houdini Scene: [merge]
+    Image: [file_cop, set_backgr]
+    Photoshop Image: [file_cop, set_backgr]
+    Rendered Image: [file_cop, set_backgr]
+    Converted Main Plate: [set_backgr]
+    Converted Reference Plate: [set_backgr]
+    Undist_Plates: [set_backgr]
+    Texture: [file_cop]
   entities:
   - caption: Assets
     entity_type: Asset
@@ -94,7 +102,14 @@ settings.tk-multi-loader2.houdini:
     - [task_assignees, is, '{context.user}']
     - [project, is, '{context.project}']
     hierarchy: [entity, content]
-  publish_filters: [["sg_status_list", "is_not", null]]
+  - caption: Current Entity
+    entity_type: Task
+    type: Query
+    filters:
+    - [project, is, '{context.project}']
+    - [entity, is, '{context.entity}']
+    hierarchy: [entity, content]
+  publish_filters: [["sg_status_list", "not_in", ['efl', 'omt']], ["sg_status_list", "is_not", null]]
   location: "@apps.tk-multi-loader2.location"
 
 # mari
@@ -108,6 +123,11 @@ settings.tk-multi-loader2.mari:
     - [project, is, '{context.project}']
     hierarchy: [sg_asset_type, code]
     publish_filters: []
+  - caption: Shots
+    entity_type: Shot
+    filters:
+    - [project, is, "{context.project}"]
+    hierarchy: [sg_sequence, code]
   - caption: My Tasks
     entity_type: Task
     filters:
@@ -123,18 +143,22 @@ settings.tk-multi-loader2.maya:
   actions_hook: '{config}/tk-multi-loader2/tk-maya_actions.py'
   filter_publishes_hook: '{config}/tk-multi-loader2/filter_publishes.py'
   action_mappings:
-    Alembic Cache: [import, reference]
-    Alembic Camera: [import, reference]
+    Alembic Cache: [import, multi_import, reference, multi_ref, view_metadata, shaded_alembic]
+    Alembic Camera: [import, reference, view_metadata]
     Image: [texture_node, image_plane]
-    Maya Scene: [import, reference, assembly_reference]
+    Maya Scene: [import, reference, view_metadata]
     Photoshop Image: [texture_node, image_plane]
     Rendered Image: [texture_node, image_plane]
+    Converted Main Plate: [texture_node, image_plane]
+    Converted Reference Plate: [texture_node, image_plane]
+    Undist_Plates: [texture_node, image_plane]
     Texture: [texture_node, image_plane]
     UDIM Image: [texture_node, image_plane]
     Maya Shader Network: [import, reference]
-    Standin: [import, reference]
-    Ass File: [import, reference]
-    Rig Animation: [animation]
+    Standin: [import, multi_import, reference, multi_ref, view_metadata, assign_shaders]
+    Ass File: [import, multi_import, reference, multi_ref, view_metadata, assign_shaders]
+    Mel File: [import_mel]
+    OBJ Cache: [obj_import, view_metadata]
   entities:
   - caption: Assets
     entity_type: Asset
@@ -156,7 +180,7 @@ settings.tk-multi-loader2.maya:
     entity_type: Asset
     filters:
     - [project, is, {'type': 'Project', 'id': 241}]
-    hierarchy: [sg_2d_3d, sg_asset_type, sg_element, tags, code] 
+    hierarchy: [sg_2d_3d, sg_asset_type, sg_element, tags, code]
   publish_filters: [["sg_status_list", "is_not", null]]
   location: "@apps.tk-multi-loader2.location"
 
@@ -208,6 +232,13 @@ settings.tk-multi-loader2.nuke:
     filters:
     - [project, is, {'type': 'Project', 'id': 241}]
     hierarchy: [sg_2d_3d, sg_asset_type, code]
+  - caption: Current Entity
+    entity_type: Task
+    type: Query
+    filters:
+    - [project, is, '{context.project}']
+    - [entity, is, '{context.entity}']
+    hierarchy: [entity, content]
   # - caption: My Tasks
   #   entity_type: Task
   #   filters:
@@ -416,3 +447,37 @@ settings.tk-multi-loader2.vred:
   actions_hook: "{engine}/tk-multi-loader2/basic/scene_actions.py"
   publish_filters: [["sg_status_list", "is_not", null]]
   location: "@apps.tk-multi-loader2.location"
+
+# 3dequalizer
+settings.tk-multi-loader2.3dequalizer:
+  actions_hook: '{config}/tk-multi-loader2/tk-3dequalizer_actions.py'
+  filter_publishes_hook: '{config}/tk-multi-loader2/filter_publishes.py'
+  action_mappings:
+    Project: [open_project]
+    Main Plate: [clip_import, clip_substitute]
+    Converted Main Plate: [clip_import, clip_substitute]
+    Converted Reference Plate: [clip_import, clip_substitute]
+    Rendered Image: [clip_import, clip_substitute]
+    3DE lens: [import_lens]
+  entities:
+  - caption: Assets
+    entity_type: Asset
+    filters:
+    - [project, is, '{context.project}']
+    hierarchy: [sg_asset_type, code]
+    publish_filters: []
+
+  - caption: Shots
+    entity_type: Shot
+    filters:
+    - [project, is, "{context.project}"]
+    hierarchy: [sg_sequence, code]
+  - caption: My Tasks
+    entity_type: Task
+    filters:
+    - [task_assignees, is, '{context.user}']
+    - [project, is, '{context.project}']
+    hierarchy: [entity, content]
+    publish_filters: []
+  title_name: Import
+  location: '@apps.tk-multi-loader2.location'

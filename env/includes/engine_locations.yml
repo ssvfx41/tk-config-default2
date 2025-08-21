@@ -45,15 +45,17 @@ engines.tk-flame.location:
 engines.tk-houdini.location:
   type: app_store
   name: tk-houdini
-  version: v1.8.1
+  #version: v1.8.1
+  version: v1.9.5
 engines.tk-mari.location:
   type: app_store
   name: tk-mari
-  version: v1.3.2
+  version: v1.3.4
 engines.tk-maya.location:
   type: app_store
   name: tk-maya
-  version: v0.11.1
+  #version: v0.11.8
+  version: v0.13.3
 engines.tk-motionbuilder.location:
   type: app_store
   name: tk-motionbuilder
@@ -61,7 +63,7 @@ engines.tk-motionbuilder.location:
 engines.tk-nuke.location:
   type: app_store
   name: tk-nuke
-  version: v0.14.1
+  version: v0.14.6
 engines.tk-photoshopcc.location:
   type: app_store
   name: tk-photoshopcc
@@ -78,3 +80,12 @@ engines.tk-vred.location:
   type: app_store
   name: tk-vred
   version: v2.1.1
+
+engines.tk-3dequalizer.location:
+  type: dev
+  name: tk-3dequalizer
+  path: \\pix_artist\pipeline_repo\configs\vhuba_dev\Pipeline\bundle_cache\engines\tk-3dequalizer
+
+#  type: git
+#  version: v1.0.0
+#  path: https://github.com/ssvfx41/tk-3dequalizer.git

@@ -123,56 +123,68 @@ settings.tk-multi-publish2.houdini.asset_step:
   collector: "{self}/collector.py:{config}/tk-multi-publish2/basic/houdini/collector.py"
   collector_settings:
       Work Template: houdini_asset_work
-
+      Generated ABC Template: houdini_asset_cache_alembic_abc
+      Generated BGEO Template Anim: houdini_asset_cache_bgeo_anim
+      Generated BGEO Template Stat: houdini_asset_cache_bgeo
+      Generated ASS Template Stat: houdini_asset_cache_standin
+      Generated ASS Template Anim: houdini_asset_cache_standin_anim
+      Generated EXR Template: houdini_asset_render_exr
   publish_plugins:
-  - name: Publish File
+  - name: Publish to ShotGrid
     hook: "{self}/publish_file.py"
     settings: {}
-  # - name: Upload for review
-  #   hook: "{self}/upload_version.py"
-  #   settings: {}
   - name: Begin file versioning
-    #hook: "{config}/tk-multi-publish2/basic/houdini/start_version_control.py"
     hook: "{engine}/tk-multi-publish2/basic/start_version_control.py"
     settings: {}
-  
-  - name: Publish Session
+  - name: Publish to Shotgrid
     hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/houdini/publish_session.py"
     settings:
         Publish Template: houdini_asset_publish
-  
-  - name: Publish NULL
-    hook: "{config}/tk-multi-publish2/basic/houdini/publish_null.py"
-    settings: {}
-
+  - name: Publish Node Preset
+    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/houdini/publish_node.py"
+    settings:
+      Publish Template: houdini_asset_node_param_publish
+  - name: Publish Node Network
+    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/houdini/publish_node_network.py"
+    settings:
+      Publish Template: houdini_asset_node_network_publish
   help_url: *help_url
   location: "@apps.tk-multi-publish2.location"
+  enable_manual_load: false
 
 # shot step
 settings.tk-multi-publish2.houdini.shot_step:
   collector: "{self}/collector.py:{config}/tk-multi-publish2/basic/houdini/collector.py"
   collector_settings:
       Work Template: houdini_shot_work
+      Generated ABC Template: houdini_shot_cache_alembic_abc
+      Generated BGEO Template Anim: houdini_shot_cache_bgeo_anim
+      Generated BGEO Template Stat: houdini_shot_cache_bgeo
+      Generated ASS Template Stat: houdini_shot_cache_standin
+      Generated ASS Template Anim: houdini_shot_cache_standin_anim
+      Generated EXR Template: houdini_shot_render_exr
   publish_plugins:
-  - name: Publish File
+  - name: Publish to ShotGrid
     hook: "{self}/publish_file.py"
     settings: {}
-
   - name: Begin file versioning
     hook: "{engine}/tk-multi-publish2/basic/start_version_control.py"
     settings: {}
-
-  - name: Publish Session
+  - name: Publish to Shotgrid
     hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/houdini/publish_session.py"
     settings:
         Publish Template: houdini_shot_publish
-
-  - name: Publish NULL
-    hook: "{config}/tk-multi-publish2/basic/houdini/publish_null.py"
-    settings: {}
-
+  - name: Publish Node Preset
+    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/houdini/publish_node.py"
+    settings:
+      Publish Template: houdini_shot_node_param_publish
+  - name: Publish Node Network
+    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/houdini/publish_node_network.py"
+    settings:
+      Publish Template: houdini_shot_node_network_publish
   help_url: *help_url
   location: "@apps.tk-multi-publish2.location"
+  enable_manual_load: false
 
 ################################################################################
 
@@ -205,85 +217,103 @@ settings.tk-multi-publish2.maya.asset_step:
   collector: "{self}/collector.py:{config}/tk-multi-publish2/basic/maya/collector.py"
   collector_settings:
       Work Template: maya_asset_work
+      Generated ABC Template: maya_asset_cache_alembic_file
+      Generated ASS Template: maya_asset_cache_standin_file
   publish_plugins:
-  - name: Publish to ShotGrid
-    hook: "{self}/publish_file.py"
-    settings: {}
-  # - name: Upload for review
-  #   hook: "{self}/upload_version.py"
-  #   settings: {}
   - name: Begin file versioning
     hook: "{engine}/tk-multi-publish2/basic/start_version_control.py"
     settings: {}
-  - name: Publish Session
+  - name: Version Up
     hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/maya/publish_session.py"
     settings:
         Publish Template: maya_asset_publish
-  - name: Publish Shaders
-    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/maya/publish_shader_network.py"
-    settings:
-        Publish Template: maya_shader_network_publish
   - name: Publish Camera
     hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/maya/publish_camera.py"
     settings:
         Publish Template: maya_asset_camera_publish
-        Cameras: ["cam_main*"]
+        Cameras: ["camMain"]
   - name: Publish to Alembic
     hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/maya/publish_session_geometry.py"
     settings:
-        # Publish Template: asset_alembic_cache
         Publish Template: maya_asset_cache_alembic_file
-  - name: Publish Assembly definition
-    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/maya/publish_assembly_definition.py"
+        Publish Generated: "False"
+  # its a hack, we need different names of the plugin
+  # the name depends on whether we want to publish generated file
+  - name: Publish generated ABC file
+    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/maya/publish_session_geometry.py"
     settings:
-        Publish Template: maya_asset_assembly_publish
-  - name: Publish Arnold Stand-in
+        Publish Template: maya_asset_cache_alembic_file
+        Publish Generated: "True"
+  - name: Publish to Arnold
     hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/maya/publish_standin.py"
     settings:
-        Publish Template: maya_asset_standin_publish
-  - name: Publish Animation
-    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/maya/publish_animation.py"
+        Publish Template: maya_asset_cache_standin_file
+        Publish Generated: "False"
+  - name: Publish generated ASS file
+    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/maya/publish_standin.py"
     settings:
-        Publish Template: maya_asset_animation_publish
+        Publish Template: maya_asset_cache_standin_file
+        Publish Generated: "True"
+  - name: Publish OBJ
+    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/maya/publish_obj.py"
+    settings:
+      Publish Template: maya_asset_cache_obj_file
+  - name: Publish maya file
+    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/maya/publish_ma_file.py"
+    settings:
+      Publish Template: maya_asset_publish
   help_url: *help_url
   location: "@apps.tk-multi-publish2.location"
 
 # shot step
 settings.tk-multi-publish2.maya.shot_step:
-  collector: "{self}/collector.py:{engine}/tk-multi-publish2/basic/collector.py:{config}/tk-multi-publish2/basic/maya/collector.py"
+  pre_publish: "{config}/tk-multi-publish2/basic/maya/pre_publish.py"
+  collector: "{self}/collector.py:{config}/tk-multi-publish2/basic/maya/collector.py"
   collector_settings:
       Work Template: maya_shot_work
+      Generated ABC Template: maya_shot_cache_alembic_abc
+      Generated ASS Template: maya_shot_cache_standin_ass
   publish_plugins:
-  - name: Publish to ShotGrid
-    hook: "{self}/publish_file.py"
-    settings: {}
-  # - name: Upload for review
-  #   hook: "{self}/upload_version.py"
-  #   settings: {}
   - name: Begin file versioning
     hook: "{engine}/tk-multi-publish2/basic/start_version_control.py"
     settings: {}
-  - name: Publish to ShotGrid
-    hook: "{self}/publish_file.py:{engine}/tk-multi-publish2/basic/publish_session.py"
+  - name: Version Up
+    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/maya/publish_session.py"
     settings:
         Publish Template: maya_shot_publish
-  - name: Publish to Camera
+  - name: Publish Camera
     hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/maya/publish_camera.py"
     settings:
         Publish Template: maya_shot_camera_publish
-        Cameras: ["cam_main"]
+        Cameras: ["camMain"]
   - name: Publish to Alembic
-    hook: "{self}/publish_file.py:{engine}/tk-multi-publish2/basic/publish_session_geometry.py"
+    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/maya/publish_session_geometry.py"
     settings:
         Publish Template: maya_shot_cache_alembic_abc
-  - name: Publish to Shaders
-    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/maya/publish_shader_network.py"
+        Publish Generated: "False"
+  - name: Publish generated ABC file
+    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/maya/publish_session_geometry.py"
     settings:
-        Publish Template: maya_shader_network_publish
+        Publish Template: maya_shot_cache_alembic_abc
+        Publish Generated: "True"
   - name: Publish Arnold Stand-in
     hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/maya/publish_standin.py"
     settings:
       Publish Template: maya_shot_cache_standin_ass
+      Publish Generated: "False"
+  - name: Publish generated ASS file
+    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/maya/publish_standin.py"
+    settings:
+      Publish Template: maya_shot_cache_standin_ass
+      Publish Generated: "True"
+  - name: Publish OBJ
+    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/maya/publish_obj.py"
+    settings:
+      Publish Template: maya_shot_cache_obj
+  - name: Publish maya file
+    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/maya/publish_ma_file.py"
+    settings:
+      Publish Template: maya_shot_publish
   help_url: *help_url
   location: "@apps.tk-multi-publish2.location"
 
@@ -301,19 +331,19 @@ settings.tk-multi-publish2.nuke.asset_step:
   - name: Version for review
     hook: "{self}/upload_version.py:{config}/tk-multi-publish2/basic/nuke/upload_version.py"
     settings: {}
-  - name: Publish to ShotGrid
+  - name: Publish Render to ShotGrid
     hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/nuke/publish_file.py"
     settings: {}
   - name: Begin file versioning
     hook: "{engine}/tk-multi-publish2/basic/nuke_start_version_control.py"
     settings: {}
-  - name: Publish to ShotGrid
-    hook: "{self}/publish_file.py:{engine}/tk-multi-publish2/basic/nuke_publish_script.py"
+  - name: Publish Script to ShotGrid
+    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/nuke/nuke_publish_script.py"
     settings:
         Publish Template: nuke_asset_publish
-  - name: Submit for Review
-    hook: "{engine}/tk-multi-publish2/basic/submit_for_review.py"
-    settings: {}
+  # - name: Submit for Review
+  #   hook: "{engine}/tk-multi-publish2/basic/submit_for_review.py"
+  #   settings: {}
   help_url: *help_url
   location: "@apps.tk-multi-publish2.location"
 
@@ -327,7 +357,7 @@ settings.tk-multi-publish2.nuke.shot_step:
   - name: Version for review
     hook: "{self}/upload_version.py:{config}/tk-multi-publish2/basic/nuke/upload_version.py"
     settings: {}
-  - name: Publish to ShotGrid
+  - name: Publish Render to ShotGrid
     hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/nuke/publish_file.py"
     settings: {}
   # - name: Upload for review
@@ -336,7 +366,7 @@ settings.tk-multi-publish2.nuke.shot_step:
   - name: Begin file versioning
     hook: "{engine}/tk-multi-publish2/basic/nuke_start_version_control.py"
     settings: {}
-  - name: Publish to ShotGrid
+  - name: Publish Script to ShotGrid
     hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/nuke/nuke_publish_script.py"
     settings:
         Publish Template: nuke_shot_publish
@@ -635,3 +665,70 @@ settings.tk-multi-publish2.vred.asset_step:
      settings: {}
   help_url: *help_url
   location: "@apps.tk-multi-publish2.location"
+
+
+################################################################################
+
+# ---- 3dequalizer
+
+# asset_step
+settings.tk-multi-publish2.3dequalizer.asset_step:
+  # pre_publish: "{config}/tk-multi-publish2/basic/3dequalizer/pre_publish.py"
+  collector: "{self}/collector.py:{config}/tk-multi-publish2/basic/_3dequalizer/collector.py"
+  collector_settings:
+      Work Template: 3dequalizer_asset_work
+  publish_plugins:
+
+  - name: Publish Session to ShotGrid
+    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/_3dequalizer/publish_session.py"
+    settings:
+        Publish Template: 3dequalizer_asset_publish
+
+  - name: Publish Lens to ShotGrid
+    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/_3dequalizer/publish_lens.py"
+    settings:
+        Publish Template: 3dequalizer_asset_lens_publish
+
+  help_url: *help_url
+  location: "@apps.tk-multi-publish2.location"
+
+
+# shot step
+settings.tk-multi-publish2.3dequalizer.shot_step:
+  collector: "{self}/collector.py:{config}/tk-multi-publish2/basic/_3dequalizer/collector.py"
+  collector_settings:
+      Work Template: 3dequalizer_shot_work
+      #Playblast Render Template: 3dequalizer_shot_playblast_publish
+      #Playblast cone Render Template: 3dequalizer_shot_playblast_cones_publish
+      #Playblast wire Render Template: 3dequalizer_shot_playblast_wire_publish
+      Undist Render Template: 3dequalizer_shot_undist_plates_publish
+      Undist Node Template: 3dequalizer_shot_dist_publish
+  publish_plugins:
+  - name: Publish Session to ShotGrid
+    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/_3dequalizer/publish_session.py"
+    settings:
+        Publish Template: 3dequalizer_shot_publish
+
+  - name: Publish Camera to ShotGrid
+    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/_3dequalizer/publish_camera.py"
+    settings:
+        Publish Template: 3dequalizer_shot_camera_publish
+        Publish UndPlates Template: 3dequalizer_shot_undist_plates_publish
+        Cameras: ["*"]
+
+  - name: Publish Alembic Camera to ShotGrid
+    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/_3dequalizer/publish_camera_ABC.py"
+    settings:
+        Publish Template: 3dequalizer_shot_camera_publish
+
+  - name: Publish Generated Data
+    hook: "{self}/publish_file.py"
+    settings: {}
+
+  - name: Publish Lens to ShotGrid
+    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/_3dequalizer/publish_lens.py"
+    settings:
+        Publish Template: 3dequalizer_shot_lens_publish
+   
+  help_url: *help_url
+  location: "@apps.tk-multi-publish2.location" 

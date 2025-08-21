@@ -39,8 +39,8 @@ settings.tk-desktop.project:
     tk-multi-launchmotionbuilder: "@settings.tk-multi-launchapp.motionbuilder"
     tk-multi-publish2: "@settings.tk-multi-publish2.standalone"
     tk-multi-screeningroom: "@settings.tk-multi-screeningroom.rv"
-    ssvfx-multi-resourcecollector: 
-      location: "@apps.ssvfx-multi-resourcecollector.location"
+    ssvfx-scene-structure-editor:
+      location: "@apps.ssvfx-scene-structure-editor.location"
   default_group: Production Tools
   groups:
   - matches:
