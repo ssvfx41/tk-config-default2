@@ -1,0 +1,189 @@
+# Copyright (c) 2015 Shotgun Software Inc.
+#
+# CONFIDENTIAL AND PROPRIETARY
+#
+# This work is provided "AS IS" and subject to the Shotgun Pipeline Toolkit
+# Source Code License included in this distribution package. See LICENSE.
+# By accessing, using, copying or modifying this work you indicate your
+# agreement to the Shotgun Pipeline Toolkit Source Code License. All rights
+# not expressly granted therein are reserved by Shotgun Software Inc.
+
+#
+# This file is one of the central points in the Shotgun Pipeline Toolkit configuration and
+# a counterpart to the folder configuration structure.
+#
+# The folder structure underneath the project folder is used to create folders on disk -
+# templates.yml (this file) refers to those folders. Therefore, the two files need to be
+# in sync. This file contains an overview of all locations that are used by Sgtk.
+#
+# Whenever an app or an engine refers to a location on disk, it is using an entry defined in
+# this file. For more information, see the Shotgun Pipeline Toolkit Documentation.
+
+keys:
+    3dequalizer.lens_name:
+        type: str
+        filter_by: '^[0-9a-zA-Z_]+$'
+
+    3dequalizer.camera_name:
+        type: str
+        filter_by: '^[0-9a-zA-Z_]+$'
+
+    3dequalizer.dist_name:
+        type: str
+        filter_by: '^[0-9a-zA-Z_]+$'
+
+    3dequalizer.pointGroup_name:
+        type: str
+        filter_by: '^[0-9a-zA-Z_]+$'
+
+    # 3dequalizer supports two extension types.
+    3dequalizer_extension:
+        type: str
+        choices:
+            3de: 3dequalizer Project (.3de)
+        default: 3de
+        alias: extension
+    3DESEQ:
+        type: sequence
+        format_spec: "04"
+        default: "####"
+        alias: 3DESEQ
+    3dequalizer_camera_extension:
+        type: str
+        choices:
+            mel: Maya MEL
+            abc: Alembic
+        default: mel
+        alias: extension
+
+paths:
+    ###########
+    ## 3dequalizer
+    ###########
+    3dequalizer_cache_shot_root:  '@shot_context/3dequalizer/{task_name}/caches'
+    ########################################SHOT WORK
+    # define the location of a work area
+    3dequalizer_shot_work_area:
+        definition: '@shot_root/3dequalizer'
+        root_name: 'project_storage_pix'
+    # define the location of a publish area
+    3dequalizer_shot_publish_area:
+        definition: '@shot_root/publish/3dequalizer'
+        root_name: 'project_storage_pix'
+    # The location of WIP files
+    3dequalizer_shot_work:
+        definition: '@shot_root/3dequalizer/scenes/{Shot}_{task_name}[_{name}]_v{version}.{3dequalizer_extension}'
+        root_name: 'project_storage_pix'
+        
+    # The location of published 3dequalizer files
+    3dequalizer_shot_publish:
+        definition: '@shot_root/publish/3dequalizer/{Shot}_{task_name}[_{name}]_v{version}.{3dequalizer_extension}'
+        root_name: 'project_storage_pix'
+    # the Location of 3dequalizer published Cameras
+    #3dequalizer_shot_camera_publish:
+    #    definition: '@shot_root/publish/3dequalizer/cameras/{Shot}_{task_name}[_{name}]_v{version}.{3dequalizer_camera_extension}'
+    #    root_name: 'project_storage_pix'
+    
+    3dequalizer_shot_camera_publish:
+        definition: '@3dequalizer_cache_shot_root/alembic/{Shot}_{task_name}_camera-cache[_{name}]_v{version}/{Shot}_{task_name}_camera-cache[_{name}]_v{version}.{3dequalizer_camera_extension}'
+        root_name: 'caches'
+
+    #maya_shot_cache_alembic_abc:
+    #     definition: '@shot_context/maya/{task_name}/caches/alembic/{Shot}_{task_name}_alembic-cache[_{name}]_v{version}/{Shot}_{task_name}_alembic-cache[_{name}]_v{version}.abc'
+    #     root_name: 'caches'
+    
+    #houdini_shot_cache_alembic_abc:
+    #     definition: '@houdini_cache_shot_root/alembic/{Shot}_{task_name}_alembic-cache[_{name}]_v{version}/{Shot}_{task_name}_alembic-cache_{houdini.node}_v{version}.abc'
+    #     root_name: 'caches'
+
+    # the Location of 3dequalizer published distortion Node's
+    3dequalizer_shot_dist_publish:
+        definition: '@shot_root/publish/3dequalizer/distNode/{Shot}_{task_name}[_{name}]_v{version}.nk'
+        root_name: 'project_storage_pix'
+    # the Location of 3dequalizer published distortion Renderscript's
+    3dequalizer_shot_distRender_publish:
+        definition: '@shot_root/publish/3dequalizer/distRender/{Shot}_{task_name}[_{name}]_v{version}.nk'
+        root_name: 'project_storage_pix'
+
+    # the location of 3dequalizer published undistorted plates
+    3dequalizer_shot_undist_plates_publish:
+        definition: '@shot_root/publish/3dequalizer/undistRender/v{version}/{Shot}_{task_name}[_{name}]_v{version}.{3DESEQ}.jpg'
+        root_name: 'project_storage_pix'
+    
+    # the location of 3dequalizer published playblast plates
+    3dequalizer_shot_playblast_publish_root:
+        definition: '@shot_root/publish/3dequalizer/playblast/v{version}/standard'
+        root_name: 'project_storage_pix'
+
+    3dequalizer_shot_playblast_publish:
+        definition: '@3dequalizer_shot_playblast_publish_root/{Shot}_{task_name}[_{name}]_v{version}.{3DESEQ}.jpg'
+        root_name: 'project_storage_pix'
+
+    # the location of 3dequalizer published playblast plates
+    3dequalizer_shot_playblast_cones_publish_root:
+        definition: '@shot_root/publish/3dequalizer/playblast/v{version}/cones'
+        root_name: 'project_storage_pix'
+
+    3dequalizer_shot_playblast_cones_publish:
+        definition: '@3dequalizer_shot_playblast_cones_publish_root/{Shot}_{task_name}[_{name}]_cones_v{version}.{3DESEQ}.jpg'
+        root_name: 'project_storage_pix'
+    
+    # the location of 3dequalizer published playblast plates
+    3dequalizer_shot_playblast_wire_publish_root:
+        definition: '@shot_root/publish/3dequalizer/playblast/v{version}/wire'
+        root_name: 'project_storage_pix'
+
+    3dequalizer_shot_playblast_wire_publish:
+        definition: '@3dequalizer_shot_playblast_wire_publish_root/{Shot}_{task_name}[_{name}]_wire_v{version}.{3DESEQ}.jpg'
+        root_name: 'project_storage_pix'
+    
+    # the Location of 3dequalizer published Lenses
+    3dequalizer_shot_lens_publish:
+        definition: '@shot_root/publish/3dequalizer/lenses/{Shot}_{task_name}[_{name}]_v{version}.txt'
+        root_name: 'project_storage_pix'
+
+    ########################################ASSET WORK
+    # define the location of a work area
+    3dequalizer_asset_work_area:
+        definition: '@asset_root/work/3dequalizer'
+        root_name: 'project_storage_pix'
+    # define the location of a publish area
+    3dequalizer_asset_publish_area:
+        definition: '@asset_root/publish/3dequalizer'
+        root_name: 'project_storage_pix'
+    # The location of WIP files
+    3dequalizer_asset_work:
+        definition: '@asset_root/work/3dequalizer/scenes/{Asset}_{task_name}[_{name}]_v{version}.{3dequalizer_extension}'
+        root_name: 'project_storage_pix'
+    # The location of published 3dequalizer files
+    3dequalizer_asset_publish:
+        definition: '@asset_root/publish/3dequalizer/{Asset}_{task_name}[_{name}]_v{version}.{3dequalizer_extension}'
+        root_name: 'project_storage_pix'
+    # the Location of 3dequalizer published Cameras
+    3dequalizer_asset_camera_publish:
+        definition: '@asset_root/publish/3dequalizer/cameras/{Asset}_{task_name}[_{name}]_v{version}.{3dequalizer_camera_extension}'
+        root_name: 'project_storage_pix'
+    # the Location of 3dequalizer published Lenses
+    3dequalizer_asset_lens_publish:
+        definition: '@asset_root/publish/3dequalizer/lenses/{Asset}_{task_name}[_{name}]_v{version}.txt'
+        root_name: 'project_storage_pix'
+    
+
+    # # 3dequalizer Object export 
+    3dequalizer_shot_export_obj:
+        definition: '@shot_context/3d_export/obj/{task_name}/{Shot}_{task_name}_v{version}/{Shot}_{task_name}_v{version}.obj'
+        root_name: 'caches'
+ 
+
+    ######################################## ASSET OUTPUT       
+    # Render location for asset renders
+    3dequalizer_asset_renders_step:
+        definition: '@asset_render_root/3dequalizera/{task_name}/version'
+        root_name: 'project_storage_pix'
+    3dequalizer_asset_renders_stub:
+        definition: '@asset_render_root/3dequalizer/{task_name}/version/{Asset}_{task_name}[_{name}]_v{version}'
+        root_name: 'project_storage_pix'
+
+    3dequalizer_deadline_temp:
+        definition: 'admin/processing/temp/deadline'
+        root_name: 'project_storage_pix'
