@@ -14,7 +14,7 @@
                     "color_required": false,
                     "client_process": false,              
                     "plugin_name": "MayaBatch",
-                    "plugin_version": "2018",
+                    "plugin_version": "2024",
                     "plugin_in_script": "admin/processing/nuke_scripts/2021/pump_processing.nk"
                 },
                 "nuke_settings":{
@@ -92,7 +92,7 @@
                     "color_required": false,
                     "client_process": false,              
                     "plugin_name": "MayaBatch",
-                    "plugin_version": "2018",
+                    "plugin_version": "2024",
                     "plugin_in_script": "admin/processing/nuke_scripts/2021/pump_processing.nk"
                 },
                 "nuke_settings":{
