@@ -66,7 +66,7 @@
                     "process_type": "primary",
                     "output_type": "thumb",
                     "output_root": "primary",
-                    "output_directory": "_thumb/{output_file}",
+                    "output_directory": "_thumb",
                     "output_file": "{output_file}",
                     "output_file_ext": "jpeg",
                     "create_version": false,
