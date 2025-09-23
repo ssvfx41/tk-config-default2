@@ -242,7 +242,7 @@ paths:
         definition: '@render_root/houdini/{task_name}/flip'
         root_name: 'project_storage_pix'
     houdini_shot_playblast_output:
-        definition: '@houdini_shot_playblast_root/@houdini_shot_hipfile/@houdini_shot_hipfile'
+        definition: '@houdini_shot_playblast_root/@houdini_shot_hipfile/{Shot}_{task_name}[_{name}]_pb_v{version}'
         root_name: 'project_storage_pix'
     houdini_shot_playblast_publishing:
         definition: '@houdini_shot_playblast_output.{HSEQ}.jpg'
@@ -312,7 +312,7 @@ paths:
         definition: '@asset_render_root/houdini/{task_name}/flip'
         root_name: 'project_storage_pix'
     houdini_asset_playblast_output:
-        definition: '@houdini_asset_playblast_root/@houdini_asset_hipfile/@houdini_asset_hipfile'
+        definition: '@houdini_asset_playblast_root/@houdini_asset_hipfile/{Asset}_{task_name}[_{name}]_pb_v{version}'
         root_name: 'project_storage_pix'
     houdini_asset_playblast_publishing:
         definition: '@houdini_asset_playblast_output.{HSEQ}.jpg'
