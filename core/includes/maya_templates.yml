@@ -199,7 +199,7 @@ paths:
         definition: '@shot_context/maya/{task_name}/caches/obj/{Shot}_{task_name}_obj_cache[_{name}]_v{version}/{Shot}_{task_name}_obj-cache[_{name}]_v{version}.obj'
         root_name: 'caches'
     maya_shot_cache_standin_ass:
-        definition: '@shot_context/maya/{task_name}/caches/standin/{Shot}_{task_name}_standin_cache[_{name}]_v{version}/{Shot}_{task_name}_standin-cache[_{name}]_v{version}.ass'
+        definition: '@shot_context/maya/{task_name}/caches/standin/{Shot}_{task_name}_standin_cache[_{name}]_v{version}/{Shot}_{task_name}_standin-cache[_{name}]_v{version}[.{SEQ}].ass'
         root_name: 'caches'
     maya_shot_cache_bifrost:
          definition: '@shot_context/maya/{task_name}/caches/bifrost/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}_v{version}.{SEQ}.bif'
