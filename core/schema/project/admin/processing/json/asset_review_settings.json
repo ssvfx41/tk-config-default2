@@ -154,7 +154,7 @@
                     "dependent_script_file": "//ssvfx_pipeline/pipeline_repo/master/ssvfx_scripts/thinkbox/python/dependencies/update_sg.py"
                 },
                 "nuke_settings":{
-                    "plate_switch": {"which":2},
+                    "plate_switch": {"which":0},
                     "color_switch": {"which":1},
                     "transform_switch": {"which":0},
                     "slate_switch": {"disable":false},
