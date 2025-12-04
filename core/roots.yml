@@ -57,12 +57,17 @@ project_storage_pix:
     # indicates that this is the default storage root
     default: true
 
+assets: {
+  linux_path: /mnt/assets_assettest,
+  mac_path: null,
+  windows_path: \\pix_assets\assets_assettest
+  }
 
 caches: {
-  shotgun_storage_id: 1320,
-  linux_path: /mnt/vfx_projects_caches/projects_caches,
+  shotgun_storage_id: 3599,
+  linux_path: /mnt/project_caches,
   mac_path: null, 
-  windows_path: \\pix_artist\vfx_projects_caches\projects_caches
+  windows_path: \\pix_assets\project_caches
   }
 
 records: {
@@ -72,7 +77,6 @@ records: {
   windows_path: \\pix_artist\tech_records\tech_records
   }
 
-# TODO: create the entity
 showtools: {
   shotgun_storage_id: 2739,
   linux_path: /mnt/pipeline_repo/show_tools/SHARED,
