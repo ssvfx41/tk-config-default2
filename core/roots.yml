@@ -57,7 +57,7 @@ project_storage_pix:
     # indicates that this is the default storage root
     default: true
 
-assets: {
+asset_storage: {
   linux_path: /mnt/assets_assettest,
   mac_path: null,
   windows_path: \\pix_assets\assets_assettest
