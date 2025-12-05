@@ -215,18 +215,22 @@ paths:
     # These don't require the standard formatting (with definition and root_name) because they
     # will be set within each template that uses the alias.
     # Primary roots to assets and shots
+    project_assets_root:
+        definition: 'assets/'
+        root_name: 'assets'
+
     shot_root: shots/{Shot}/pipeline_task/{task_name}
-    asset_root: assets/{sg_asset_type}/{Asset}/pipeline_task/{task_name}
+    asset_root: @project_assets_root/{sg_asset_type}/{Asset}/pipeline_task/{task_name}
 
     # Render root locations for assets and shots
     render_root: shots/{Shot}/renders
-    asset_render_root: assets/{sg_asset_type}/{Asset}/renders
+    asset_render_root: @project_assets_root/{sg_asset_type}/{Asset}/renders
     # Temp render locations
     temp_shot_root: shots/temp/{Shot}
-    temp_asset_render_root: assets/temp/{sg_asset_type}/{Asset}/renders
+    temp_asset_render_root: @project_assets_root/temp/{sg_asset_type}/{Asset}/renders
     info_json_file: shots/temp/{Shot}/json/{Shot}_{task_name}[_{name}]_v{version}.json
     alembic_shot_json: shots/temp/[{Shot}][{Asset}]/json/[{Shot}][{Asset}]_{task_name}_alembic_v{version}.json
-    alembic_asset_json: assets/temp/{sg_asset_type}/{Asset}/json/{Asset}_{task_name}_alembic_v{version}.json
+    alembic_asset_json: @project_assets_root/temp/{sg_asset_type}/{Asset}/json/{Asset}_{task_name}_alembic_v{version}.json
 
     deadline_temp_folder: 
         definition: 'admin/temp/'
@@ -237,14 +241,14 @@ paths:
     plates_root: shots/{Shot}/rushes/plate
 
     #Context root locations for assets and shots
-    asset_context: assets/{sg_asset_type}/{Asset}
+    asset_context: @project_assets_root/{sg_asset_type}/{Asset}
     shot_context: shots/{Shot}
 
     project_shots_folder: 
         definition: 'shots/'
         root_name: 'project_storage_pix'
 
-    workfile_templates: 
+    workfile_templates:
         definition: 'admin/workfile_templates'
         root_name: 'project_storage_pix'
         
@@ -299,14 +303,6 @@ paths:
     asset_review_process_json2:
         definition: '@processing_root/json/asset_review_settings.json'
         root_name: 'project_storage_pix'
-
-    # shot_submission_json_file: 
-    #     definition: '@processing_root/temp/json/submissions/{Shot}/{Shot}_{task_name}[_{name}]_v{version}.json'
-    #     root_name: 'project_storage_pix'
-
-    # asset_submission_json_file: 
-    #     definition: '@processing_root/temp/json/submissions/{sg_asset_type}/{Asset}/{Asset}_{task_name}[_{name}]_v{version}.json'
-    #     root_name: 'project_storage_pix'
 
     shot_review_process_json:
         definition: '@processing_root/json/shot_processing_review_settings.json'
@@ -442,7 +438,7 @@ paths:
     # global asset root locations for the different locations to save to
     asset_render_global:
         definition: '@asset_context/'
-        root_name: 'project_storage_pix'
+        root_name: 'asset'
 
     # templates
     showtools_template:

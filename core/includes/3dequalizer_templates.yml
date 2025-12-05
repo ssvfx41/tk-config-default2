@@ -146,27 +146,27 @@ paths:
     # define the location of a work area
     3dequalizer_asset_work_area:
         definition: '@asset_root/work/3dequalizer'
-        root_name: 'project_storage_pix'
+        root_name: 'asset'
     # define the location of a publish area
     3dequalizer_asset_publish_area:
         definition: '@asset_root/publish/3dequalizer'
-        root_name: 'project_storage_pix'
+        root_name: 'asset'
     # The location of WIP files
     3dequalizer_asset_work:
         definition: '@asset_root/work/3dequalizer/scenes/{Asset}_{task_name}[_{name}]_v{version}.{3dequalizer_extension}'
-        root_name: 'project_storage_pix'
+        root_name: 'asset'
     # The location of published 3dequalizer files
     3dequalizer_asset_publish:
         definition: '@asset_root/publish/3dequalizer/{Asset}_{task_name}[_{name}]_v{version}.{3dequalizer_extension}'
-        root_name: 'project_storage_pix'
+        root_name: 'asset'
     # the Location of 3dequalizer published Cameras
     3dequalizer_asset_camera_publish:
         definition: '@asset_root/publish/3dequalizer/cameras/{Asset}_{task_name}[_{name}]_v{version}.{3dequalizer_camera_extension}'
-        root_name: 'project_storage_pix'
+        root_name: 'asset'
     # the Location of 3dequalizer published Lenses
     3dequalizer_asset_lens_publish:
         definition: '@asset_root/publish/3dequalizer/lenses/{Asset}_{task_name}[_{name}]_v{version}.txt'
-        root_name: 'project_storage_pix'
+        root_name: 'asset'
     
 
     # # 3dequalizer Object export 
@@ -179,10 +179,10 @@ paths:
     # Render location for asset renders
     3dequalizer_asset_renders_step:
         definition: '@asset_render_root/3dequalizera/{task_name}/version'
-        root_name: 'project_storage_pix'
+        root_name: 'assets'
     3dequalizer_asset_renders_stub:
         definition: '@asset_render_root/3dequalizer/{task_name}/version/{Asset}_{task_name}[_{name}]_v{version}'
-        root_name: 'project_storage_pix'
+        root_name: 'assets'
 
     3dequalizer_deadline_temp:
         definition: 'admin/processing/temp/deadline'

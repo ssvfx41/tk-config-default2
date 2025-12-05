@@ -3,7 +3,7 @@ paths:
     # The location of WIP script files
     psd_asset_work:
         definition: '@asset_root/psd/{Asset}_{task_name}[_{name}]_v{version}.psd'
-        root_name: 'project_storage_pix'
+        root_name: 'assets'
     psd_shot_work:
         definition: '@shot_root/psd/{Shot}_{task_name}[_{name}]_v{version}.psd'
         root_name: 'project_storage_pix'
@@ -16,13 +16,13 @@ paths:
     # Asset
     psd_asset_version_dpx:
         definition: '@asset_render_root/psd/{task_name}/version/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}[_{name}]_v{version}.dpx'
-        root_name: 'project_storage_pix'
+        root_name: 'assets'
     psd_asset_version_exr:
         definition: '@asset_render_root/psd/{task_name}/version/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}[_{name}]_v{version}.exr'
-        root_name: 'project_storage_pix'
+        root_name: 'assets'
     psd_asset_version_jpeg:
         definition: '@asset_render_root/psd/{task_name}/version/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}[_{name}]_v{version}.jpeg'
-        root_name: 'project_storage_pix'
+        root_name: 'assets'
     # Shot
     psd_shot_version_dpx:
         definition: '@render_root/psd/{task_name}/version/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}[_{name}]_v{version}.{SEQ}.dpx'
