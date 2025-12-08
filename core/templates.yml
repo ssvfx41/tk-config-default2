@@ -216,17 +216,25 @@ paths:
     # will be set within each template that uses the alias.
     # Primary roots to assets and shots
     shot_root: shots/{Shot}/pipeline_task/{task_name}
-    asset_root: assets/{sg_asset_type}/{Asset}/pipeline_task/{task_name}
+    asset_root:
+        definition: 'assets/{sg_asset_type}/{Asset}/pipeline_task/{task_name}'
+        root_name: 'asset_storage'
 
     # Render root locations for assets and shots
     render_root: shots/{Shot}/renders
-    asset_render_root: assets/{sg_asset_type}/{Asset}/renders
+    asset_render_root:
+        definition: 'assets/{sg_asset_type}/{Asset}/renders'
+        root_name: 'asset_storage'
     # Temp render locations
     temp_shot_root: shots/temp/{Shot}
-    temp_asset_render_root: assets/temp/{sg_asset_type}/{Asset}/renders
+    temp_asset_render_root:
+        definition: 'assets/temp/{sg_asset_type}/{Asset}/renders'
+        root_name: 'asset_storage'
     info_json_file: shots/temp/{Shot}/json/{Shot}_{task_name}[_{name}]_v{version}.json
     alembic_shot_json: shots/temp/[{Shot}][{Asset}]/json/[{Shot}][{Asset}]_{task_name}_alembic_v{version}.json
-    alembic_asset_json: assets/temp/{sg_asset_type}/{Asset}/json/{Asset}_{task_name}_alembic_v{version}.json
+    alembic_asset_json:
+        definition: 'assets/temp/{sg_asset_type}/{Asset}/json/{Asset}_{task_name}_alembic_v{version}.json'
+        root_name: 'asset_storage'
 
     deadline_temp_folder: 
         definition: 'admin/temp/'
@@ -237,8 +245,10 @@ paths:
     plates_root: shots/{Shot}/rushes/plate
 
     #Context root locations for assets and shots
-    asset_context: assets/{sg_asset_type}/{Asset}
     shot_context: shots/{Shot}
+    asset_context:
+        definition: 'assets/{sg_asset_type}/{Asset}'
+        root_name: 'asset_storage'
 
     project_shots_folder: 
         definition: 'shots/'
@@ -434,7 +444,7 @@ paths:
     # global asset root locations for the different locations to save to
     asset_render_global:
         definition: '@asset_context/'
-        root_name: 'project_storage_pix'
+        root_name: 'asset_storage'
 
     # templates
     showtools_template:
