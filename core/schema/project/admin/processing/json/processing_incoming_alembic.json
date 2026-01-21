@@ -46,8 +46,8 @@
                     }
                 },
                 "deadline_settings":{
-                    "primary_pool": "vfx_3d",
-                    "secondary_pool": "vfx_3d",
+                    "primary_pool": "maya_arnold",
+                    "secondary_pool": "maya_arnold",
                     "chunk_size": 1000000,
                     "priority": 55,
                     "concurrent_task": 1,
@@ -124,8 +124,8 @@
                     }
                 },
                 "deadline_settings":{
-                    "primary_pool": "vfx_3d",
-                    "secondary_pool": "vfx_3d",
+                    "primary_pool": "maya_arnold",
+                    "secondary_pool": "maya_arnold",
                     "chunk_size": 1000000,
                     "priority": 55,
                     "concurrent_task": 1,

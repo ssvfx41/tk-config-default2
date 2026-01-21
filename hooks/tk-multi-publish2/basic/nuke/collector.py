@@ -9,7 +9,7 @@
 # not expressly granted therein are reserved by Shotgun Software Inc.
 # ### OVERRIDDEN IN SSVFX_SG ###
 
-from ss_config.hooks.tk_multi_publish2.nuke.collector import SsNukeSessionCollector
+from ss_config.hooks.tk_multi_publish2.nuke.collector_pcr import SsNukeSessionCollector
 
 class NukeSessionCollector(SsNukeSessionCollector):
     """
