@@ -193,7 +193,7 @@ settings.tk-multi-workfiles2.houdini.project:
   - caption: Shots
     entity_type: Shot
     filters: *filter_by_omit_hold
-    hierarchy: [sg_episode, code]
+    hierarchy: [sg_sequence, code]
     sub_hierarchy:
       entity_type: Task
       filters: *filter_by_omit_hold
@@ -278,7 +278,7 @@ settings.tk-multi-workfiles2.maya.project:
   - caption: Shots
     entity_type: Shot
     filters: *filter_by_omit_hold
-    hierarchy: [sg_episode, code]
+    hierarchy: [sg_sequence, code]
     sub_hierarchy:
       entity_type: Task
       filters: *filter_by_omit_hold
@@ -292,7 +292,7 @@ settings.tk-multi-workfiles2.maya.asset_step:
   allow_task_creation: false
   template_publish: maya_asset_publish
   template_publish_area: maya_asset_publish_area
-  template_work: maya_asset_work
+  template_work: maya_asset_workfile
   template_work_area: maya_asset_work_area
   entities:
   - caption: Assets
@@ -321,7 +321,7 @@ settings.tk-multi-workfiles2.maya.shot_step:
   allow_task_creation: false
   template_publish: maya_shot_publish
   template_publish_area: maya_shot_publish_area
-  template_work: maya_shot_work
+  template_work: maya_shot_workfile
   template_work_area: maya_shot_work_area
   entities:
   - caption: Assets
@@ -365,7 +365,7 @@ settings.tk-multi-workfiles2.nuke.project:
   - caption: Shots
     entity_type: Shot
     filters: *filter_by_omit_hold
-    hierarchy: [sg_episode, code]
+    hierarchy: [sg_sequence, code]
     sub_hierarchy:
       entity_type: Task
       filters: *filter_by_omit_hold
@@ -377,9 +377,9 @@ settings.tk-multi-workfiles2.nuke.project:
 # asset_step
 settings.tk-multi-workfiles2.nuke.asset_step:
   allow_task_creation: false
-  template_publish: nuke_asset_publish
+  template_publish: asset_publish_workfile
   template_publish_area: nuke_asset_publish_area
-  template_work: nuke_asset_work
+  template_work: nuke_asset_workfile
   template_work_area: nuke_asset_work_area
   entities:
   - caption: Assets
@@ -407,9 +407,9 @@ settings.tk-multi-workfiles2.nuke.asset_step:
 # shot_step
 settings.tk-multi-workfiles2.nuke.shot_step:
   allow_task_creation: false
-  template_publish: nuke_shot_publish
+  template_publish: shot_publish_workfile
   template_publish_area: nuke_shot_publish_area
-  template_work: nuke_shot_work
+  template_work: nuke_shot_workfile
   template_work_area: nuke_shot_work_area
   entities:
   - caption: Assets
@@ -424,7 +424,7 @@ settings.tk-multi-workfiles2.nuke.shot_step:
   - caption: Shots
     entity_type: Shot
     filters: *filter_by_omit_hold
-    hierarchy: [sg_episode, code]
+    hierarchy: [sg_sequence, code]
     sub_hierarchy:
       entity_type: Task
       filters: *filter_by_omit_hold
@@ -753,7 +753,7 @@ settings.tk-multi-workfiles2.mari:
   - caption: Shots
     entity_type: Shot
     filters: 
-    hierarchy: [sg_episode, code]
+    hierarchy: [sg_sequence, code]
     sub_hierarchy:
       entity_type: Task
       filters:
@@ -786,7 +786,7 @@ settings.tk-multi-workfiles2.3dequalizer:
   - caption: Shots
     entity_type: Shot
     filters: *filter_by_omit_hold
-    hierarchy: [sg_episode, code]
+    hierarchy: [sg_sequence, code]
     sub_hierarchy:
       entity_type: Task
       filters: *filter_by_omit_hold

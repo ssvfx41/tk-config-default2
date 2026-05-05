@@ -115,7 +115,8 @@ settings.tk-nuke.asset_step:
   - {app_instance: tk-multi-publish2, name: Publish...}
   location: "@engines.tk-nuke.location"
   favourite_directories: [
-    {display_name: Asset Work Area, template_directory: nuke_asset_work_area, icon: 'icons/icon_folder_80.png'}
+    {display_name: Asset Work Area, template_directory: nuke_asset_work_area, icon: 'icons/icon_folder_80.png'},
+    { display_name: Asset Render Area, template_directory: asset_render_root, icon: 'icons/icon_renders_80.png' }
   ]
 
 # project
@@ -190,8 +191,7 @@ settings.tk-nuke.shot_step:
   - {app_instance: tk-multi-publish2, name: Publish...}
   favourite_directories: [
     {display_name: Shot Work Area, template_directory: nuke_shot_work_area, icon: 'icons/icon_folder_80.png'}, 
-    # {display_name: Shot Rush Area, template_directory: shot_rushes_root, icon: 'icons/icon_plates_80.png'},
-    {display_name: Shot Render Area, template_directory: nuke_shot_render_area, icon: 'icons/icon_renders_80.png'}
+    {display_name: Shot Render Area, template_directory: shot_render_root, icon: 'icons/icon_renders_80.png'}
     ]  
   location: "@engines.tk-nuke.location"
 
