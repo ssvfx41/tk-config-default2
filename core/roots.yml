@@ -42,10 +42,6 @@
 # ------------------------------------------------------------------------------
 
 project_storage_pix:
-
-    description: A top-level root folder for production data. Project folders
-        will be created beneath this location.
-
     # these paths will be populated by the associated local storage in Shotgun
     # at setup time.
     mac_path: null
@@ -56,6 +52,8 @@ project_storage_pix:
 
     # indicates that this is the default storage root
     default: true
+    description: A top-level root folder for production data. Project folders
+      will be created beneath this location.
 
 asset_storage: {
   linux_path: /mnt/assets_assettest,
@@ -70,11 +68,18 @@ caches: {
   windows_path: \\pix_assets\project_caches
   }
 
+review: {
+  shotgun_storage_id: 3762,
+  linux_path: /mnt/project_review,
+  mac_path: null,
+  windows_path: \\pix_artist\project_review
+  }
+
 records: {
-  shotgun_storage_id: 2277,
-  linux_path: /mnt/tech_records/tech_records,
+  shotgun_storage_id: 2080,
+  linux_path: /mnt/tech_records/projects,
   mac_path: null, 
-  windows_path: \\pix_artist\tech_records\tech_records
+  windows_path: \\pix_artist\tech_records\projects
   }
 
 showtools: {
