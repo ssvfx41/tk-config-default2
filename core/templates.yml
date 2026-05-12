@@ -209,8 +209,14 @@ keys:
     work_extension:
         type: str
         choices:
-            nk: Nuke work file (.nk)
-            ma: Maya work file (.ma)
+            3de: 3dequalizer file (.3de)
+            hip: Houdini file (.hip)
+            hipnc: Houdini file (.hipnc)
+            ma: Maya file (.ma)
+            mb: Maya binary file (.mb)
+            nk: Nuke file (.nk)
+            psd: Photoshop file (.psd)
+            psb: Photoshop file (.psb)
         default: nk
 
     export_extension:
@@ -218,11 +224,12 @@ keys:
         choices:
             abc: (.abc)
             ass: (.ass)
-            obj: (.obj)
-            mcx: (.mcx)
-            fxd: (.fxd)
             bgeo: (.bgeo)
             bgeosc: (.bgeosc)
+            fxd: (.fxd)
+            mcx: (.mcx)
+            obj: (.obj)
+            txt: (.txt)
         default: abc
 
     element_type:
@@ -252,11 +259,13 @@ keys:
     dcc:
         type: str
         choices:
+            3de: 3D Equalizer
+            3dsmax: 3ds Max
+            houdini: Houdini
             mari: Mari
             maya: Maya
-            houdini: Houdini
             nuke: Nuke
-            3dequalizer: 3dequalizer
+            psd: Photoshop
 
     descriptor:
         type: str

@@ -61,29 +61,29 @@ paths:
     ################
     ## Work Files ##
     3dequalizer_shot_work_area:
-        definition: '@shot_root/3dequalizer'
+        definition: '@shot_root/3de'
         root_name: 'project_storage_pix'
 
     3dequalizer_shot_work:
-        definition: '@shot_root/3dequalizer/scenes/{Shot}_{task_name}[_{name}]_v{version}.{3dequalizer_extension}'
+        definition: '@shot_root/3de/scenes/{Shot}_{task_name}[_{name}]_v{version}.{3dequalizer_extension}'
         root_name: 'project_storage_pix'
 
     3dequalizer_asset_work_area:
-        definition: '@asset_root/work/3dequalizer'
+        definition: '@asset_root/work/3de'
         root_name: 'asset_storage'
 
     3dequalizer_asset_work:
-        definition: '@asset_root/work/3dequalizer/scenes/{Asset}_{task_name}[_{name}]_v{version}.{3dequalizer_extension}'
+        definition: '@asset_root/work/3de/scenes/{Asset}_{task_name}[_{name}]_v{version}.{3dequalizer_extension}'
         root_name: 'asset_storage'
 
     ######################
     ## Render Templates ##
     3dequalizer_asset_renders_step: # TODO not in use?
-        definition: '@asset_render_root/3dequalizera/{task_name}/version'
+        definition: '@asset_render_root/3de/{task_name}/version'
         root_name: 'asset_storage'
 
     3dequalizer_asset_renders_stub: # TODO not in use?
-        definition: '@asset_render_root/3dequalizer/{task_name}/version/{Asset}_{task_name}[_{name}]_v{version}'
+        definition: '@asset_render_root/3de/{task_name}/version/{Asset}_{task_name}[_{name}]_v{version}'
         root_name: 'asset_storage'
 
     ######################
@@ -92,39 +92,39 @@ paths:
     #######################
     ## Publish Templates ##
     3dequalizer_shot_publish_area:
-        definition: '@shot_root/publish/3dequalizer'
+        definition: '@shot_root/publish/3de'
         root_name: 'project_storage_pix'
 
     3dequalizer_shot_publish:
-        definition: '@shot_root/publish/3dequalizer/{Shot}_{task_name}[_{name}]_v{version}.{3dequalizer_extension}'
+        definition: '@shot_root/publish/3de/{Shot}_{task_name}[_{name}]_v{version}.{3dequalizer_extension}'
         root_name: 'project_storage_pix'
 
     3dequalizer_asset_publish_area:
-        definition: '@asset_root/publish/3dequalizer'
+        definition: '@asset_root/publish/3de'
         root_name: 'asset_storage'
 
     3dequalizer_asset_publish:
-        definition: '@asset_root/publish/3dequalizer/{Asset}_{task_name}[_{name}]_v{version}.{3dequalizer_extension}'
+        definition: '@asset_root/publish/3de/{Asset}_{task_name}[_{name}]_v{version}.{3dequalizer_extension}'
         root_name: 'asset_storage'
 
     # Distortion Node publish path
     3dequalizer_shot_dist_publish:
-        definition: '@shot_root/publish/3dequalizer/distNode/{Shot}_{task_name}[_{name}]_v{version}.nk'
+        definition: '@shot_root/publish/3de/distNode/{Shot}_{task_name}[_{name}]_v{version}.nk'
         root_name: 'project_storage_pix'
 
     # Distortion render script publish path
     3dequalizer_shot_distRender_publish:
-        definition: '@shot_root/publish/3dequalizer/distRender/{Shot}_{task_name}[_{name}]_v{version}.nk'
+        definition: '@shot_root/publish/3de/distRender/{Shot}_{task_name}[_{name}]_v{version}.nk'
         root_name: 'project_storage_pix'
 
     # Undistort render publish path
     3dequalizer_shot_undist_plates_publish:
-        definition: '@shot_root/publish/3dequalizer/undistRender/v{version}/{Shot}_{task_name}[_{name}]_v{version}.{3DESEQ}.jpg'
+        definition: '@shot_root/publish/3de/undistRender/v{version}/{Shot}_{task_name}[_{name}]_v{version}.{3DESEQ}.jpg'
         root_name: 'project_storage_pix'
 
     # Playblast publish
     3dequalizer_shot_playblast_publish_root:
-        definition: '@shot_root/publish/3dequalizer/playblast/v{version}/standard'
+        definition: '@shot_root/publish/3de/playblast/v{version}/standard'
         root_name: 'project_storage_pix'
 
     3dequalizer_shot_playblast_publish:
@@ -132,7 +132,7 @@ paths:
         root_name: 'project_storage_pix'
 
     3dequalizer_shot_playblast_cones_publish_root: # TODO: Why root & publish?
-        definition: '@shot_root/publish/3dequalizer/playblast/v{version}/cones'
+        definition: '@shot_root/publish/3de/playblast/v{version}/cones'
         root_name: 'project_storage_pix'
 
     3dequalizer_shot_playblast_cones_publish: # TODO: Why root & publish?
@@ -140,7 +140,7 @@ paths:
         root_name: 'project_storage_pix'
 
     3dequalizer_shot_playblast_wire_publish_root: # TODO: Why root & publish?
-        definition: '@shot_root/publish/3dequalizer/playblast/v{version}/wire'
+        definition: '@shot_root/publish/3de/playblast/v{version}/wire'
         root_name: 'project_storage_pix'
 
     3dequalizer_shot_playblast_wire_publish: # TODO: Why root & publish?
@@ -154,20 +154,20 @@ paths:
 
     # Lens text data
     3dequalizer_shot_lens_publish:
-        definition: '@shot_root/publish/3dequalizer/lenses/{Shot}_{task_name}[_{name}]_v{version}.txt'
+        definition: '@shot_root/publish/3de/lenses/{Shot}_{task_name}[_{name}]_v{version}.txt'
         root_name: 'project_storage_pix'
 
     3dequalizer_asset_lens_publish:
-        definition: '@asset_root/publish/3dequalizer/lenses/{Asset}_{task_name}[_{name}]_v{version}.txt'
+        definition: '@asset_root/publish/3de/lenses/{Asset}_{task_name}[_{name}]_v{version}.txt'
         root_name: 'asset_storage'
 
     # Caches
-    3dequalizer_cache_shot_root:  '@shot_context/3dequalizer/{task_name}/caches'
+    3dequalizer_cache_shot_root:  '@shot_context/3de/{task_name}/caches'
 
     3dequalizer_shot_camera_publish:
-        definition: '@3dequalizer_cache_shot_root/alembic/{Shot}_{task_name}_camera-cache[_{name}]_v{version}/{Shot}_{task_name}_camera-cache[_{name}]_v{version}.{3dequalizer_camera_extension}'
+        definition: '@3de/alembic/{Shot}_{task_name}_camera-cache[_{name}]_v{version}/{Shot}_{task_name}_camera-cache[_{name}]_v{version}.{3dequalizer_camera_extension}'
         root_name: 'caches'
 
     3dequalizer_asset_camera_publish: # TODO not in use?
-        definition: '@asset_root/publish/3dequalizer/cameras/{Asset}_{task_name}[_{name}]_v{version}.{3dequalizer_camera_extension}'
+        definition: '@asset_root/publish/3de/cameras/{Asset}_{task_name}[_{name}]_v{version}.{3dequalizer_camera_extension}'
         root_name: 'asset_storage'

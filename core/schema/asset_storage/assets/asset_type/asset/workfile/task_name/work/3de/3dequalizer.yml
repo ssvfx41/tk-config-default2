@@ -11,6 +11,6 @@
 # the type of dynamic content
 type: "static"
 
-# defer creation and only create this folder when Maya starts
-defer_creation: "tk-maya"
+# defer creation and only create this folder when 3dsmax starts
+defer_creation: "tk-3dequalizer"
 
