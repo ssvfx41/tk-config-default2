@@ -14,6 +14,7 @@ Hook that gets executed every time an engine has fully initialized.
 """
 from tank import Hook
 import os
+import pprint
 import sgtk
 import socket
 
@@ -35,22 +36,19 @@ class EngineInit(Hook):
             project = ctx.project
             sg = engine.shotgun
 
-            filters = [
-            ['sg_status', 'in', ['Active', 'Development']],
-            ['id', 'is', project['id']]
-            ]
+            filters = [['id', 'is', project['id']]]
             fields = [
-            'name',
-            'sg_format_width',
-            'sg_format_height',
-            'sg_delivery_format_width',
-            'sg_delivery_format_height',            
-            'sg_format_pixel_aspect_ratio',
-            'sg_pixel_aspect_ratio',
-            'sg_frame_rate',
-            'sg_short_name'
+                'name',
+                'sg_format_width',
+                'sg_format_height',
+                'sg_delivery_format_width',
+                'sg_delivery_format_height',
+                'sg_format_pixel_aspect_ratio',
+                'sg_pixel_aspect_ratio',
+                'sg_frame_rate',
+                'sg_short_name'
             ]
-            project_info =  sg.find_one('Project', filters, fields)
+            project_info = sg.find_one('Project', filters, fields)
             if project_info:
                 if not(project_info['sg_frame_rate'] and 
                 project_info['sg_format_width'] and
