@@ -41,19 +41,18 @@ includes:
 keys:
     Sequence:
         type: str
+        shotgun_entity_type: Shot
+        shotgun_field_name: sg_sequence.Sequence.code
     Shot:
         type: str
-        # filter_by: '^[0-9a-zA-Z]{0,3}_?[0-9a-zA-Z]+_?\d{0,4}'
+        shotgun_entity_type: Shot
+        shotgun_field_name: code
     Rush:
         type: str    
     ext:
         type: str    
-    # Step:
-    #     type: str
     sg_asset_type:
         type: str
-    # sg_element:
-    #     type: str    
     ampm:
         type: str    
     Asset:
@@ -87,12 +86,21 @@ keys:
     height:
         type: int
 
+    # SEQ vs frame_padding
+    # type: sequence always appears in output paths even when set as optional in
+    # the template.
+    # Use "frame_padding" for output templates as it is correctly treated as optional.
+    # Use "SEQ" for templates that are always sequences, or for input templates to
+    #   correctly extract frame padding.
     SEQ:
         type: sequence
         format_spec: "04"
     SEQ6:
         type: sequence
         format_spec: "06"
+    frame_padding:
+        type: str
+
     eye:
         type: str
 
@@ -158,7 +166,6 @@ keys:
         shotgun_entity_type: Task
         shotgun_field_name: content
 
-
     # Maya supports two extension types.
     camera_extension:
         type: str
@@ -180,11 +187,89 @@ keys:
             py: Python (.py)
         alias: extension
 
+    # image extension descriptor.
+    image_extension:
+        type: str
+        choices:
+            jpg: Joint Photographic Group (.JPG)
+            jpeg: Joint Photographic Expert Group (.jpeg)
+            exr: OpenEXR (.exr)
+            dpx: Digital Picture Exchange (.dpx)
+        default: exr
+
+    # movie extension descriptor.
+    movie_extension:
+        type: str
+        choices:
+            mov: QuickTime File Format (.mov)
+            mp4: MPEG-4 Part 14 (.mp4)
+        default: mov
+
+    # image extension descriptor.
+    work_extension:
+        type: str
+        choices:
+            3de: 3dequalizer file (.3de)
+            hip: Houdini file (.hip)
+            hipnc: Houdini file (.hipnc)
+            ma: Maya file (.ma)
+            mb: Maya binary file (.mb)
+            nk: Nuke file (.nk)
+            psd: Photoshop file (.psd)
+            psb: Photoshop file (.psb)
+        default: nk
+
+    export_extension:
+        type: str
+        choices:
+            abc: (.abc)
+            ass: (.ass)
+            bgeo: (.bgeo)
+            bgeosc: (.bgeosc)
+            fxd: (.fxd)
+            mcx: (.mcx)
+            obj: (.obj)
+            txt: (.txt)
+        default: abc
+
+    element_type:
+        type: str
+        choices:
+            denoise: denoise
+            element: element
+            smartvector: smartvector
+            stmap: stmap
+            test: test
+        default: element
+
+    export_type:
+        type: str
+        choices:
+            alembic: alembic
+            bifrost: bifrost
+            geometry: geometry
+            n_cache: n_cache
+            obj: obj
+            standin: standin
+        default: alembic
+
+    export_group:
+        type: str
+
     dcc:
         type: str
         choices:
-            maya: Maya
+            3de: 3D Equalizer
+            3dsmax: 3ds Max
             houdini: Houdini
+            mari: Mari
+            maya: Maya
+            nuke: Nuke
+            psd: Photoshop
+
+    descriptor:
+        type: str
+        filter_by: '^[0-9a-zA-Z- ]+$'
 
     sc_template_name:
         type: str
@@ -215,238 +300,556 @@ paths:
     # These don't require the standard formatting (with definition and root_name) because they
     # will be set within each template that uses the alias.
     # Primary roots to assets and shots
-    shot_root: shots/{Shot}/pipeline_task/{task_name}
-    asset_root:
-        definition: 'assets/{sg_asset_type}/{Asset}/pipeline_task/{task_name}'
-        root_name: 'asset_storage'
 
-    # Render root locations for assets and shots
-    render_root: shots/{Shot}/renders
-    asset_render_root:
-        definition: 'assets/{sg_asset_type}/{Asset}/renders'
-        root_name: 'asset_storage'
-    # Temp render locations
-    temp_shot_root: shots/temp/{Shot}
-    temp_asset_render_root:
-        definition: 'assets/temp/{sg_asset_type}/{Asset}/renders'
-        root_name: 'asset_storage'
-    info_json_file: shots/temp/{Shot}/json/{Shot}_{task_name}[_{name}]_v{version}.json
-    alembic_shot_json: shots/temp/[{Shot}][{Asset}]/json/[{Shot}][{Asset}]_{task_name}_alembic_v{version}.json
-    alembic_asset_json:
-        definition: 'assets/temp/{sg_asset_type}/{Asset}/json/{Asset}_{task_name}_alembic_v{version}.json'
-        root_name: 'asset_storage'
+    # TODO: NEW TEMPLATES FOR REWRITE
+    ################
+    ## Show Tools ##
+    showtools_template:
+        definition: '{dcc}/{sc_template_name}/v{version}/[{name}_]template_file.{sc_template_extension}'
+        root_name: 'showtools'
 
-    deadline_temp_folder: 
-        definition: 'admin/temp/'
+    #####################
+    ## Admin Templates ##
+    # Client
+    client_submission_folder: # TODO: Can be removed once nuke templates are fixed.
+        definition: 'admin/outgoing/submissions'
         root_name: 'project_storage_pix'
 
-    #Source of all plate footage
-    rushes_root: shots/{Shot}/rushes
-    plates_root: shots/{Shot}/rushes/plate
+#    version_zero_client: # TODO: not in use?
+#        definition: 'admin/outgoing/submissions/V000s'
+#        root_name: 'project_storage_pix'
+#
+#    project_slate: # TODO: not in use?
+#        definition: 'admin/outgoing/slate'
+#        root_name: 'project_storage_pix'
 
-    #Context root locations for assets and shots
-    shot_context: shots/{Shot}
-    asset_context:
-        definition: 'assets/{sg_asset_type}/{Asset}'
-        root_name: 'asset_storage'
-
-    project_shots_folder: 
-        definition: 'shots/'
-        root_name: 'project_storage_pix'
-
+    # Work Templates
     workfile_templates:
         definition: 'admin/workfile_templates'
         root_name: 'project_storage_pix'
-        
-    deadline_submission_folder: 
-        definition: 'admin/temp/scripts/deadline'
-        root_name: 'project_storage_pix'
 
-    client_submission_folder: 
-        definition: 'admin/outgoing/submissions'
-        root_name: 'project_storage_pix'
-    
-    resolve_review_folder: 
-        definition: 'editorial/resolve/review'
-        root_name: 'project_storage_pix'
-
+    # Json setting files
+    # TODO: See if these can be removed once new submitter is live.
     processing_root:
         definition: 'admin/processing'
         root_name: 'project_storage_pix'
 
+#    general_review_process_json: # TODO: not in use?
+#        definition: '@processing_root/json/processing_review_settings.json'
+#        root_name: 'project_storage_pix'
+
+    alembic_review_process_json: # TODO: Remove once project config tools are integrated
+        definition: '@processing_root/json/processing_incoming_alembic.json'
+        root_name: 'project_storage_pix'
+
+    shot_review_process_json: # TODO: Remove once project config tools are integrated
+        definition: '@processing_root/json/shot_processing_review_settings.json'
+        root_name: 'project_storage_pix'
+
+    shot_review_process_json2: # TODO: Remove once project config tools are integrated
+        definition: '@processing_root/json/shot_review_settings.json'
+        root_name: 'project_storage_pix'
+
+    asset_review_process_json: # TODO: Remove once project config tools are integrated
+        definition: '@processing_root/json/asset_processing_review_settings.json'
+        root_name: 'project_storage_pix'
+
+    asset_review_process_json2: # TODO: Remove once project config tools are integrated
+        definition: '@processing_root/json/asset_review_settings.json'
+        root_name: 'project_storage_pix'
+
+    # Records
     processing_records:
         definition: '@processing_root/records'
         root_name: 'project_storage_pix'
 
-    pump_records:
-        definition: '@processing_records/pump'
-        root_name: 'project_storage_pix'
+#    pump_records: # TODO not in use?
+#        definition: '@processing_records/pump'
+#        root_name: 'project_storage_pix'
 
-    publish_records:
+    publish_records: # TODO: Remove once nuke publishes are fixed.
         definition: '@processing_records/publish'
         root_name: 'project_storage_pix'
 
-    publish_shot_records:
+    publish_shot_records: # TODO: Remove once nuke publishes are fixed.
         definition: '@publish_records/shots'
         root_name: 'project_storage_pix'
 
-    publish_asset_records:
+    publish_asset_records: # TODO: Remove once nuke publishes are fixed.
         definition: '@publish_records/assets'
         root_name: 'project_storage_pix'
 
-    general_review_process_json:
-        definition: '@processing_root/json/processing_review_settings.json'
-        root_name: 'project_storage_pix'
-    
-    alembic_review_process_json:
-        definition: '@processing_root/json/processing_incoming_alembic.json'
-        root_name: 'project_storage_pix'
-
-    shot_review_process_json2:
-        definition: '@processing_root/json/shot_review_settings.json'
-        root_name: 'project_storage_pix'
-
-    asset_review_process_json2:
-        definition: '@processing_root/json/asset_review_settings.json'
-        root_name: 'project_storage_pix'
-
-    shot_review_process_json:
-        definition: '@processing_root/json/shot_processing_review_settings.json'
-        root_name: 'project_storage_pix'
-
-    asset_review_process_json:
-        definition: '@processing_root/json/asset_processing_review_settings.json'
-        root_name: 'project_storage_pix'
-
-    artist_work_render: 
-        definition: 'editorial/work/renders'
-        root_name: 'project_storage_pix'
-
-    version_zero_internal: 
-        definition: 'editorial/v000s'
-        root_name: 'project_storage_pix'
-
-    version_zero_client: 
-        definition: 'admin/outgoing/submissions/V000s'
-        root_name: 'project_storage_pix'
-        
-    project_slate: 
-        definition: 'admin/outgoing/slate'
-        root_name: 'project_storage_pix'
-
-    # Admin
-    shot_lineup_jpeg:
-        definition: '@shot_context/editorial/line_up/{name}.jpeg'
-        root_name: 'project_storage_pix'
-    shot_process_scripts_deadline:
-        definition: '@shot_context/scripts/deadline'
-        root_name: 'project_storage_pix'
-    shot_process_mov:
-        definition: '@shot_context/renders/process/{Codec}/{Shot}_v{version}.mov'
-        root_name: 'project_storage_pix'
-
-    # The location of shot rushes references, proxy jpegs and quicktimes
-    shot_rushes_root:
-        definition: '@rushes_root/'
-        root_name: 'project_storage_pix'
-    shot_rushes_main_jpg:
-        definition: '@rushes_root/jpeg/main/'
-        root_name: 'project_storage_pix'
-    shot_plates_root:
-        definition: '@plates_root/'
-        root_name: 'project_storage_pix'
-    shot_plates_main_proxy:
-        definition: '@plates_root/main/proxy/'
-        root_name: 'project_storage_pix'
-    shot_plates_main_reformat:
-        definition: '@plates_root/main/reformat/'
-        root_name: 'project_storage_pix'
-    shot_plates_bg_proxy:
-        definition: '@plates_root/background/proxy/'
-        root_name: 'project_storage_pix'
-    shot_plates_bg_reformat:
-        definition: '@plates_root/background/reformat/'
-        root_name: 'project_storage_pix'
-    shot_rushes_jpeg:
-        definition: '@rushes_root/jpeg/{Shot}_v{version}.{SEQ}.jpeg'
-        root_name: 'project_storage_pix'
-    shot_rushes_mov:
-        definition: '@rushes_root/mov/{Shot}_v{version}.mov'
-        root_name: 'project_storage_pix'
-    shot_rushes_filmstrip:
-        definition: '@rushes_root/filmstrip/{Shot}_v{version}.jpeg'
-        root_name: 'project_storage_pix'
-    # DPX
-    shot_plates_main_dpx:
-        definition: '@plates_root/main/{Rush}/{Rush}.{SEQ}.dpx'
-        root_name: 'project_storage_pix'
-    shot_plates_main_proxy_dpx:
-        definition: '@plates_root/main/proxy/{Rush}.{SEQ}.dpx'
-        root_name: 'project_storage_pix'
-    shot_plates_main_reformat_dpx:
-        definition: '@plates_root/main/reformat/{Rush}.{SEQ}.dpx'        
-    shot_plates_bg_dpx:
-        definition: '@plates_root/background/{Rush}/{Rush}.{SEQ}.dpx'
-        root_name: 'project_storage_pix'
-    shot_plates_bg_proxy_dpx:
-        definition: '@plates_root/background/proxy/{Rush}.{SEQ}.dpx'
-        root_name: 'project_storage_pix'
-    shot_plates_bg_reformat_dpx:
-        definition: '@plates_root/background/reformat/{Rush}.{SEQ}.dpx'
-        root_name: 'project_storage_pix'
-    shot_rushes_ref_dpx:
-        definition: '@plates_root/reference/{Rush}/{Rush}.{SEQ}.dpx'
-        root_name: 'project_storage_pix'
-    shot_rushes_elem_dpx:
-        definition: '@plates_root/element/{Rush}/{Rush}.{SEQ}.dpx'
-        root_name: 'project_storage_pix'
-    shot_render_process_version_dpx:
-        definition: '@render_root/{task_name}/{Shot}_v{version}/{Shot}_v{version}.{SEQ}.dpx'
-        root_name: 'project_storage_pix'
-    # EXR
-    shot_plates_main_exr:
-        definition: '@plates_root/main/{Rush}/{Rush}.{SEQ}.exr'
-        root_name: 'project_storage_pix'
-    shot_plates_main_proxy_exr:
-        definition: '@plates_root/main/proxy/{Rush}.{SEQ}.exr'
-        root_name: 'project_storage_pix'
-    shot_plates_main_reformat_exr:
-        definition: '@plates_root/main/reformat/{Rush}.{SEQ}.exr'
-        root_name: 'project_storage_pix'
-    shot_plates_bg_exr:
-        definition: '@plates_root/background/{Rush}/{Rush}.{SEQ}.exr'
-        root_name: 'project_storage_pix'
-    shot_plates_bg_proxy_exr:
-        definition: '@plates_root/background/proxy/{Rush}.{SEQ}.exr'
-        root_name: 'project_storage_pix'
-    shot_plates_bg_reformat_exr:
-        definition: '@plates_root/background/reformat/{Rush}.{SEQ}.exr'
-        root_name: 'project_storage_pix'
-    shot_rushes_ref_exr:
-        definition: '@plates_root/reference/{Rush}/{Rush}.{SEQ}.exr'
-        root_name: 'project_storage_pix'
-    shot_rushes_elem_exr:
-        definition: '@plates_root/element/{Rush}/{Rush}.{SEQ}.exr'
-        root_name: 'project_storage_pix'
-    shot_render_process_version_exr:
-        definition: '@render_root/{task_name}/{Shot}_v{version}/{Shot}_v{version}.{SEQ}.exr'
-        root_name: 'project_storage_pix'
-    # RETIME FCURVE EXPORTS
-    shot_retime_curve:
-            definition: '@shot_context/export/retime/{Shot}[_{name}]_v{version}.txt'
-            root_name: 'project_storage_pix'
-
-    # global shot root locations for the different locations to save to
-    shot_render_global:
-        definition: '@shot_context/'
-        root_name: 'project_storage_pix'
-
-    # global asset root locations for the different locations to save to
-    asset_render_global:
-        definition: '@asset_context/'
+    ##################
+    ## Entity Roots ##
+    shot_context:
+        definition: 'shots/{Sequence}/{Shot}'
+    asset_context:
+        definition: 'assets/{sg_asset_type}/{Asset}'
         root_name: 'asset_storage'
 
-    # templates
-    showtools_template:
-        definition: '{dcc}/{sc_template_name}/v{version}/[{name}_]template_file.{sc_template_extension}'
-        root_name: 'showtools'
+#    project_shots_folder: # TODO not in use?
+#        definition: 'shots/'
+#        root_name: 'project_storage_pix'
+
+
+#    ######################
+#    # Context Templates ##
+#     OLD --------------------
+#    shot_render_global: # TODO: Copy of shot_context
+#        definition: '@shot_context/'
+#        root_name: 'project_storage_pix'
+#
+#    asset_render_global: # TODO: Copy of asset_context
+#        definition: '@asset_context/'
+#        root_name: 'asset_storage'
+#
+#    shot_lineup_jpeg: # TODO not in use?
+#        definition: '@shot_context/editorial/line_up/{name}.jpeg'
+#        root_name: 'project_storage_pix'
+#     /OLD --------------------
+
+    #############
+    ## Records ##
+    # Retime text file export.
+    shot_retime_curve:
+        definition: '@shot_context/export/publish/maya/retime/{Shot}[_{name}]_v{version}.txt'
+        root_name: 'project_storage_pix'
+
+    records_json_root:
+        definition: 'json/submit'
+        root_name: 'records'
+
+    shot_json_render:
+        definition: '@records_json_root/render/{Shot}/{Shot}_{task_name}[_{name}]_v{version}.json'
+        root_name: 'records'
+
+    asset_json_render:
+        definition: '@records_json_root/render/{Asset}/{Asset}_{task_name}[_{name}]_v{version}.json'
+        root_name: 'records'
+
+    shot_json_alembic:
+        definition: '@records_json_root/alembic/[{Shot}][{Asset}]/[{Shot}][{Asset}]_{task_name}_alembic_v{version}.json'
+        root_name: 'records'
+
+    asset_json_alembic:
+        definition: '@records_json_root/alembic/{Asset}/{Asset}_{task_name}_alembic_v{version}.json'
+        root_name: 'records'
+
+    nuke_template_root:
+        definition: 'nuke/submit'
+        root_name: 'records'
+
+    records_dl_root:
+        definition: 'deadline/submit'
+        root_name: 'records'
+
+    ########################
+    ## workfile Templates ##
+    shot_workfile_root:
+        definition: '@shot_context/workfile/{task_name}'
+
+    asset_workfile_root:
+        definition: '@asset_context/workfile/{task_name}'
+        root_name: 'asset_storage'
+
+    # Flow Work areas
+    shot_root:
+        definition: '@shot_workfile_root/work'
+    asset_root:
+        definition: '@asset_workfile_root/work'
+        root_name: 'asset_storage'
+    # /Flow Work areas
+
+    # NOTE: Cannot add a generic dcc work file as the publish / workfiles apps
+    # can't handle the dcc key. All DCC specific templates are in their assigned
+    # templates.yml file.
+
+    # Generic dcc file publish location
+    shot_publish_workfile:
+        definition: '@shot_workfile_root/publish/{dcc}/{Shot}_{task_name}[_{name}]_v{version}.{work_extension}'
+
+    asset_publish_workfile:
+        definition: '@asset_workfile_root/publish/{dcc}/{Asset}_{task_name}[_{name}]_v{version}.{work_extension}'
+        root_name: 'asset_storage'
+
+    ######################
+    ## Render Templates ##
+    shot_render_root: '@shot_context/render/{task_name}'
+
+    # Render working locations
+    # TODO: New more general templates
+    shot_working_render:
+        definition: "@shot_render_root/work/{dcc}/version/{Shot}_{task_name}[_{descriptor}]_v{version}/{Shot}_{task_name}[_{descriptor}]_v{version}.{SEQ}.{image_extension}"
+
+    shot_working_element_render:
+        definition: "@shot_render_root/work/{dcc}/{element_type}/{Shot}_{element_type}_{task_name}[_{descriptor}]_v{version}/{Shot}_{element_type}_{task_name}[_{descriptor}]_v{version}.{SEQ}.{image_extension}"
+
+    # Generic render publish locations
+    shot_publish_render:
+        definition: "@shot_render_root/publish/{dcc}/version/{Shot}_{task_name}[_{descriptor}]_v{version}/{Shot}_{task_name}[_{descriptor}]_v{version}.{SEQ}.{image_extension}"
+
+    shot_publish_element_render:
+        definition: "@shot_render_root/publish/{dcc}/{element_type}/{Shot}_{element_type}_{task_name}[_{descriptor}]_v{version}/{Shot}_{element_type}_{task_name}[_{descriptor}]_v{version}.{SEQ}.{image_extension}"
+
+
+    #     OLD --------------------
+#    shot_render_process_version_dpx: # TODO not in use?
+#        definition: '@shot_render_root/{task_name}/{Shot}_v{version}/{Shot}_v{version}.{SEQ}.dpx'
+#        root_name: 'project_storage_pix'
+#
+#    shot_render_process_version_exr: # TODO not in use?
+#        definition: '@shot_render_root/{task_name}/{Shot}_v{version}/{Shot}_v{version}.{SEQ}.exr'
+#        root_name: 'project_storage_pix'
+#     /OLD --------------------
+
+    asset_render_root:
+        definition: '@asset_context/render/{task_name}'
+        root_name: 'asset_storage'
+
+    # TODO: New more general templates
+    asset_working_render:
+        definition: "@asset_render_root/work/{dcc}/version/{Asset}_{task_name}[_{descriptor}]_v{version}/{Asset}_{task_name}[_{descriptor}]_v{version}.{SEQ}.{image_extension}"
+        root_name: 'asset_storage'
+
+    asset_working_element_render:
+        definition: "@asset_render_root/work/{dcc}/{element_type}/{Asset}_{element_type}_{task_name}[_{descriptor}]_v{version}/{Asset}_{element_type}_{task_name}[_{descriptor}]_v{version}.{SEQ}.{image_extension}"
+        root_name: 'asset_storage'
+
+    # Generic render publish locations
+    asset_publish_render:
+        definition: "@asset_render_root/publish/{dcc}/version/{Asset}_{task_name}[_{descriptor}]_v{version}/{Asset}_{task_name}[_{descriptor}]_v{version}.{SEQ}.{image_extension}"
+        root_name: 'asset_storage'
+
+    asset_publish_element_render:
+        definition: "@asset_render_root/publish/{dcc}/{element_type}/{Asset}_{element_type}_{task_name}[_{descriptor}]_v{version}/{Asset}_{element_type}_{task_name}[_{descriptor}]_v{version}.{SEQ}.{image_extension}"
+        root_name: 'asset_storage'
+
+    #     Shot client rushes
+#    rushes_root: @shot_context/rushes
+#
+#     OLD --------------------
+#    shot_rushes_root: # TODO: Just a  repeat of rushes_root
+#        definition: '@rushes_root/'
+#        root_name: 'project_storage_pix'
+#
+#    shot_rushes_main_jpg: # TODO not in use?
+#        definition: '@rushes_root/jpeg/main/'
+#        root_name: 'project_storage_pix'
+#
+#    shot_rushes_jpeg: # TODO not in use?
+#        definition: '@rushes_root/jpeg/{Shot}_v{version}.{SEQ}.jpeg'
+#        root_name: 'project_storage_pix'
+#
+#    shot_rushes_mov: # TODO not in use?
+#        definition: '@rushes_root/mov/{Shot}_v{version}.mov'
+#        root_name: 'project_storage_pix'
+#
+#    shot_rushes_filmstrip: # TODO not in use?
+#        definition: '@rushes_root/filmstrip/{Shot}_v{version}.jpeg'
+#        root_name: 'project_storage_pix'
+#
+#     Shot client plates / rushes
+#    plates_root: '@shot_context/rushes/plate'
+#
+#    shot_plates_root: # TODO not in use?
+#        definition: '@plates_root/'
+#        root_name: 'project_storage_pix'
+#
+#    shot_plates_main_proxy: # TODO not in use?
+#        definition: '@plates_root/main/proxy/'
+#        root_name: 'project_storage_pix'
+#
+#    shot_plates_main_reformat: # TODO not in use?
+#        definition: '@plates_root/main/reformat/'
+#        root_name: 'project_storage_pix'
+#
+#    shot_plates_bg_proxy: # TODO not in use?
+#        definition: '@plates_root/background/proxy/'
+#        root_name: 'project_storage_pix'
+#
+#    shot_plates_bg_reformat: # TODO not in use?
+#        definition: '@plates_root/background/reformat/'
+#        root_name: 'project_storage_pix'
+#
+#     DPX
+#    shot_plates_main_dpx: # TODO not in use?
+#        definition: '@plates_root/main/{Rush}/{Rush}.{SEQ}.dpx'
+#        root_name: 'project_storage_pix'
+#
+#    shot_plates_main_proxy_dpx: # TODO not in use?
+#        definition: '@plates_root/main/proxy/{Rush}.{SEQ}.dpx'
+#        root_name: 'project_storage_pix'
+#
+#    shot_plates_main_reformat_dpx: # TODO not in use?
+#        definition: '@plates_root/main/reformat/{Rush}.{SEQ}.dpx'
+#
+#    shot_plates_bg_dpx: # TODO not in use?
+#        definition: '@plates_root/background/{Rush}/{Rush}.{SEQ}.dpx'
+#        root_name: 'project_storage_pix'
+#
+#    shot_plates_bg_proxy_dpx: # TODO not in use?
+#        definition: '@plates_root/background/proxy/{Rush}.{SEQ}.dpx'
+#        root_name: 'project_storage_pix'
+#
+#    shot_plates_bg_reformat_dpx:  # TODO not in use?
+#        definition: '@plates_root/background/reformat/{Rush}.{SEQ}.dpx'
+#        root_name: 'project_storage_pix'
+#
+#    shot_rushes_ref_dpx:  # TODO not in use?
+#        definition: '@plates_root/reference/{Rush}/{Rush}.{SEQ}.dpx'
+#        root_name: 'project_storage_pix'
+#
+#    shot_rushes_elem_dpx: # TODO not in use?
+#        definition: '@plates_root/element/{Rush}/{Rush}.{SEQ}.dpx'
+#        root_name: 'project_storage_pix'
+#
+#     EXR
+#    shot_plates_main_exr: # TODO not in use?
+#        definition: '@plates_root/main/{Rush}/{Rush}.{SEQ}.exr'
+#        root_name: 'project_storage_pix'
+#
+#    shot_plates_main_proxy_exr: # TODO not in use?
+#        definition: '@plates_root/main/proxy/{Rush}.{SEQ}.exr'
+#        root_name: 'project_storage_pix'
+#
+#    shot_plates_main_reformat_exr: # TODO not in use?
+#        definition: '@plates_root/main/reformat/{Rush}.{SEQ}.exr'
+#        root_name: 'project_storage_pix'
+#
+#    shot_plates_bg_exr: # TODO not in use?
+#        definition: '@plates_root/background/{Rush}/{Rush}.{SEQ}.exr'
+#        root_name: 'project_storage_pix'
+#
+#    shot_plates_bg_proxy_exr: # TODO not in use?
+#        definition: '@plates_root/background/proxy/{Rush}.{SEQ}.exr'
+#        root_name: 'project_storage_pix'
+#
+#    shot_plates_bg_reformat_exr: # TODO not in use?
+#        definition: '@plates_root/background/reformat/{Rush}.{SEQ}.exr'
+#        root_name: 'project_storage_pix'
+#
+#    shot_rushes_ref_exr: # TODO not in use?
+#        definition: '@plates_root/reference/{Rush}/{Rush}.{SEQ}.exr'
+#        root_name: 'project_storage_pix'
+#
+#    shot_rushes_elem_exr: # TODO not in use?
+#        definition: '@plates_root/element/{Rush}/{Rush}.{SEQ}.exr'
+#        root_name: 'project_storage_pix'
+#     /OLD --------------------
+
+#    #####################
+#    # Review Templates ##
+#     OLD --------------------
+#    resolve_review_folder: # TODO not in use?
+#        definition: 'editorial/resolve/review'
+#        root_name: 'project_storage_pix'
+#
+#    version_zero_internal: # TODO not in use?
+#        definition: 'editorial/v000s'
+#        root_name: 'project_storage_pix'
+#
+#    shot_process_mov: # TODO not in use?
+#        definition: '@shot_context/renders/process/{Codec}/{Shot}_v{version}.mov'
+#        root_name: 'project_storage_pix'
+#     /OLD --------------------
+
+    #######################
+    ## Review Templates ##
+    shot_review_file:
+        definition: '@shot_context/{task_name}/{dcc}/v{version}/{Shot}_{task_name}[_{descriptor}]_v{version}.{movie_extension}'
+        root_name: 'review'
+
+    shot_review_file_graded:
+        definition: '@shot_context/{task_name}/{dcc}/v{version}/{Shot}_{task_name}[_{descriptor}]_v{version}_delivery_graded.{movie_extension}'
+        root_name: 'review'
+
+    shot_review_file_element:
+        definition: '@shot_context/{task_name}/{dcc}/v{version}/{Shot}_{element_type}_{task_name}[_{descriptor}]_v{version}.{movie_extension}'
+        root_name: 'review'
+
+    shot_review_file_element_graded:
+        definition: '@shot_context/{task_name}/{dcc}/v{version}/{Shot}_{element_type}_{task_name}[_{descriptor}]_v{version}_delivery_graded.{movie_extension}'
+        root_name: 'review'
+
+    asset_review_file:
+        definition: '@asset_context/{task_name}/{dcc}/v{version}/{Asset}_{task_name}[_{descriptor}]_v{version}.{movie_extension}'
+        root_name: 'review'
+
+    asset_review_file_graded:
+        definition: '@asset_context/{task_name}/{dcc}/v{version}/{Asset}_{task_name}[_{descriptor}]_v{version}_delivery_graded.{movie_extension}'
+        root_name: 'review'
+
+    asset_review_file_element:
+        definition: '@asset_context/{task_name}/{dcc}/v{version}/{Asset}_{element_type}_{task_name}[_{descriptor}]_v{version}.{movie_extension}'
+        root_name: 'review'
+
+    asset_review_file_element_graded:
+        definition: '@asset_context/{task_name}/{dcc}/v{version}/{Asset}_{element_type}_{task_name}[_{descriptor}]_v{version}_delivery_graded.{movie_extension}'
+        root_name: 'review'
+
+    ######################
+    ## Export Templates ##
+    shot_export_file:
+        definition: '@shot_context/export/{task_name}/{dcc}/{export_type}/{Shot}_{task_name}_{export_type}[_{export_group}][_{descriptor}]_v{version}/{Shot}_{task_name}_{export_type}[_{export_group}][_{descriptor}]_v{version}[.{SEQ}].{export_extension}'
+
+    shot_export_publish:
+        definition: '@shot_context/{task_name}/{dcc}/{export_type}/{Shot}_{task_name}_{export_type}[_{export_group}][_{descriptor}]_v{version}/{Shot}_{task_name}_{export_type}[_{export_group}][_{descriptor}]_v{version}[.{frame_padding}].{export_extension}'
+        root_name: 'caches'
+
+    asset_export_file:
+        definition: '@asset_context/export/{task_name}/{dcc}/{export_type}/{Asset}_{task_name}_{export_type}[_{export_group}][_{descriptor}]_v{version}/{Asset}_{task_name}_{export_type}[_{export_group}][_{descriptor}]_v{version}[.{SEQ}].{export_extension}'
+        root_name: 'asset_storage'
+
+    asset_export_publish:
+        definition: '@asset_context/{task_name}/{dcc}/{export_type}/{Asset}_{task_name}_{export_type}[_{export_group}][_{descriptor}]_v{version}/{Asset}_{task_name}_{export_type}[_{export_group}][_{descriptor}]_v{version}[.{frame_padding}].{export_extension}'
+        root_name: 'caches'
+
+#    #######################
+#    ## Publish Templates ##
+#    # Shot
+#    shot_publish_root: '@shot_context/publish'
+#
+#    # Asset
+#    asset_publish_root:
+#        definition: '@asset_context/publish'
+#        root_name: 'asset_storage'
+#
+#    # DCC publish areas
+
+    ####################
+    ## Temp Templates ##
+    temp_shot_root: '@shot_context/temp'
+
+#    shot_test_render: # TODO: More general test template to be implemented.
+#        definition: '@temp_shot_root/renders/{dcc}/{task_name}/test/{Shot}_test_{task_name}[_{descriptor}]_v{version}/{Shot}_test_{task_name}[_{descriptor}]_v{version}.{SEQ}.{image_extension}'
+#        root_name: 'project_storage_pix'
+
+    temp_asset_root:
+        definition: '@asset_context/temp'
+        root_name: 'asset_storage'
+
+    #########################
+    ## Outsource Templates ##
+    # "\\pix_artist\project_pipe_test\pipe_test\admin\incoming\outsource\shots\Mist\2025_11_28\TRP1570_matchmove_v002
+    outsource_delivery_root:
+        definition: 'admin/incoming/outsource/shots/{vendor}/{YYYY}_{MM}_{DD}/{Shot}_{task_name}_v{version}'
+        root_name: 'project_storage_pix'
+
+    # Work files
+#    "\TRP1570_camLineup_v002.3de"
+    outsource_shot_3de_workfile:
+        definition: '@outsource_delivery_root/{Shot}[_{descriptor}]_v{version}.3de'
+        root_name: 'project_storage_pix'
+
+#    "\TRP1570_matchmove_v002.ma"
+    outsource_shot_maya_workfile:
+        definition: '@outsource_delivery_root/{Shot}_{task_name}_v{version}.ma'
+        root_name: 'project_storage_pix'
+
+#    "\nuke\TRP1570_undistort_v002.nk"
+    outsource_shot_nuke_workfile:
+        definition: '@outsource_delivery_root/nuke/{Shot}[_{descriptor}]_v{version}.nk'
+        root_name: 'project_storage_pix'
+
+    # Renders
+#    "\nuke\distort\TRP1570_distort_v002.0945.exr"
+    outsource_shot_nuke_render:
+        definition: '@outsource_delivery_root/nuke/{descriptor}/{Shot}_{descriptor}_v{version}.{SEQ}.{image_extension}'
+        root_name: 'project_storage_pix'
+
+#   "\renders\persp\TRP1570_persp_v002.0945.jpg"
+    outsource_shot_matchmove_render:
+        definition: '@outsource_delivery_root/renders/{descriptor}/{Shot}_{descriptor}_v{version}.{SEQ}.{image_extension}'
+        root_name: 'project_storage_pix'
+
+#   "\UD\TRP1570_output_v002.0945.jpg"
+    outsource_shot_undistort_render:
+        definition: '@outsource_delivery_root/UD/{Shot}_{descriptor}_v{version}.{SEQ}.{image_extension}'
+        root_name: 'project_storage_pix'
+
+#    incoming_outsource_shot_matchmove_qt:
+#        definition: '@incoming_outsource_shot_subfolder_root/{name}.{movie_extension}'
+#        root_name: 'project_storage_pix'
+
+    # Caches
+    # "\TRP1570_cam_v002.abc"
+    outsource_shot_maya_alembic:
+        definition: '@outsource_delivery_root/{Shot}_{descriptor}_v{version}.abc'
+        root_name: 'project_storage_pix'
+
+
+#    asset_test_render: # TODO: More general test template to be implemented.
+#        definition: '@temp_asset_root/renders/{dcc}/{task_name}/test/{Asset}_test_{task_name}[_{descriptor}]_v{version}/{Asset}_test_{task_name}[_{descriptor}]_v{version}.{SEQ}.{image_extension}'
+#        root_name: 'asset_storage'
+
+# OLD --------------------
+#    temp_shot_root: shots/temp/{Shot}
+# Renders
+# Shot
+#    nuke_shot_test_render_root:
+#        definition: '@temp_shot_root/renders/nuke/{task_name}/test/{Shot}_test[_{descriptor}]_v{version}'
+#        root_name: 'project_storage_pix'
+#
+#    nuke_shot_render_test_jpeg: # TODO: Replace with a more general render template.
+#        definition: '@nuke_shot_test_render_root/{Shot}_test[_{descriptor}]_v{version}.{SEQ}.jpeg'
+#        root_name: 'project_storage_pix'
+#
+#    nuke_shot_render_test_exr: # TODO: Replace with a more general render template.
+#        definition: '@nuke_shot_test_render_root/{Shot}_test[_{descriptor}]_v{version}.{SEQ}.exr'
+#        root_name: 'project_storage_pix'
+#
+#    nuke_shot_render_test_dpx: # TODO: Replace with a more general render template.
+#        definition: '@nuke_shot_test_render_root/{Shot}_test[_{descriptor}]_v{version}.{SEQ}.dpx'
+#        root_name: 'project_storage_pix'
+#
+#     Asset
+#    temp_asset_render_root:
+#        definition: 'assets/temp/{sg_asset_type}/{Asset}/renders'
+#        root_name: 'asset_storage'
+#
+#    nuke_asset_render_test_jpeg: # TODO: Replace with a more general render template.
+#        definition: '@temp_asset_render_root/nuke/{task_name}/test/{Asset}_test[_{descriptor}]_v{version}/{Asset}_test[_{descriptor}]_v{version}.{SEQ}.jpeg'
+#        root_name: 'asset_storage'
+#
+#    nuke_asset_render_test_exr: # TODO: Replace with a more general render template.
+#        definition: '@temp_asset_render_root/nuke/{task_name}/test/{Asset}_test[_{descriptor}]_v{version}/{Asset}_test[_{descriptor}]_v{version}.{SEQ}.exr'
+#        root_name: 'asset_storage'
+#
+#    nuke_asset_render_test_dpx: # TODO: Replace with a more general render template.
+#        definition: '@temp_asset_render_root/nuke/{task_name}/test/{Asset}_test[_{descriptor}]_v{version}/{Asset}_test[_{descriptor}]_v{version}.{SEQ}.dpx'
+#        root_name: 'asset_storage'
+#
+#     Filmstrip
+#    nuke_shot_render_filmstrip: # TODO not in use?
+#        definition: '@temp_shot_root/renders/nuke/{task_name}/review/{Shot}_{task_name}[_{nuke.output}]_v{version}/{Shot}_{task_name}[_{nuke.output}]_v{version}.png'
+#        root_name: 'project_storage_pix'
+#
+#    nuke_asset_render_filmstrip: # TODO not in use?
+#        definition: '@temp_asset_render_root/renders/nuke/{task_name}/review/{Asset}_{task_name}[_{nuke.output}]_v{version}/{Asset}_{task_name}[_{nuke.output}]_v{version}.png'
+#        root_name: 'asset_storage'
+
+#     Json files
+#    info_json_file: shots/temp/{Shot}/json/{Shot}_{task_name}[_{name}]_v{version}.json
+#    alembic_shot_json: shots/temp/[{Shot}][{Asset}]/json/[{Shot}][{Asset}]_{task_name}_alembic_v{version}.json
+#    alembic_asset_json:
+#        definition: 'assets/temp/{sg_asset_type}/{Asset}/json/{Asset}_{task_name}_alembic_v{version}.json'
+#        root_name: 'asset_storage'
+#
+#     Deadline Files
+#    deadline_temp_folder:  # TODO not in use?
+#        definition: 'admin/temp/'
+#        root_name: 'project_storage_pix'
+#
+#    deadline_submission_folder: # TODO not in use?
+#        definition: 'admin/temp/scripts/deadline'
+#        root_name: 'project_storage_pix'
+#
+#    shot_process_scripts_deadline: # TODO not in use?
+#        definition: '@shot_context/scripts/deadline'
+#        root_name: 'project_storage_pix'
+#
+#    3dequalizer_deadline_temp: # TODO Update tech records.
+#        definition: 'admin/processing/temp/deadline'
+#        root_name: 'project_storage_pix'
+#
+#     /OLD --------------------

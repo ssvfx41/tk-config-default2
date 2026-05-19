@@ -65,225 +65,267 @@ keys:
 
 
 paths:
-    ###########
-    ## Maya
-    ###########
-    ########################################SHOT WORK
-    # define the location of a work area
+    # TODO: NEW TEMPLATES FOR REWRITE
+    ####################
+    ## Work Templates ##
+    # Shot
     maya_shot_work_area:
         definition: '@shot_root/maya'
         root_name: 'project_storage_pix'
-    # define the location of a publish area
-    maya_shot_publish_area:
-        definition: '@shot_root/publish/maya'
+
+#    maya_shot_work:
+#        definition: '@shot_root/maya/scenes/{Shot}_{task_name}[_{name}]_v{version}.{maya_extension}'
+#        root_name: 'project_storage_pix'
+
+    maya_shot_workfile:
+        definition: '@maya_shot_work_area/{Shot}_{task_name}[_{name}]_v{version}.{maya_extension}'
         root_name: 'project_storage_pix'
-    # The location of WIP files
-    maya_shot_work:
-        definition: '@shot_root/maya/scenes/{Shot}_{task_name}[_{name}]_v{version}.{maya_extension}'
-        root_name: 'project_storage_pix'
-        
-    # The location of backups of WIP files
+
     maya_shot_snapshot:
-        definition: '@shot_root/maya/snapshots/{Shot}_{task_name}[_{name}]_v{version}_{timestamp}.{maya_extension}'
+        definition: '@maya_shot_work_area/snapshots/{Shot}_{task_name}[_{name}]_v{version}_{timestamp}.{maya_extension}'
         root_name: 'project_storage_pix'
-    # The location of published maya files
-    maya_shot_publish:
-        definition: '@shot_root/publish/maya/{Shot}_{task_name}[_{name}]_v{version}.{maya_extension}'
-        root_name: 'project_storage_pix'
-    # the Location of Maya published Camera's
-    maya_shot_camera_publish:
-        definition: '@shot_root/publish/maya/cameras/{Shot}_{task_name}[_{name}]_v{version}.abc'
-        root_name: 'project_storage_pix'
-    # the location of Maya published json's
-    maya_shot_json_publish:
-        definition: '@shot_root/publish/maya/json/{Shot}_{task_name}[_{name}]_v{version}.json'
-        root_name: 'project_storage_pix'
-    
-    ########################################ASSET WORK
-    # define the location of a work area
+
+    # Asset
     maya_asset_work_area:
-        definition: '@asset_root/work/maya'
+        definition: '@asset_root/maya'
         root_name: 'asset_storage'
-    # define the location of a publish area
-    maya_asset_publish_area:
-        definition: '@asset_root/publish/maya'
+
+#    maya_asset_work:
+#        definition: '@asset_root/work/maya/scenes/{Asset}_{task_name}[_{name}]_v{version}.{maya_extension}'
+#        root_name: 'asset_storage'
+
+    maya_asset_workfile:
+        definition: '@maya_asset_work_area/{Asset}_{task_name}[_{name}]_v{version}.{maya_extension}'
         root_name: 'asset_storage'
-    # The location of WIP files
-    maya_asset_work:
-        definition: '@asset_root/work/maya/scenes/{Asset}_{task_name}[_{name}]_v{version}.{maya_extension}'
-        root_name: 'asset_storage'
-    # The location of backups of WIP files
+
     maya_asset_snapshot:
-        definition: '@asset_root/work/maya/snapshots/{Asset}_{task_name}[_{name}]_v{version}_{timestamp}.{maya_extension}'
+        definition: '@maya_asset_work_area/snapshots/{Asset}_{task_name}[_{name}]_v{version}_{timestamp}.{maya_extension}'
         root_name: 'asset_storage'
-    # The location of published maya files
-    maya_asset_publish:
-        definition: '@asset_root/publish/maya/{Asset}_{task_name}[_{name}]_v{version}.{maya_extension}'
-        root_name: 'asset_storage'
-    # # The location of published maya geometry files
-    asset_alembic_cache:
-        definition: '@asset_root/publish/maya/geometry/{Asset}_{task_name}[_{name}]_v{version}.{maya_extension}'
-        root_name: 'asset_storage'
-    # The location of published maya shader files
-    maya_shader_network_publish:
-        definition: '@asset_root/publish/maya/surfacing/{Asset}_{task_name}[_{name}]_v{version}.{maya_extension}'
-        root_name: 'asset_storage'
-    # the Location of Maya published Camera's
-    maya_asset_camera_publish:
-        definition: '@asset_root/publish/maya/cameras/{Asset}_{task_name}[_{name}]_v{version}.abc'
-        root_name: 'asset_storage'
-    # The location of published maya assembly definition files
-    maya_asset_assembly_publish:
-        definition: '@asset_root/publish/maya/{Asset}_{task_name}[_{name}]_assembly_v{version}.{maya_extension}'
-        root_name: 'asset_storage'
-    maya_asset_standin_publish:
-        definition: '@asset_root/publish/maya/standin/{Asset}_{task_name}[_{name}]_v{version}/{Asset}_{task_name}[_{name}]_v{version}.ass'
-        root_name: 'asset_storage'
-    # the location of Maya published json's
-    maya_asset_json_publish:
-        definition: '@asset_root/publish/maya/json/{Asset}_{task_name}[_{name}]_v{version}.json'
-        root_name: 'asset_storage'
-    
-    ########################################SHOT OUTPUT
-    # version output
+
+    ######################
+    ## Render Templates ##
+    # Shot
     maya_shot_renders_step:
-        definition: '@render_root/maya/{task_name}/version'
+        definition: '@shot_render_root/maya/{task_name}/version'
         root_name: 'project_storage_pix'
+
     maya_shot_render_stub:
-        definition: '@render_root/maya/{task_name}/version/{Shot}_{task_name}[_{name}]_v{version}'
+        definition: '@shot_render_root/maya/{task_name}/version/{Shot}_{task_name}[_{name}]_v{version}'
         root_name: 'project_storage_pix'
+
     maya_shot_render_layer:
         definition: '@maya_shot_render_stub/{maya.layer_name}'
         root_name: 'project_storage_pix'
+
     maya_shot_render_exr:
-        definition: '@render_root/maya/{task_name}/version/{Shot}_{task_name}[_{name}]_v{version}/[{maya.layer_name}/]{Shot}_{task_name}[_{maya.layer_name}]_v{version}.{SEQ}.exr'
-        root_name: 'project_storage_pix'
-    maya_shot_render_multi_exr:
-        definition: '@render_root/maya/{task_name}/version/{Shot}_{task_name}[_{name}]_v{version}/[{maya.layer_name}/]{pass_group}/{Shot}_{task_name}[_{maya.layer_name}]_v{version}_{pass_group}.{SEQ}.exr'
-        root_name: 'project_storage_pix'
-    maya_shot_render_jpg:
-        definition: '@render_root/maya/{task_name}/version/{Shot}_{task_name}[_{name}]_v{version}/[{maya.layer_name}/]{Shot}_{task_name}[_{maya.layer_name}]_v{version}.{SEQ}.jpg'
-        root_name: 'project_storage_pix'
-    maya_shot_render_png:
-        definition: '@render_root/maya/{task_name}/version/{Shot}_{task_name}[_{name}]_v{version}/[{maya.layer_name}/]{Shot}_{task_name}[_{maya.layer_name}]_v{version}.{SEQ}.png'
-        root_name: 'project_storage_pix'
-    maya_shot_render_exr_pub:
-        definition: '@render_root/maya/{task_name}/publish/{Shot}_{task_name}[_{name}]_v{version}/[{maya.layer_name}/]{Shot}_{task_name}[_{maya.layer_name}]_v{version}.{SEQ}.exr'
-        root_name: 'project_storage_pix'
-    # # Maya Simulations output 
-    # fxd = fume effects
-    maya_shot_sim_ffx:
-        definition: '@shot_context/maya/{task_name}/caches/sim/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}[_{name}]_v{version}.{SEQ}.fxd'
-        root_name: 'caches' 
-    # # Maya Object export 
-    # maya_shot_export_obj:
-    #     definition: '@shot_context/3d_export/obj/{task_name}/{Shot}_{task_name}_v{version}/{Shot}_{task_name}_v{version}.abc'
-    #     root_name: 'caches'
-    # Maya Cache output
-    maya_shot_cache_area:
-        definition:  '@shot_context/maya/{task_name}/caches/'
-        root_name:  'caches'
-    maya_shot_cache_geo:
-         definition: '@shot_context/maya/{task_name}/caches/n_cache/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}_v{version}.{SEQ}.mcx'
-         root_name: 'caches'
-    maya_shot_cache_alembic:
-         definition: '@shot_context/maya/{task_name}/caches/alembic/{Shot}_{task_name}_alembic-cache[_{name}]_v{version}'
-         root_name: 'caches'
-    maya_shot_cache_alembic_abc:
-         definition: '@shot_context/maya/{task_name}/caches/alembic/{Shot}_{task_name}_alembic-cache[_{name}]_v{version}/{Shot}_{task_name}_alembic-cache[_{name}]_v{version}.abc'
-         root_name: 'caches'
-    maya_shot_cache_standin:
-        definition: '@shot_context/maya/{task_name}/caches/standin/{Shot}_{task_name}[_{name}]_v{version}'
-        root_name: 'caches'
-    maya_shot_cache_obj:
-        definition: '@shot_context/maya/{task_name}/caches/obj/{Shot}_{task_name}_obj_cache[_{name}]_v{version}/{Shot}_{task_name}_obj-cache[_{name}]_v{version}.obj'
-        root_name: 'caches'
-    maya_shot_cache_standin_ass:
-        definition: '@shot_context/maya/{task_name}/caches/standin/{Shot}_{task_name}_standin_cache[_{name}]_v{version}/{Shot}_{task_name}_standin-cache[_{name}]_v{version}[.{SEQ}].ass'
-        root_name: 'caches'
-    maya_shot_cache_bifrost:
-         definition: '@shot_context/maya/{task_name}/caches/bifrost/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}_v{version}.{SEQ}.bif'
-         root_name: 'caches'
-    # review output
-    maya_shot_playblast_root:
-        definition: '@render_root/maya/{task_name}/playblast/{Shot}_{task_name}[_{maya.techpass_name}][_{name}]_pb_v{version}'
-        root_name: 'project_storage_pix'
-    maya_shot_playblast_output:
-        definition: '@maya_shot_playblast_root/{Shot}_{task_name}[_{maya.techpass_name}][_{name}]_pb_v{version}'
-        root_name: 'project_storage_pix'
-    maya_shot_playblast_publishing:
-        definition: '@maya_shot_playblast_root/{Shot}_{task_name}[_{maya.techpass_name}][_{name}]_pb_v{version}.{SEQ}.jpg'
-        root_name: 'project_storage_pix'
-    maya_shot_quicktime_quick:
-        definition: '@render_root/maya/{task_name}/review/quickdaily/{Shot}[_{name}]_v{version}_{iteration}.mov'
-        root_name: 'project_storage_pix'
-    maya_shot_render_filmstrip:
-        definition: '@render_root/maya/{task_name}/review/{Shot}_review/{Shot}[_{name}]_review_v{version}.{SEQ}.png'
+        definition: '@shot_render_root/maya/{task_name}/version/{Shot}_{task_name}[_{name}]_v{version}/[{maya.layer_name}/]{Shot}_{task_name}[_{maya.layer_name}]_v{version}.{SEQ}.exr'
         root_name: 'project_storage_pix'
 
-    ######################################## ASSET OUTPUT       
-    # Render location for asset renders
+    maya_shot_render_multi_exr:
+        definition: '@shot_render_root/maya/{task_name}/version/{Shot}_{task_name}[_{name}]_v{version}/[{maya.layer_name}/]{pass_group}/{Shot}_{task_name}[_{maya.layer_name}]_v{version}_{pass_group}.{SEQ}.exr'
+        root_name: 'project_storage_pix'
+
+    maya_shot_render_jpg:
+        definition: '@shot_render_root/maya/{task_name}/version/{Shot}_{task_name}[_{name}]_v{version}/[{maya.layer_name}/]{Shot}_{task_name}[_{maya.layer_name}]_v{version}.{SEQ}.jpg'
+        root_name: 'project_storage_pix'
+
+    maya_shot_render_png:
+        definition: '@shot_render_root/maya/{task_name}/version/{Shot}_{task_name}[_{name}]_v{version}/[{maya.layer_name}/]{Shot}_{task_name}[_{maya.layer_name}]_v{version}.{SEQ}.png'
+        root_name: 'project_storage_pix'
+
+    # Asset
     maya_asset_renders_step:
         definition: '@asset_render_root/maya/{task_name}/version'
         root_name: 'asset_storage'
+
     maya_asset_renders_stub:
         definition: '@asset_render_root/maya/{task_name}/version/{Asset}_{task_name}[_{name}]_v{version}'
         root_name: 'asset_storage'
+
     maya_asset_renders_layer:
         definition: '@maya_asset_renders_stub/{maya.layer_name}'
         root_name: 'asset_storage'
+
     maya_asset_render_exr:
         definition: '@maya_asset_renders_step/{Asset}_{task_name}[_{name}]_v{version}/[{maya.layer_name}/]{Asset}_{task_name}[_{maya.layer_name}]_v{version}.[{SEQ}.]exr'
         root_name: 'asset_storage'
+
     maya_asset_render_multi_exr:
         definition: '@maya_asset_renders_step/{Asset}_{task_name}[_{name}]_v{version}/[{maya.layer_name}/]{pass_group}/{Asset}_{task_name}[_{maya.layer_name}]_v{version}_{pass_group}.[{SEQ}.]exr'
         root_name: 'asset_storage'
+
     maya_asset_render_jpg:
         definition: '@maya_asset_renders_step/{Asset}_{task_name}[_{name}]_v{version}/[{maya.layer_name}/]{Asset}_{task_name}[_{maya.layer_name}]_v{version}.[{SEQ}.]jpg'
         root_name: 'asset_storage'
+
     maya_asset_render_jpeg:
         definition: '@maya_asset_renders_step/{Asset}_{task_name}[_{name}]_v{version}/[{maya.layer_name}/]{Asset}_{task_name}[_{maya.layer_name}]_v{version}.[{SEQ}.]jpeg'
         root_name: 'asset_storage'
+
     maya_asset_render_png:
         definition: '@maya_asset_renders_step/{Asset}_{task_name}[_{name}]_v{version}/[{maya.layer_name}/]{Asset}_{task_name}[_{maya.layer_name}]_v{version}.[{SEQ}.]png'
         root_name: 'asset_storage'
-    maya_asset_render_exr_pub:
-        definition: '@asset_render_root/maya/{task_name}/publish/{Asset}_{task_name}[_{name}]_v{version}/[{maya.layer_name}/]{Asset}_{task_name}[_{name}]_v{version}.{SEQ}.exr'
-        root_name: 'asset_storage'
-    maya_asset_playblast_root:
-        definition: '@asset_render_root/maya/{task_name}/playblast/{Asset}_{task_name}[_{maya.techpass_name}][_{name}]_pb_v{version}'
-        root_name: 'asset_storage'
-    maya_asset_playblast_output:
-        definition: '@maya_asset_playblast_root/{Asset}_{task_name}[_{maya.techpass_name}][_{name}]_pb_v{version}'
-        root_name: 'asset_storage'
-    maya_asset_playblast_publishing:
-        definition: '@maya_asset_playblast_root/{Asset}_{task_name}[_{maya.techpass_name}][_{name}]_pb_v{version}.{SEQ}.jpg'
-        root_name: 'asset_storage'
-    # # Maya Simulations output
-    # maya_asset_sim:
-    #     definition: '@asset_context/maya/{task_name}/caches/sim/{Asset}_{task_name}_v{version}/{Asset}_{task_name}_v{version}.fxd'
-    #     root_name: 'caches'   
-    # # Maya Cache output
-    # asset_context: assets/{sg_asset_type}/{Asset}
-    #'@asset_context/pipeline_task/{task_name}/caches/houdini'
+
+    #####################
+    ## Cache Templates ##
+    # Shot
+    maya_shot_sim_ffx:
+        definition: '@shot_context/maya/{task_name}/caches/sim/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}[_{name}]_v{version}.{SEQ}.fxd'
+        root_name: 'caches'
+
+    maya_shot_cache_area:
+        definition: '@shot_context/maya/{task_name}/caches/'
+        root_name: 'caches'
+
+    maya_shot_cache_geo:
+        definition: '@shot_context/maya/{task_name}/caches/n_cache/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}_v{version}.{SEQ}.mcx'
+        root_name: 'caches'
+
+    maya_shot_cache_alembic:
+        definition: '@shot_context/maya/{task_name}/caches/alembic/{Shot}_{task_name}_alembic-cache[_{name}]_v{version}'
+        root_name: 'caches'
+
+    maya_shot_cache_alembic_abc:
+        definition: '@shot_context/maya/{task_name}/caches/alembic/{Shot}_{task_name}_alembic-cache[_{name}]_v{version}/{Shot}_{task_name}_alembic-cache[_{name}]_v{version}.abc'
+        root_name: 'caches'
+
+    maya_shot_cache_standin:
+        definition: '@shot_context/maya/{task_name}/caches/standin/{Shot}_{task_name}[_{name}]_v{version}'
+        root_name: 'caches'
+
+    maya_shot_cache_obj:
+        definition: '@shot_context/maya/{task_name}/caches/obj/{Shot}_{task_name}_obj_cache[_{name}]_v{version}/{Shot}_{task_name}_obj-cache[_{name}]_v{version}.obj'
+        root_name: 'caches'
+
+    maya_shot_cache_standin_ass:
+        definition: '@shot_context/maya/{task_name}/caches/standin/{Shot}_{task_name}_standin_cache[_{name}]_v{version}/{Shot}_{task_name}_standin-cache[_{name}]_v{version}[.{SEQ}].ass'
+        root_name: 'caches'
+
+    maya_shot_cache_bifrost:
+        definition: '@shot_context/maya/{task_name}/caches/bifrost/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}_v{version}.{SEQ}.bif'
+        root_name: 'caches'
+
+    # Asset
     maya_asset_cache_area:
-        definition:  '@asset_context/pipeline_task/{task_name}/caches/maya'
-        root_name:  'caches'
+        definition: '@asset_context/pipeline_task/{task_name}/caches/maya'
+        root_name: 'caches'
+
     maya_asset_cache_geo:
-         definition: '@maya_asset_cache_area/n_cache/{Asset}_{task_name}[_{name}]_v{version}/'
-         root_name: 'caches'
+        definition: '@maya_asset_cache_area/n_cache/{Asset}_{task_name}[_{name}]_v{version}/'
+        root_name: 'caches'
+
     maya_asset_cache_alembic:
-         definition: '@maya_asset_cache_area/geometry/{Asset}_{task_name}[_{name}]_v{version}/'
-         root_name: 'caches'
+        definition: '@maya_asset_cache_area/geometry/{Asset}_{task_name}[_{name}]_v{version}/'
+        root_name: 'caches'
+
     maya_asset_cache_alembic_seq:
-         definition: '@maya_asset_cache_area/geometry/{Asset}_{task_name}[_{name}]_v{version}/{Asset}_{task_name}[_{name}]_v{version}.{SEQ}.abc'
-         root_name: 'caches'
+        definition: '@maya_asset_cache_area/geometry/{Asset}_{task_name}[_{name}]_v{version}/{Asset}_{task_name}[_{name}]_v{version}.{SEQ}.abc'
+        root_name: 'caches'
+
     maya_asset_cache_alembic_file:
-         definition: '@maya_asset_cache_area/geometry/{Asset}_{task_name}[_{name}]_v{version}/{Asset}_{task_name}[_{name}]_v{version}.abc'
-         root_name: 'caches'
+        definition: '@maya_asset_cache_area/geometry/{Asset}_{task_name}[_{name}]_v{version}/{Asset}_{task_name}[_{name}]_v{version}.abc'
+        root_name: 'caches'
+
     maya_asset_cache_standin_file:
         definition: '@maya_asset_cache_area/standin/{Asset}_{task_name}[_{name}]_v{version}/{Asset}_{task_name}[_{name}]_v{version}[.{SEQ}].ass'
         root_name: 'caches'
+
     maya_asset_cache_obj_file:
         definition: '@maya_asset_cache_area/obj/{Asset}_{task_name}[_{name}]_v{version}/{Asset}_{task_name}[_{name}]_v{version}.obj'
         root_name: 'caches'
+
+    ######################
+    ## Review Templates ##
+    # Shot
+    maya_shot_playblast_root:
+        definition: '@shot_render_root/maya/{task_name}/playblast/{Shot}_{task_name}[_{maya.techpass_name}][_{name}]_pb_v{version}'
+        root_name: 'project_storage_pix'
+
+    maya_shot_playblast_output:
+        definition: '@maya_shot_playblast_root/{Shot}_{task_name}[_{maya.techpass_name}][_{name}]_pb_v{version}'
+        root_name: 'project_storage_pix'
+
+    maya_shot_playblast_publishing:
+        definition: '@maya_shot_playblast_root/{Shot}_{task_name}[_{maya.techpass_name}][_{name}]_pb_v{version}.{SEQ}.jpg'
+        root_name: 'project_storage_pix'
+
+    maya_shot_quicktime_quick:
+        definition: '@shot_render_root/maya/{task_name}/review/quickdaily/{Shot}[_{name}]_v{version}_{iteration}.mov'
+        root_name: 'project_storage_pix'
+
+    maya_shot_render_filmstrip:
+        definition: '@shot_render_root/maya/{task_name}/review/{Shot}_review/{Shot}[_{name}]_review_v{version}.{SEQ}.png'
+        root_name: 'project_storage_pix'
+
+    # Asset
+    maya_asset_playblast_root:
+        definition: '@asset_render_root/maya/{task_name}/playblast/{Asset}_{task_name}[_{maya.techpass_name}][_{name}]_pb_v{version}'
+        root_name: 'asset_storage'
+
+    maya_asset_playblast_output:
+        definition: '@maya_asset_playblast_root/{Asset}_{task_name}[_{maya.techpass_name}][_{name}]_pb_v{version}'
+        root_name: 'asset_storage'
+
+    maya_asset_playblast_publishing:
+        definition: '@maya_asset_playblast_root/{Asset}_{task_name}[_{maya.techpass_name}][_{name}]_pb_v{version}.{SEQ}.jpg'
+        root_name: 'asset_storage'
+
+    #######################
+    ## Publish Templates ##
+    # Shot
+    maya_shot_publish_area:
+        definition: '@shot_workfile_root/publish/maya'
+        root_name: 'project_storage_pix'
+
+    maya_shot_publish:
+        definition: '@shot_root/publish/maya/{Shot}_{task_name}[_{name}]_v{version}.{maya_extension}'
+        root_name: 'project_storage_pix'
+
+    maya_shot_camera_publish:
+        definition: '@shot_root/publish/maya/cameras/{Shot}_{task_name}[_{name}]_v{version}.abc'
+        root_name: 'project_storage_pix'
+
+    maya_shot_json_publish:
+        definition: '@shot_root/publish/maya/json/{Shot}_{task_name}[_{name}]_v{version}.json'
+        root_name: 'project_storage_pix'
+
+    maya_shot_render_exr_pub:
+        definition: '@shot_render_root/maya/{task_name}/publish/{Shot}_{task_name}[_{name}]_v{version}/[{maya.layer_name}/]{Shot}_{task_name}[_{maya.layer_name}]_v{version}.{SEQ}.exr'
+        root_name: 'project_storage_pix'
+
+    # Asset
+    maya_asset_publish_area:
+        definition: '@asset_root/publish/maya'
+        root_name: 'asset_storage'
+
+    maya_asset_publish:
+        definition: '@asset_root/publish/maya/{Asset}_{task_name}[_{name}]_v{version}.{maya_extension}'
+        root_name: 'asset_storage'
+
+    asset_alembic_cache:
+        definition: '@asset_root/publish/maya/geometry/{Asset}_{task_name}[_{name}]_v{version}.{maya_extension}'
+        root_name: 'asset_storage'
+
+    maya_shader_network_publish:
+        definition: '@asset_root/publish/maya/surfacing/{Asset}_{task_name}[_{name}]_v{version}.{maya_extension}'
+        root_name: 'asset_storage'
+
+    maya_asset_camera_publish:
+        definition: '@asset_root/publish/maya/cameras/{Asset}_{task_name}[_{name}]_v{version}.abc'
+        root_name: 'asset_storage'
+
+    maya_asset_json_publish:
+        definition: '@asset_root/publish/maya/json/{Asset}_{task_name}[_{name}]_v{version}.json'
+        root_name: 'asset_storage'
+
+    maya_asset_render_exr_pub:
+        definition: '@asset_render_root/maya/{task_name}/publish/{Asset}_{task_name}[_{name}]_v{version}/[{maya.layer_name}/]{Asset}_{task_name}[_{name}]_v{version}.{SEQ}.exr'
+        root_name: 'asset_storage'
+
+    maya_asset_assembly_publish:
+        definition: '@asset_root/publish/maya/{Asset}_{task_name}[_{name}]_assembly_v{version}.{maya_extension}'
+        root_name: 'asset_storage'
+
+    maya_asset_standin_publish:
+        definition: '@asset_root/publish/maya/standin/{Asset}_{task_name}[_{name}]_v{version}/{Asset}_{task_name}[_{name}]_v{version}.ass'
+        root_name: 'asset_storage'

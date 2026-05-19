@@ -9,7 +9,7 @@
 # not expressly granted therein are reserved by Shotgun Software Inc.
 # ### OVERRIDDEN IN SSVFX_SG ###
 
-from ss_config.hooks.tk_multi_publish2.general.upload_version import SsUploadVersionPlugin
+from ss_config.hooks.tk_multi_publish2.desktop.upload_version import SsUploadVersionPlugin
 
 
 class UploadVersionPlugin(SsUploadVersionPlugin):
