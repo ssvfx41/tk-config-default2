@@ -16,11 +16,21 @@ to set environment variables or run scripts as part of the app initialization.
 import os
 import sys
 
-roots = [os.getenv('SSVFX_PIPELINE_DEV'), os.getenv('SSVFX_PIPELINE'), "//ssvfx_pipeline/pipeline_repo"]
+
+roots = [os.getenv("SSVFX_PIPELINE_DEV"), os.getenv("SSVFX_PIPELINE")]
+if not any(roots):
+    if sys.platform.startswith("win"):
+        local_pipe = "\\\\ssvfx_pipeline\\pipeline_repo"
+    else:
+        local_pipe = "/mnt/pipeline_repo"
+
+    roots.append(local_pipe)
+    os.environ["SSVFX_PIPELINE"] = local_pipe
+
 for root_path in roots:
     if not root_path:
         continue
-    sg_path = os.path.join(root_path, 'master', 'ssvfx_sg')
+    sg_path = os.path.join(root_path, "master", "ssvfx_sg")
     if os.path.exists(sg_path):
         sys.path.append(os.path.normpath(sg_path))
         break
@@ -31,6 +41,6 @@ from ss_config.hooks.tk_multi_launchapp.before_app_launch import SsBeforeAppLaun
 class BeforeAppLaunch(SsBeforeAppLaunch):
     """
     Hook to set up the system prior to app launch.
-    set's up the environment variables for Nuke, Maya, Houdini and 3DsMax
+    sets up the environment variables for Nuke, Maya, Houdini and 3DsMax
     """
     pass

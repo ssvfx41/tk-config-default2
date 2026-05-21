@@ -9,6 +9,7 @@
 # not expressly granted therein are reserved by Shotgun Software Inc.
 
 ### THIS MUST BE LOCAL IN ALL CONFIGS TO UPDATE ENVIRONMENT ###
+# TODO: Centralize this in the same way in before_app_launch.py.
 
 import os
 import sys
@@ -73,7 +74,15 @@ class PrePublishHook(HookBaseClass):
         else:
             postfix = ''
 
-        roots = [os.getenv('SSVFX_PIPELINE_DEV'), os.getenv('SSVFX_PIPELINE'), "//ssvfx_pipeline/pipeline_repo"]
+        roots = [os.getenv('SSVFX_PIPELINE_DEV'), os.getenv('SSVFX_PIPELINE')]
+        if not any(roots):
+            if sys.platform.startswith("win"):
+                local_pipe = "\\\\ssvfx_pipeline\\pipeline_repo"
+            else:
+                local_pipe = "/mnt/pipeline_repo"
+            os.environ["SSVFX_PIPELINE"] = local_pipe
+            roots = [local_pipe]
+
         for root_path in roots:
             if not root_path:
                 continue
@@ -113,7 +122,7 @@ class PrePublishHook(HookBaseClass):
 
         # CONSTRUCT BASIC PATHS - all apps use ssvfx_scripts and ssvfx_sg, add that first
         add_paths = [
-            self.get_pipeline_path(package_name='ssvfx_scripts'), 
+            self.get_pipeline_path(package_name='ssvfx_scripts'),
             self.get_pipeline_path(package_name='ssvfx_sg')
             ]
 
