@@ -16,6 +16,8 @@ to set environment variables or run scripts as part of the app initialization.
 import os
 import sys
 
+# TODO: Remove after testing
+os.environ["TEST_ENV"] = "True"
 
 roots = [os.getenv("SSVFX_PIPELINE_DEV"), os.getenv("SSVFX_PIPELINE")]
 if not any(roots):
@@ -30,7 +32,14 @@ if not any(roots):
 for root_path in roots:
     if not root_path:
         continue
-    sg_path = os.path.join(root_path, "master", "ssvfx_sg")
+
+    test_env = os.getenv("TEST_ENV", False)
+    if not test_env:
+        source_root = "master"
+    else:
+        source_root = "testEnv"
+
+    sg_path = os.path.join(root_path, source_root, "ssvfx_sg")
     if os.path.exists(sg_path):
         sys.path.append(os.path.normpath(sg_path))
         break
