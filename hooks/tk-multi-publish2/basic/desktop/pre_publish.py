@@ -9,40 +9,41 @@
 # not expressly granted therein are reserved by Shotgun Software Inc.
 
 ### THIS MUST BE LOCAL IN ALL CONFIGS TO UPDATE ENVIRONMENT ###
-# TODO: Centralize this in the same way in before_app_launch.py.
-
 import os
 import sys
 import sgtk
 
-roots = [os.getenv("SSVFX_PIPELINE_DEV"), os.getenv("SSVFX_PIPELINE")]
-if not any(roots):
-    if sys.platform.startswith("win"):
-        local_pipe = "\\\\ssvfx_pipeline\\pipeline_repo"
-    else:
-        local_pipe = "/mnt/pipeline_repo"
 
-    roots.append(local_pipe)
-    os.environ["SSVFX_PIPELINE"] = local_pipe
+try:
+    from ss_config.hooks.tk_multi_publish2.desktop.pre_publish import SsPrePublishHook
 
-for root_path in roots:
-    if not root_path:
-        continue
+except ImportError:
+    roots = [os.getenv("SSVFX_PIPELINE_DEV"), os.getenv("SSVFX_PIPELINE")]
+    if not any(roots):
+        if sys.platform.startswith("win"):
+            local_pipe = "\\\\ssvfx_pipeline\\pipeline_repo"
+        else:
+            local_pipe = "/mnt/pipeline_repo"
 
-    test_env = os.getenv("TEST_ENV", False)
-    if not test_env:
-        source_root = "master"
-    else:
-        source_root = "testEnv"
+        roots.append(local_pipe)
+        os.environ["SSVFX_PIPELINE"] = local_pipe
 
-    sg_path = os.path.join(root_path, source_root, "ssvfx_sg")
-    if os.path.exists(sg_path):
-        sys.path.append(os.path.normpath(sg_path))
-        break
+    for root_path in roots:
+        if not root_path:
+            continue
 
-from ss_config.hooks.tk_multi_publish2.desktop.pre_publish import SsPrePublishHook
+        test_env = os.getenv("TEST_ENV", False)
+        if not test_env:
+            source_root = "master"
+        else:
+            source_root = "testEnv"
 
-HookBaseClass = sgtk.get_hook_baseclass()
+        sg_path = os.path.join(root_path, source_root, "ssvfx_sg")
+        if os.path.exists(sg_path):
+            sys.path.append(os.path.normpath(sg_path))
+            break
+
+    from ss_config.hooks.tk_multi_publish2.desktop.pre_publish import SsPrePublishHook
 
 
 class PrePublishHook(SsPrePublishHook):
