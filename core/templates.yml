@@ -215,7 +215,9 @@ paths:
     # These don't require the standard formatting (with definition and root_name) because they
     # will be set within each template that uses the alias.
     # Primary roots to assets and shots
-    shot_root: shots/{Shot}/pipeline_task/{task_name}
+    shot_root:
+        definition: shots/{Shot}/pipeline_task/{task_name}
+
     asset_root:
         definition: 'assets/{sg_asset_type}/{Asset}/pipeline_task/{task_name}'
         root_name: 'asset_storage'
