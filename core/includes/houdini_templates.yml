@@ -119,29 +119,29 @@ paths:
     # define the location of a work area
     houdini_shot_work_area:
         definition: '@shot_root/houdini'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     # define the location of a publish area
     houdini_shot_publish_area:
         definition: '@shot_root/publish/houdini'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     # The location of WIP files
     houdini_shot_work:
         definition: '@houdini_shot_work_area/scenes/@houdini_shot_hipfile.{houdini_extension}'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     # The location of backups of WIP files
     houdini_shot_snapshot:
         definition: '@houdini_shot_work_area/snapshots/@houdini_shot_hipfile.{timestamp}.{houdini_extension}'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     # The location of published houdini files
     houdini_shot_publish:
         definition: '@houdini_shot_publish_area/@houdini_shot_hipfile.{houdini_extension}'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     houdini_shot_node_param_publish:
         definition: '@houdini_shot_publish_area/{Shot}_{task_name}[_{name}]_v{version}/node/{houdini.node}/{houdini.context}/{houdini.node.type}.idx'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     houdini_shot_node_network_publish:
         definition: '@houdini_shot_publish_area/{Shot}_{task_name}[_{name}]_v{version}/{houdini.context}/{houdini.node}/{houdini.node}.cpio'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     ######################################## ASSET WORK
     # define the location of a work area
     houdini_asset_work_area:
@@ -173,37 +173,37 @@ paths:
     # Rendered images go to render root
     houdini_shot_render_step:
         definition: '@render_root/houdini/{task_name}'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     houdini_shot_render_step_ver:
         definition: '@render_root/houdini/{task_name}/version'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     houdini_shot_render_root:
         definition: '@houdini_shot_render_step_ver/@houdini_shot_hipfile'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     houdini_shot_render_exr:
         definition: '@houdini_shot_render_root/[{houdini.node}/]@houdini_shot_node_version.{HSEQ}.exr'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     houdini_shot_render_multi_exr:
         definition: '@houdini_shot_render_root/[{houdini.node}/]{pass_group}/@houdini_shot_node_version_{pass_group}.{HSEQ}.exr'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     houdini_shot_render_multi_tiled_exr:
         definition: '@houdini_shot_render_root/[{houdini.node}/]@houdini_shot_node_version_{channel_group}.{tile_index}.{HSEQ}.exr'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     # Additional mantra SHOT outputs stay in the project folder
     # ifd is "compiled" hip scene for rendering mantra still has to render it
     houdini_shot_ifd:
         definition: '@houdini_shot_render_step/ifds/@houdini_shot_hipfile/[{houdini.node}/]@houdini_shot_node_version.{HSEQ}.ifd'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     houdini_shot_vdb:
         definition: '@houdini_shot_render_step/vdbs/@houdini_shot_hipfile/[{houdini.node}/]@houdini_shot_node_version.{HSEQ}.vdb'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     # potentially very large file size deep camera maps
     houdini_shot_dcm:
         definition: '@houdini_shot_render_step/dcm/@houdini_shot_hipfile/[{houdini.node}/]@houdini_shot_node_version.{HSEQ}.dcm'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     houdini_shot_extra_plane:
         definition: '@houdini_shot_render_root/[{houdini.node}/]@houdini_shot_node_version_{aov_name}.{HSEQ}.exr'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     # Additional geometry Shot node outputs
     houdini_shot_work_geo_cache:
         definition: '@houdini_shot_cache_root/geometry/@houdini_shot_hipfile/[{houdini.node}/]@houdini_shot_node_version.{HSEQ}.bgeo.sc'
@@ -240,16 +240,16 @@ paths:
     # Playblast output
     houdini_shot_playblast_root:
         definition: '@render_root/houdini/{task_name}/flip'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     houdini_shot_playblast_output:
         definition: '@houdini_shot_playblast_root/@houdini_shot_hipfile/{Shot}_{task_name}[_{name}]_pb_v{version}'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     houdini_shot_playblast_publishing:
         definition: '@houdini_shot_playblast_output.{HSEQ}.jpg'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     houdini_shot_playblast_mov:
         definition: '@houdini_shot_playblast_output.mov'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     # node output
 
 

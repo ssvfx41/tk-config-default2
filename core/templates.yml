@@ -43,17 +43,12 @@ keys:
         type: str
     Shot:
         type: str
-        # filter_by: '^[0-9a-zA-Z]{0,3}_?[0-9a-zA-Z]+_?\d{0,4}'
     Rush:
         type: str    
     ext:
         type: str    
-    # Step:
-    #     type: str
     sg_asset_type:
         type: str
-    # sg_element:
-    #     type: str    
     ampm:
         type: str    
     Asset:
@@ -90,9 +85,9 @@ keys:
     SEQ:
         type: sequence
         format_spec: "04"
-    SEQ6:
-        type: sequence
-        format_spec: "06"
+#    SEQ6:
+#        type: sequence
+#        format_spec: "06"
     eye:
         type: str
 
@@ -240,208 +235,208 @@ paths:
 
     deadline_temp_folder: 
         definition: 'admin/temp/'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
 
     #Source of all plate footage
-    rushes_root: shots/{Shot}/rushes
-    plates_root: shots/{Shot}/rushes/plate
+    rushes_root: shots/{Sequence}/{Shot}/rushes
+    plates_root: shots/{Sequence}/{Shot}/rushes/plate
 
     #Context root locations for assets and shots
-    shot_context: shots/{Shot}
+    shot_context: shots/{Sequence}/{Shot}
     asset_context:
         definition: 'assets/{sg_asset_type}/{Asset}'
         root_name: 'asset_storage'
 
     project_shots_folder: 
         definition: 'shots/'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
 
     workfile_templates:
         definition: 'admin/workfile_templates'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
         
     deadline_submission_folder: 
         definition: 'admin/temp/scripts/deadline'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
 
     client_submission_folder: 
         definition: 'admin/outgoing/submissions'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     
     resolve_review_folder: 
         definition: 'editorial/resolve/review'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
 
     processing_root:
         definition: 'admin/processing'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
 
     processing_records:
         definition: '@processing_root/records'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
 
     pump_records:
         definition: '@processing_records/pump'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
 
     publish_records:
         definition: '@processing_records/publish'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
 
     publish_shot_records:
         definition: '@publish_records/shots'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
 
     publish_asset_records:
         definition: '@publish_records/assets'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
 
     general_review_process_json:
         definition: '@processing_root/json/processing_review_settings.json'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     
     alembic_review_process_json:
         definition: '@processing_root/json/processing_incoming_alembic.json'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
 
     shot_review_process_json2:
         definition: '@processing_root/json/shot_review_settings.json'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
 
     asset_review_process_json2:
         definition: '@processing_root/json/asset_review_settings.json'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
 
     shot_review_process_json:
         definition: '@processing_root/json/shot_processing_review_settings.json'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
 
     asset_review_process_json:
         definition: '@processing_root/json/asset_processing_review_settings.json'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
 
     artist_work_render: 
         definition: 'editorial/work/renders'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
 
     version_zero_internal: 
         definition: 'editorial/v000s'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
 
     version_zero_client: 
         definition: 'admin/outgoing/submissions/V000s'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
         
     project_slate: 
         definition: 'admin/outgoing/slate'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
 
     # Admin
     shot_lineup_jpeg:
         definition: '@shot_context/editorial/line_up/{name}.jpeg'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     shot_process_scripts_deadline:
         definition: '@shot_context/scripts/deadline'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     shot_process_mov:
         definition: '@shot_context/renders/process/{Codec}/{Shot}_v{version}.mov'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
 
     # The location of shot rushes references, proxy jpegs and quicktimes
     shot_rushes_root:
         definition: '@rushes_root/'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     shot_rushes_main_jpg:
         definition: '@rushes_root/jpeg/main/'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     shot_plates_root:
         definition: '@plates_root/'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     shot_plates_main_proxy:
         definition: '@plates_root/main/proxy/'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     shot_plates_main_reformat:
         definition: '@plates_root/main/reformat/'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     shot_plates_bg_proxy:
         definition: '@plates_root/background/proxy/'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     shot_plates_bg_reformat:
         definition: '@plates_root/background/reformat/'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     shot_rushes_jpeg:
         definition: '@rushes_root/jpeg/{Shot}_v{version}.{SEQ}.jpeg'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     shot_rushes_mov:
         definition: '@rushes_root/mov/{Shot}_v{version}.mov'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     shot_rushes_filmstrip:
         definition: '@rushes_root/filmstrip/{Shot}_v{version}.jpeg'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     # DPX
     shot_plates_main_dpx:
         definition: '@plates_root/main/{Rush}/{Rush}.{SEQ}.dpx'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     shot_plates_main_proxy_dpx:
         definition: '@plates_root/main/proxy/{Rush}.{SEQ}.dpx'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     shot_plates_main_reformat_dpx:
         definition: '@plates_root/main/reformat/{Rush}.{SEQ}.dpx'        
     shot_plates_bg_dpx:
         definition: '@plates_root/background/{Rush}/{Rush}.{SEQ}.dpx'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     shot_plates_bg_proxy_dpx:
         definition: '@plates_root/background/proxy/{Rush}.{SEQ}.dpx'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     shot_plates_bg_reformat_dpx:
         definition: '@plates_root/background/reformat/{Rush}.{SEQ}.dpx'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     shot_rushes_ref_dpx:
         definition: '@plates_root/reference/{Rush}/{Rush}.{SEQ}.dpx'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     shot_rushes_elem_dpx:
         definition: '@plates_root/element/{Rush}/{Rush}.{SEQ}.dpx'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     shot_render_process_version_dpx:
         definition: '@render_root/{task_name}/{Shot}_v{version}/{Shot}_v{version}.{SEQ}.dpx'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     # EXR
     shot_plates_main_exr:
         definition: '@plates_root/main/{Rush}/{Rush}.{SEQ}.exr'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     shot_plates_main_proxy_exr:
         definition: '@plates_root/main/proxy/{Rush}.{SEQ}.exr'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     shot_plates_main_reformat_exr:
         definition: '@plates_root/main/reformat/{Rush}.{SEQ}.exr'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     shot_plates_bg_exr:
         definition: '@plates_root/background/{Rush}/{Rush}.{SEQ}.exr'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     shot_plates_bg_proxy_exr:
         definition: '@plates_root/background/proxy/{Rush}.{SEQ}.exr'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     shot_plates_bg_reformat_exr:
         definition: '@plates_root/background/reformat/{Rush}.{SEQ}.exr'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     shot_rushes_ref_exr:
         definition: '@plates_root/reference/{Rush}/{Rush}.{SEQ}.exr'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     shot_rushes_elem_exr:
         definition: '@plates_root/element/{Rush}/{Rush}.{SEQ}.exr'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     shot_render_process_version_exr:
         definition: '@render_root/{task_name}/{Shot}_v{version}/{Shot}_v{version}.{SEQ}.exr'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
     # RETIME FCURVE EXPORTS
     shot_retime_curve:
             definition: '@shot_context/export/retime/{Shot}[_{name}]_v{version}.txt'
-            root_name: 'project_storage_pix'
+            root_name: 'project_storage'
 
     # global shot root locations for the different locations to save to
     shot_render_global:
         definition: '@shot_context/'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
 
     # global asset root locations for the different locations to save to
     asset_render_global:
