@@ -71,77 +71,77 @@ paths:
     ########################################SHOT WORK
     # define the location of a work area
     maya_shot_work_area:
-        definition: '@shot_root/maya'
+        definition: '@shot_task_root/maya'
         root_name: 'project_storage'
     # define the location of a publish area
     maya_shot_publish_area:
-        definition: '@shot_root/publish/maya'
+        definition: '@shot_task_root/publish/maya'
         root_name: 'project_storage'
     # The location of WIP files
     maya_shot_work:
-        definition: '@shot_root/maya/scenes/{Shot}_{task_name}[_{name}]_v{version}.{maya_extension}'
+        definition: '@shot_task_root/maya/scenes/{Shot}_{task_name}[_{name}]_v{version}.{maya_extension}'
         root_name: 'project_storage'
         
     # The location of backups of WIP files
     maya_shot_snapshot:
-        definition: '@shot_root/maya/snapshots/{Shot}_{task_name}[_{name}]_v{version}_{timestamp}.{maya_extension}'
+        definition: '@shot_task_root/maya/snapshots/{Shot}_{task_name}[_{name}]_v{version}_{timestamp}.{maya_extension}'
         root_name: 'project_storage'
     # The location of published maya files
     maya_shot_publish:
-        definition: '@shot_root/publish/maya/{Shot}_{task_name}[_{name}]_v{version}.{maya_extension}'
+        definition: '@shot_task_root/publish/maya/{Shot}_{task_name}[_{name}]_v{version}.{maya_extension}'
         root_name: 'project_storage'
     # the Location of Maya published Camera's
     maya_shot_camera_publish:
-        definition: '@shot_root/publish/maya/cameras/{Shot}_{task_name}[_{name}]_v{version}.abc'
+        definition: '@shot_task_root/publish/maya/cameras/{Shot}_{task_name}[_{name}]_v{version}.abc'
         root_name: 'project_storage'
     # the location of Maya published json's
     maya_shot_json_publish:
-        definition: '@shot_root/publish/maya/json/{Shot}_{task_name}[_{name}]_v{version}.json'
+        definition: '@shot_task_root/publish/maya/json/{Shot}_{task_name}[_{name}]_v{version}.json'
         root_name: 'project_storage'
     
     ########################################ASSET WORK
     # define the location of a work area
     maya_asset_work_area:
-        definition: '@asset_root/work/maya'
+        definition: '@asset_task_root/work/maya'
         root_name: 'asset_storage'
     # define the location of a publish area
     maya_asset_publish_area:
-        definition: '@asset_root/publish/maya'
+        definition: '@asset_task_root/publish/maya'
         root_name: 'asset_storage'
     # The location of WIP files
     maya_asset_work:
-        definition: '@asset_root/work/maya/scenes/{Asset}_{task_name}[_{name}]_v{version}.{maya_extension}'
+        definition: '@asset_task_root/work/maya/scenes/{Asset}_{task_name}[_{name}]_v{version}.{maya_extension}'
         root_name: 'asset_storage'
     # The location of backups of WIP files
     maya_asset_snapshot:
-        definition: '@asset_root/work/maya/snapshots/{Asset}_{task_name}[_{name}]_v{version}_{timestamp}.{maya_extension}'
+        definition: '@asset_task_root/work/maya/snapshots/{Asset}_{task_name}[_{name}]_v{version}_{timestamp}.{maya_extension}'
         root_name: 'asset_storage'
     # The location of published maya files
     maya_asset_publish:
-        definition: '@asset_root/publish/maya/{Asset}_{task_name}[_{name}]_v{version}.{maya_extension}'
+        definition: '@asset_task_root/publish/maya/{Asset}_{task_name}[_{name}]_v{version}.{maya_extension}'
         root_name: 'asset_storage'
     # # The location of published maya geometry files
     asset_alembic_cache:
-        definition: '@asset_root/publish/maya/geometry/{Asset}_{task_name}[_{name}]_v{version}.{maya_extension}'
+        definition: '@asset_task_root/publish/maya/geometry/{Asset}_{task_name}[_{name}]_v{version}.{maya_extension}'
         root_name: 'asset_storage'
     # The location of published maya shader files
     maya_shader_network_publish:
-        definition: '@asset_root/publish/maya/surfacing/{Asset}_{task_name}[_{name}]_v{version}.{maya_extension}'
+        definition: '@asset_task_root/publish/maya/surfacing/{Asset}_{task_name}[_{name}]_v{version}.{maya_extension}'
         root_name: 'asset_storage'
     # the Location of Maya published Camera's
     maya_asset_camera_publish:
-        definition: '@asset_root/publish/maya/cameras/{Asset}_{task_name}[_{name}]_v{version}.abc'
+        definition: '@asset_task_root/publish/maya/cameras/{Asset}_{task_name}[_{name}]_v{version}.abc'
         root_name: 'asset_storage'
     # The location of published maya assembly definition files
     maya_asset_assembly_publish:
-        definition: '@asset_root/publish/maya/{Asset}_{task_name}[_{name}]_assembly_v{version}.{maya_extension}'
+        definition: '@asset_task_root/publish/maya/{Asset}_{task_name}[_{name}]_assembly_v{version}.{maya_extension}'
         root_name: 'asset_storage'
     maya_asset_standin_publish:
-        definition: '@asset_root/publish/maya/standin/{Asset}_{task_name}[_{name}]_v{version}/{Asset}_{task_name}[_{name}]_v{version}.ass'
+        definition: '@asset_task_root/publish/maya/standin/{Asset}_{task_name}[_{name}]_v{version}/{Asset}_{task_name}[_{name}]_v{version}.ass'
         root_name: 'asset_storage'
     # the location of Maya published json's
     maya_asset_json_publish:
-        definition: '@asset_root/publish/maya/json/{Asset}_{task_name}[_{name}]_v{version}.json'
+        definition: '@asset_task_root/publish/maya/json/{Asset}_{task_name}[_{name}]_v{version}.json'
         root_name: 'asset_storage'
     
     ########################################SHOT OUTPUT
@@ -173,36 +173,36 @@ paths:
     # # Maya Simulations output 
     # fxd = fume effects
     maya_shot_sim_ffx:
-        definition: '@shot_context/maya/{task_name}/caches/sim/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}[_{name}]_v{version}.{SEQ}.fxd'
+        definition: '@shot_root/maya/{task_name}/caches/sim/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}[_{name}]_v{version}.{SEQ}.fxd'
         root_name: 'caches' 
     # # Maya Object export 
     # maya_shot_export_obj:
-    #     definition: '@shot_context/3d_export/obj/{task_name}/{Shot}_{task_name}_v{version}/{Shot}_{task_name}_v{version}.abc'
+    #     definition: '@shot_root/3d_export/obj/{task_name}/{Shot}_{task_name}_v{version}/{Shot}_{task_name}_v{version}.abc'
     #     root_name: 'caches'
     # Maya Cache output
     maya_shot_cache_area:
-        definition:  '@shot_context/maya/{task_name}/caches/'
+        definition:  '@shot_root/maya/{task_name}/caches/'
         root_name:  'caches'
     maya_shot_cache_geo:
-         definition: '@shot_context/maya/{task_name}/caches/n_cache/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}_v{version}.{SEQ}.mcx'
+         definition: '@shot_root/maya/{task_name}/caches/n_cache/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}_v{version}.{SEQ}.mcx'
          root_name: 'caches'
     maya_shot_cache_alembic:
-         definition: '@shot_context/maya/{task_name}/caches/alembic/{Shot}_{task_name}_alembic-cache[_{name}]_v{version}'
+         definition: '@shot_root/maya/{task_name}/caches/alembic/{Shot}_{task_name}_alembic-cache[_{name}]_v{version}'
          root_name: 'caches'
     maya_shot_cache_alembic_abc:
-         definition: '@shot_context/maya/{task_name}/caches/alembic/{Shot}_{task_name}_alembic-cache[_{name}]_v{version}/{Shot}_{task_name}_alembic-cache[_{name}]_v{version}.abc'
+         definition: '@shot_root/maya/{task_name}/caches/alembic/{Shot}_{task_name}_alembic-cache[_{name}]_v{version}/{Shot}_{task_name}_alembic-cache[_{name}]_v{version}.abc'
          root_name: 'caches'
     maya_shot_cache_standin:
-        definition: '@shot_context/maya/{task_name}/caches/standin/{Shot}_{task_name}[_{name}]_v{version}'
+        definition: '@shot_root/maya/{task_name}/caches/standin/{Shot}_{task_name}[_{name}]_v{version}'
         root_name: 'caches'
     maya_shot_cache_obj:
-        definition: '@shot_context/maya/{task_name}/caches/obj/{Shot}_{task_name}_obj_cache[_{name}]_v{version}/{Shot}_{task_name}_obj-cache[_{name}]_v{version}.obj'
+        definition: '@shot_root/maya/{task_name}/caches/obj/{Shot}_{task_name}_obj_cache[_{name}]_v{version}/{Shot}_{task_name}_obj-cache[_{name}]_v{version}.obj'
         root_name: 'caches'
     maya_shot_cache_standin_ass:
-        definition: '@shot_context/maya/{task_name}/caches/standin/{Shot}_{task_name}_standin_cache[_{name}]_v{version}/{Shot}_{task_name}_standin-cache[_{name}]_v{version}[.{SEQ}].ass'
+        definition: '@shot_root/maya/{task_name}/caches/standin/{Shot}_{task_name}_standin_cache[_{name}]_v{version}/{Shot}_{task_name}_standin-cache[_{name}]_v{version}[.{SEQ}].ass'
         root_name: 'caches'
     maya_shot_cache_bifrost:
-         definition: '@shot_context/maya/{task_name}/caches/bifrost/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}_v{version}.{SEQ}.bif'
+         definition: '@shot_root/maya/{task_name}/caches/bifrost/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}_v{version}.{SEQ}.bif'
          root_name: 'caches'
     # review output
     maya_shot_playblast_root:
@@ -261,13 +261,13 @@ paths:
         root_name: 'asset_storage'
     # # Maya Simulations output
     # maya_asset_sim:
-    #     definition: '@asset_context/maya/{task_name}/caches/sim/{Asset}_{task_name}_v{version}/{Asset}_{task_name}_v{version}.fxd'
+    #     definition: '@asset_root/maya/{task_name}/caches/sim/{Asset}_{task_name}_v{version}/{Asset}_{task_name}_v{version}.fxd'
     #     root_name: 'caches'   
     # # Maya Cache output
     # asset_context: assets/{sg_asset_type}/{Asset}
-    #'@asset_context/pipeline_task/{task_name}/caches/houdini'
+    #'@asset_root/pipeline_task/{task_name}/caches/houdini'
     maya_asset_cache_area:
-        definition:  '@asset_context/pipeline_task/{task_name}/caches/maya'
+        definition:  '@asset_root/pipeline_task/{task_name}/caches/maya'
         root_name:  'caches'
     maya_asset_cache_geo:
          definition: '@maya_asset_cache_area/n_cache/{Asset}_{task_name}[_{name}]_v{version}/'

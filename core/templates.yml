@@ -209,11 +209,20 @@ paths:
     #
     # These don't require the standard formatting (with definition and root_name) because they
     # will be set within each template that uses the alias.
-    # Primary roots to assets and shots
-    shot_root:
-        definition: shots/{Shot}/pipeline_task/{task_name}
 
+    # Shot / Asset entity root folder.
+    shot_root:
+        definition: 'shots/{Sequence}/{Shot}'
+        root_name: 'project_storage'
     asset_root:
+        definition: 'assets/{sg_asset_type}/{Asset}'
+        root_name: 'asset_storage'
+
+    # Task root folder.
+    shot_task_root:
+        definition: 'shots/{Sequence}/{Shot}/pipeline_task/{task_name}'
+        root_name: 'project_storage'
+    asset_task_root:
         definition: 'assets/{sg_asset_type}/{Asset}/pipeline_task/{task_name}'
         root_name: 'asset_storage'
 
@@ -241,13 +250,7 @@ paths:
     rushes_root: shots/{Sequence}/{Shot}/rushes
     plates_root: shots/{Sequence}/{Shot}/rushes/plate
 
-    #Context root locations for assets and shots
-    shot_context: shots/{Sequence}/{Shot}
-    asset_context:
-        definition: 'assets/{sg_asset_type}/{Asset}'
-        root_name: 'asset_storage'
-
-    project_shots_folder: 
+    project_shots_folder:
         definition: 'shots/'
         root_name: 'project_storage'
 
@@ -333,13 +336,13 @@ paths:
 
     # Admin
     shot_lineup_jpeg:
-        definition: '@shot_context/editorial/line_up/{name}.jpeg'
+        definition: '@shot_root/editorial/line_up/{name}.jpeg'
         root_name: 'project_storage'
     shot_process_scripts_deadline:
-        definition: '@shot_context/scripts/deadline'
+        definition: '@shot_root/scripts/deadline'
         root_name: 'project_storage'
     shot_process_mov:
-        definition: '@shot_context/renders/process/{Codec}/{Shot}_v{version}.mov'
+        definition: '@shot_root/renders/process/{Codec}/{Shot}_v{version}.mov'
         root_name: 'project_storage'
 
     # The location of shot rushes references, proxy jpegs and quicktimes
@@ -430,17 +433,17 @@ paths:
         root_name: 'project_storage'
     # RETIME FCURVE EXPORTS
     shot_retime_curve:
-            definition: '@shot_context/export/retime/{Shot}[_{name}]_v{version}.txt'
+            definition: '@shot_root/export/retime/{Shot}[_{name}]_v{version}.txt'
             root_name: 'project_storage'
 
     # global shot root locations for the different locations to save to
     shot_render_global:
-        definition: '@shot_context/'
+        definition: '@shot_root/'
         root_name: 'project_storage'
 
     # global asset root locations for the different locations to save to
     asset_render_global:
-        definition: '@asset_context/'
+        definition: '@asset_root/'
         root_name: 'asset_storage'
 
     # templates

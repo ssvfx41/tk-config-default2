@@ -110,19 +110,19 @@ strings:
 paths:
     # houdini_cache_root: shots/cache
     # Asset Context = assets/{sg_asset_type}/{Asset}
-    houdini_cache_shot_root:  '@shot_context/houdini/{task_name}/caches'
-    houdini_cache_asset_root: '@asset_context/pipeline_task/{task_name}/caches/houdini'
-    houdini_shot_temp_root:   '@shot_context/renders/houdini/{task_name}'
-    houdini_asset_temp_root:  '@asset_context/renders/houdini/{task_name}'
+    houdini_cache_shot_root:  '@shot_root/houdini/{task_name}/caches'
+    houdini_cache_asset_root: '@asset_root/pipeline_task/{task_name}/caches/houdini'
+    houdini_shot_temp_root:   '@shot_root/renders/houdini/{task_name}'
+    houdini_asset_temp_root:  '@asset_root/renders/houdini/{task_name}'
 
     ######################################## SHOT WORK
     # define the location of a work area
     houdini_shot_work_area:
-        definition: '@shot_root/houdini'
+        definition: '@shot_task_root/houdini'
         root_name: 'project_storage'
     # define the location of a publish area
     houdini_shot_publish_area:
-        definition: '@shot_root/publish/houdini'
+        definition: '@shot_task_root/publish/houdini'
         root_name: 'project_storage'
     # The location of WIP files
     houdini_shot_work:
@@ -145,23 +145,23 @@ paths:
     ######################################## ASSET WORK
     # define the location of a work area
     houdini_asset_work_area:
-        definition: '@asset_root/work/houdini'
+        definition: '@asset_task_root/work/houdini'
         root_name: 'asset_storage'
     # define the location of a publish area
     houdini_asset_publish_area:
-        definition: '@asset_root/publish/houdini'
+        definition: '@asset_task_root/publish/houdini'
         root_name: 'asset_storage'
     # The location of WIP files
     houdini_asset_work:
-        definition: '@asset_root/work/houdini/scenes/@houdini_asset_hipfile.{houdini_extension}'
+        definition: '@asset_task_root/work/houdini/scenes/@houdini_asset_hipfile.{houdini_extension}'
         root_name: 'asset_storage'
     # The location of backups of WIP files
     houdini_asset_snapshot:
-        definition: '@asset_root/work/houdini/snapshots/@houdini_asset_hipfile.{timestamp}.{houdini_extension}'
+        definition: '@asset_task_root/work/houdini/snapshots/@houdini_asset_hipfile.{timestamp}.{houdini_extension}'
         root_name: 'asset_storage'
     # The location of published houdini files
     houdini_asset_publish:
-        definition: '@asset_root/publish/houdini/@houdini_asset_hipfile.{houdini_extension}'
+        definition: '@asset_task_root/publish/houdini/@houdini_asset_hipfile.{houdini_extension}'
         root_name: 'asset_storage'
     houdini_asset_node_param_publish:
         definition: '@houdini_asset_publish_area/{Asset}_{task_name}[_{name}]_v{version}/{houdini.context}/{houdini.node}/{houdini.node.type}.preset'

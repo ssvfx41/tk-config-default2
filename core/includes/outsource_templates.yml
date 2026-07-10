@@ -62,5 +62,5 @@ paths:
         root_name: 'project_storage'
 
     incoming_outsource_camera_copy:
-        definition: '@shot_context/maya/{outsource_task}/caches/alembic/{Shot}[_{outsource_task}][_{name}]_v{version}.abc'
+        definition: '@shot_root/maya/{outsource_task}/caches/alembic/{Shot}[_{outsource_task}][_{name}]_v{version}.abc'
         root_name: 'caches'

@@ -40,15 +40,15 @@ paths:
     ###########
     ########################################SHOT WORK   
     nuke_shot_render_area:
-        definition: '@shot_context/renders'
+        definition: '@shot_root/renders'
         root_name: 'project_storage'
     # define the location of a work area
     nuke_shot_work_area:
-        definition: '@shot_root/nuke'
+        definition: '@shot_task_root/nuke'
         root_name: 'project_storage'
     # define the location of a publish area
     nuke_shot_publish_area:
-        definition: '@shot_root/nuke/publish'
+        definition: '@shot_task_root/nuke/publish'
         root_name: 'project_storage'
     # The location of WIP script files
     nuke_shot_work:
@@ -56,7 +56,7 @@ paths:
         root_name: 'project_storage'
     # The location of WIP script files
     nuke_shot_submission_root:
-        definition: '@shot_root/submission/nuke/'
+        definition: '@shot_task_root/submission/nuke/'
         root_name: 'project_storage'
     # The location of backups of WIP files
     nuke_shot_snapshot:
@@ -75,19 +75,19 @@ paths:
     ########################################ASSET WORK
     # define the location of a work area
     nuke_asset_work_area:
-        definition: '@asset_root/work/nuke'
+        definition: '@asset_task_root/work/nuke'
         root_name: 'asset_storage'
     # define the location of a publish area
     nuke_asset_publish_area:
-        definition: '@asset_root/publish/nuke'
+        definition: '@asset_task_root/publish/nuke'
         root_name: 'asset_storage'
     # The location of WIP script files
     nuke_asset_work:
-        definition: '@asset_root/work/nuke/{Asset}_{task_name}[_{name}]_v{version}.nk'
+        definition: '@asset_task_root/work/nuke/{Asset}_{task_name}[_{name}]_v{version}.nk'
         root_name: 'asset_storage'
     # The location of backups of WIP files
     nuke_asset_snapshot:
-        definition: '@asset_root/work/nuke/snapshots/{Asset}_{task_name}[_{name}]_v{version}.{timestamp}.nk'
+        definition: '@asset_task_root/work/nuke/snapshots/{Asset}_{task_name}[_{name}]_v{version}.{timestamp}.nk'
         root_name: 'asset_storage'
     # The location of published nuke script files
     nuke_asset_publish:

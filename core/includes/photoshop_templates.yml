@@ -2,14 +2,14 @@ paths:
     ## Workfiles
     # The location of WIP script files
     psd_asset_work:
-        definition: '@asset_root/psd/{Asset}_{task_name}[_{name}]_v{version}.psd'
+        definition: '@asset_task_root/psd/{Asset}_{task_name}[_{name}]_v{version}.psd'
         root_name: 'asset_storage'
     psd_shot_work:
-        definition: '@shot_root/psd/{Shot}_{task_name}[_{name}]_v{version}.psd'
+        definition: '@shot_task_root/psd/{Shot}_{task_name}[_{name}]_v{version}.psd'
         root_name: 'project_storage'
     # The location of backups of WIP files
     psd_shot_snapshot:
-        definition: '@shot_root/nuke/snapshots/{Shot}_{task_name}[_{name}]_v{version}.{timestamp}.psd'
+        definition: '@shot_task_root/nuke/snapshots/{Shot}_{task_name}[_{name}]_v{version}.{timestamp}.psd'
         root_name: 'project_storage'
 
     ## Output
