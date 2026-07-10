@@ -57,19 +57,19 @@ paths:
     ########################################SHOT OUTPUT
     # version output
     max_shot_renders_step:
-        definition: '@render_root/3dsmax/{task_name}/version/'
+        definition: '@shot_render_root/3dsmax/{task_name}/version/'
         root_name: 'project_storage'
     max_shot_render_exr:
-        definition: '@render_root/3dsmax/{task_name}/version/{Shot}_{task_name}[_{3dsmax.render.output}]_v{version}/{Shot}_{task_name}[_{3dsmax.render.output}]_v{version}.exr'
+        definition: '@shot_render_root/3dsmax/{task_name}/version/{Shot}_{task_name}[_{3dsmax.render.output}]_v{version}/{Shot}_{task_name}[_{3dsmax.render.output}]_v{version}.exr'
         root_name: 'project_storage'
     max_shot_render_jpg:
-        definition: '@render_root/3dsmax/{task_name}/version/{Shot}_{task_name}[_{3dsmax.render.output}]_v{version}/{Shot}_{task_name}[_{3dsmax.render.output}]_v{version}.jpg'
+        definition: '@shot_render_root/3dsmax/{task_name}/version/{Shot}_{task_name}[_{3dsmax.render.output}]_v{version}/{Shot}_{task_name}[_{3dsmax.render.output}]_v{version}.jpg'
         root_name: 'project_storage'
     max_shot_render_png:
-        definition: '@render_root/3dsmax/{task_name}/version/{Shot}_{task_name}[_{3dsmax.render.output}]_v{version}/{Shot}_{task_name}[_{3dsmax.render.output}]_v{version}.png'
+        definition: '@shot_render_root/3dsmax/{task_name}/version/{Shot}_{task_name}[_{3dsmax.render.output}]_v{version}/{Shot}_{task_name}[_{3dsmax.render.output}]_v{version}.png'
         root_name: 'project_storage'
     max_shot_render_exr_pub:
-        definition: '@render_root/3dsmax/{task_name}/publish/{Shot}_{task_name}_v{version}/{Shot}_{task_name}_v{version}.exr'
+        definition: '@shot_render_root/3dsmax/{task_name}/publish/{Shot}_{task_name}_v{version}/{Shot}_{task_name}_v{version}.exr'
         root_name: 'project_storage'
     # 3dMax Simulations output
     max_shot_sim_ffx:

@@ -96,25 +96,25 @@ paths:
     ########################################SHOT OUTPUT   
     # sequence render roots
     nuke_shot_render_root:
-        definition: '@render_root/nuke/{task_name}/version/{Shot}_{task_name}[_{nuke.output}]_v{version}'
+        definition: '@shot_render_root/nuke/{task_name}/version/{Shot}_{task_name}[_{nuke.output}]_v{version}'
         root_name: 'project_storage'
     nuke_shot_render_pub_root:
-        definition: '@render_root/nuke/{task_name}/publish/{Shot}_{task_name}_v{version}'
+        definition: '@shot_render_root/nuke/{task_name}/publish/{Shot}_{task_name}_v{version}'
         root_name: 'project_storage'
     nuke_shot_element_render_root:
-        definition: '@render_root/nuke/{task_name}/element/{Shot}_elem[_{nuke.output}]_v{version}'
+        definition: '@shot_render_root/nuke/{task_name}/element/{Shot}_elem[_{nuke.output}]_v{version}'
         root_name: 'project_storage'
     nuke_shot_denoise_render_root:
-        # definition: '@render_root/nuke/element/denoise/{Shot}_{task_name}[_{nuke.output}]_v{version}'
-        definition: '@render_root/nuke/element/denoise/@shot_denoise_string'
+        # definition: '@shot_render_root/nuke/element/denoise/{Shot}_{task_name}[_{nuke.output}]_v{version}'
+        definition: '@shot_render_root/nuke/element/denoise/@shot_denoise_string'
         root_name: 'project_storage'
     nuke_shot_stmap_render_root:
-        # definition: '@render_root/nuke/element/STMap/{Shot}_{task_name}[_{nuke.output}]_v{version}'
-        definition: '@render_root/nuke/element/STMap/@shot_stmap_string'
+        # definition: '@shot_render_root/nuke/element/STMap/{Shot}_{task_name}[_{nuke.output}]_v{version}'
+        definition: '@shot_render_root/nuke/element/STMap/@shot_stmap_string'
         root_name: 'project_storage'
     nuke_shot_smartvector_render_root:
-        # definition: '@render_root/nuke/element/SmartVector/{Shot}_{task_name}[_{nuke.output}]_v{version}'
-        definition: '@render_root/nuke/element/SmartVector/@shot_smartvector_string'
+        # definition: '@shot_render_root/nuke/element/SmartVector/{Shot}_{task_name}[_{nuke.output}]_v{version}'
+        definition: '@shot_render_root/nuke/element/SmartVector/@shot_smartvector_string'
         root_name: 'project_storage'
     nuke_shot_test_render_root:
         definition: '@temp_shot_root/renders/nuke/{task_name}/test/{Shot}_test[_{nuke.output}]_v{version}'

@@ -218,7 +218,9 @@ paths:
         definition: 'assets/{sg_asset_type}/{Asset}'
         root_name: 'asset_storage'
 
-    # Task root folder.
+    # TODO: Instead of one task root we now have several based on what data is
+    #   in that location. So there is a workFile, export, render and review root.
+    #   So these maybe can be removed in favour of more specific data root templates.
     shot_task_root:
         definition: 'shots/{Sequence}/{Shot}/pipeline_task/{task_name}'
         root_name: 'project_storage'
@@ -226,11 +228,22 @@ paths:
         definition: 'assets/{sg_asset_type}/{Asset}/pipeline_task/{task_name}'
         root_name: 'asset_storage'
 
-    # Render root locations for assets and shots
-    render_root: shots/{Shot}/renders
-    asset_render_root:
-        definition: 'assets/{sg_asset_type}/{Asset}/renders'
+    # Task working file root.
+    shot_task_work_file:
+        definition: '@shot_root/workFile/{task_name}'
+        root_name: 'project_storage'
+    asset_task_work_file:
+        definition: '@asset_root/workFile/{task_name}'
         root_name: 'asset_storage'
+
+    # Render root locations for assets and shots
+    shot_render_root: 
+        definition: '@shot_root/render/{task_name}'
+        root_name: 'project_storage'
+    asset_render_root:
+        definition: '@asset_root/render/{task_name}'
+        root_name: 'asset_storage'
+    
     # Temp render locations
     temp_shot_root: shots/temp/{Shot}
     temp_asset_render_root:
@@ -401,7 +414,7 @@ paths:
         definition: '@plates_root/element/{Rush}/{Rush}.{SEQ}.dpx'
         root_name: 'project_storage'
     shot_render_process_version_dpx:
-        definition: '@render_root/{task_name}/{Shot}_v{version}/{Shot}_v{version}.{SEQ}.dpx'
+        definition: '@shot_render_root/{task_name}/{Shot}_v{version}/{Shot}_v{version}.{SEQ}.dpx'
         root_name: 'project_storage'
     # EXR
     shot_plates_main_exr:
@@ -429,7 +442,7 @@ paths:
         definition: '@plates_root/element/{Rush}/{Rush}.{SEQ}.exr'
         root_name: 'project_storage'
     shot_render_process_version_exr:
-        definition: '@render_root/{task_name}/{Shot}_v{version}/{Shot}_v{version}.{SEQ}.exr'
+        definition: '@shot_render_root/{task_name}/{Shot}_v{version}/{Shot}_v{version}.{SEQ}.exr'
         root_name: 'project_storage'
     # RETIME FCURVE EXPORTS
     shot_retime_curve:

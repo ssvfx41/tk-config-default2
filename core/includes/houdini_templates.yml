@@ -172,10 +172,10 @@ paths:
     ######################################## SHOT OUTPUT
     # Rendered images go to render root
     houdini_shot_render_step:
-        definition: '@render_root/houdini/{task_name}'
+        definition: '@shot_render_root/houdini/{task_name}'
         root_name: 'project_storage'
     houdini_shot_render_step_ver:
-        definition: '@render_root/houdini/{task_name}/version'
+        definition: '@shot_render_root/houdini/{task_name}/version'
         root_name: 'project_storage'
     houdini_shot_render_root:
         definition: '@houdini_shot_render_step_ver/@houdini_shot_hipfile'
@@ -239,7 +239,7 @@ paths:
         root_name: 'caches'
     # Playblast output
     houdini_shot_playblast_root:
-        definition: '@render_root/houdini/{task_name}/flip'
+        definition: '@shot_render_root/houdini/{task_name}/flip'
         root_name: 'project_storage'
     houdini_shot_playblast_output:
         definition: '@houdini_shot_playblast_root/@houdini_shot_hipfile/{Shot}_{task_name}[_{name}]_pb_v{version}'

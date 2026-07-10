@@ -58,7 +58,7 @@ paths:
         root_name: 'project_storage'
 
     incoming_outsource_render_copy:
-        definition: '@render_root/maya/{task_name}/v{version}/{outsource_render}/[{name}/]@outsource_descriptor_name[.{SEQ}].{ext}'
+        definition: '@shot_render_root/maya/{task_name}/v{version}/{outsource_render}/[{name}/]@outsource_descriptor_name[.{SEQ}].{ext}'
         root_name: 'project_storage'
 
     incoming_outsource_camera_copy:
