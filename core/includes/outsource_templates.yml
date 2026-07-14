@@ -7,7 +7,7 @@ keys:
         type: str
         # choices: ['nuke', 'renders', 'UD']
         filter_by: '^[0-9a-zA-Z-]+$'
-        
+
     outsource_task:
         type: str
         shotgun_entity_type: Task

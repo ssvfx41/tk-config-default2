@@ -244,44 +244,72 @@ paths:
         definition: '@asset_root/render/{task_name}'
         root_name: 'asset_storage'
     
-    # Temp render locations
-    temp_shot_root: shots/temp/{Shot}
+    # Entity temp data root.
+    temp_shot_root:
+        definition: '@shot_root/temp'
+        root_name: 'project_storage'
+    temp_asset_root:
+        definition: '@asset_root/temp'
+        root_name: 'project_storage'
+
+    # Temp render locations.
+    temp_shot_render_root:
+        definition: '@temp_shot_root/render'
+        root_name: 'asset_storage'
     temp_asset_render_root:
-        definition: 'assets/temp/{sg_asset_type}/{Asset}/renders'
+        definition: '@temp_asset_root/render'
         root_name: 'asset_storage'
-    info_json_file: shots/temp/{Shot}/json/{Shot}_{task_name}[_{name}]_v{version}.json
-    alembic_shot_json: shots/temp/[{Shot}][{Asset}]/json/[{Shot}][{Asset}]_{task_name}_alembic_v{version}.json
+
+    # Json data files saved during artist submission.
+    # TODO: These can be removed once the submitter has been updated to use the project_config api.
+    info_json_file:
+        definition: '@temp_shot_root/json/{Shot}_{task_name}[_{name}]_v{version}.json'
+        root_name: 'project_storage'
+
+    alembic_shot_json:
+        definition: '@temp_shot_root/json/{Shot}_{task_name}_alembic_v{version}.json'
+        root_name: 'project_storage'
+
     alembic_asset_json:
-        definition: 'assets/temp/{sg_asset_type}/{Asset}/json/{Asset}_{task_name}_alembic_v{version}.json'
+        definition: '@temp_asset_root/json/{Asset}_{task_name}_alembic_v{version}.json'
         root_name: 'asset_storage'
 
-    deadline_temp_folder: 
-        definition: 'admin/temp/'
+#    # TODO: Not in use, commenting out and will remove after testing.
+#    deadline_temp_folder:
+#        definition: 'admin/temp/'
+#        root_name: 'project_storage'
+
+    # Ingest location for client plates / rushes.
+    rushes_root:
+        definition: '@shot_root/rushes'
         root_name: 'project_storage'
 
-    #Source of all plate footage
-    rushes_root: shots/{Sequence}/{Shot}/rushes
-    plates_root: shots/{Sequence}/{Shot}/rushes/plate
-
-    project_shots_folder:
-        definition: 'shots/'
+    plates_root:
+        definition: '@rushes_root/plate'
         root_name: 'project_storage'
+
+#    # TODO: Not in use, commenting out and will remove after testing.
+#    project_shots_folder:
+#        definition: 'shots/'
+#        root_name: 'project_storage'
 
     workfile_templates:
         definition: 'admin/workfile_templates'
         root_name: 'project_storage'
-        
-    deadline_submission_folder: 
-        definition: 'admin/temp/scripts/deadline'
-        root_name: 'project_storage'
+
+#    # TODO: Not in use, commenting out and will remove after testing.
+#    deadline_submission_folder:
+#        definition: 'admin/temp/scripts/deadline'
+#        root_name: 'project_storage'
 
     client_submission_folder: 
         definition: 'admin/outgoing/submissions'
         root_name: 'project_storage'
-    
-    resolve_review_folder: 
-        definition: 'editorial/resolve/review'
-        root_name: 'project_storage'
+
+#    # TODO: Not in use, commenting out and will remove after testing.
+#    resolve_review_folder:
+#        definition: 'editorial/resolve/review'
+#        root_name: 'project_storage'
 
     processing_root:
         definition: 'admin/processing'
@@ -291,9 +319,10 @@ paths:
         definition: '@processing_root/records'
         root_name: 'project_storage'
 
-    pump_records:
-        definition: '@processing_records/pump'
-        root_name: 'project_storage'
+#    # TODO: Not in use, commenting out and will remove after testing.
+#    pump_records:
+#        definition: '@processing_records/pump'
+#        root_name: 'project_storage'
 
     publish_records:
         definition: '@processing_records/publish'
@@ -307,9 +336,10 @@ paths:
         definition: '@publish_records/assets'
         root_name: 'project_storage'
 
-    general_review_process_json:
-        definition: '@processing_root/json/processing_review_settings.json'
-        root_name: 'project_storage'
+#    # TODO: Not in use, commenting out and will remove after testing.
+#    general_review_process_json:
+#        definition: '@processing_root/json/processing_review_settings.json'
+#        root_name: 'project_storage'
     
     alembic_review_process_json:
         definition: '@processing_root/json/processing_incoming_alembic.json'
@@ -331,9 +361,10 @@ paths:
         definition: '@processing_root/json/asset_processing_review_settings.json'
         root_name: 'project_storage'
 
-    artist_work_render: 
-        definition: 'editorial/work/renders'
-        root_name: 'project_storage'
+#    # TODO: Not in use, commenting out and will remove after testing.
+#    artist_work_render:
+#        definition: 'editorial/work/renders'
+#        root_name: 'project_storage'
 
     version_zero_internal: 
         definition: 'editorial/v000s'
@@ -342,122 +373,174 @@ paths:
     version_zero_client: 
         definition: 'admin/outgoing/submissions/V000s'
         root_name: 'project_storage'
-        
-    project_slate: 
-        definition: 'admin/outgoing/slate'
-        root_name: 'project_storage'
 
-    # Admin
-    shot_lineup_jpeg:
-        definition: '@shot_root/editorial/line_up/{name}.jpeg'
-        root_name: 'project_storage'
+#    # TODO: Not in use, commenting out and will remove after testing.
+#    project_slate:
+#        definition: 'admin/outgoing/slate'
+#        root_name: 'project_storage'
+
+#    # Admin
+#    # TODO: Not in use, commenting out and will remove after testing.
+#    shot_lineup_jpeg:
+#        definition: '@shot_root/editorial/line_up/{name}.jpeg'
+#        root_name: 'project_storage'
+
     shot_process_scripts_deadline:
         definition: '@shot_root/scripts/deadline'
         root_name: 'project_storage'
-    shot_process_mov:
-        definition: '@shot_root/renders/process/{Codec}/{Shot}_v{version}.mov'
-        root_name: 'project_storage'
+
+#    # TODO: Not in use, commenting out and will remove after testing.
+#    shot_process_mov:
+#        definition: '@shot_root/renders/process/{Codec}/{Shot}_v{version}.mov'
+#        root_name: 'project_storage'
 
     # The location of shot rushes references, proxy jpegs and quicktimes
-    shot_rushes_root:
-        definition: '@rushes_root/'
-        root_name: 'project_storage'
+#    # TODO: Not in use, commenting out and will remove after testing.
+#    shot_rushes_root:
+#        definition: '@rushes_root/'
+#        root_name: 'project_storage'
+
     shot_rushes_main_jpg:
         definition: '@rushes_root/jpeg/main/'
         root_name: 'project_storage'
-    shot_plates_root:
-        definition: '@plates_root/'
-        root_name: 'project_storage'
+
+#    # TODO: Not in use, commenting out and will remove after testing.
+#    shot_plates_root:
+#        definition: '@plates_root/'
+#        root_name: 'project_storage'
+
     shot_plates_main_proxy:
         definition: '@plates_root/main/proxy/'
         root_name: 'project_storage'
-    shot_plates_main_reformat:
-        definition: '@plates_root/main/reformat/'
-        root_name: 'project_storage'
+
+#    # TODO: Not in use, commenting out and will remove after testing.
+#    shot_plates_main_reformat:
+#        definition: '@plates_root/main/reformat/'
+#        root_name: 'project_storage'
+
     shot_plates_bg_proxy:
         definition: '@plates_root/background/proxy/'
         root_name: 'project_storage'
-    shot_plates_bg_reformat:
-        definition: '@plates_root/background/reformat/'
-        root_name: 'project_storage'
-    shot_rushes_jpeg:
-        definition: '@rushes_root/jpeg/{Shot}_v{version}.{SEQ}.jpeg'
-        root_name: 'project_storage'
+
+#    # TODO: Not in use, commenting out and will remove after testing.
+#    shot_plates_bg_reformat:
+#        definition: '@plates_root/background/reformat/'
+#        root_name: 'project_storage'
+
+#    shot_rushes_jpeg:
+#        definition: '@rushes_root/jpeg/{Shot}_v{version}.{SEQ}.jpeg'
+#        root_name: 'project_storage'
+
     shot_rushes_mov:
         definition: '@rushes_root/mov/{Shot}_v{version}.mov'
         root_name: 'project_storage'
-    shot_rushes_filmstrip:
-        definition: '@rushes_root/filmstrip/{Shot}_v{version}.jpeg'
-        root_name: 'project_storage'
+
+#    shot_rushes_filmstrip:
+#        definition: '@rushes_root/filmstrip/{Shot}_v{version}.jpeg'
+#        root_name: 'project_storage'
+
     # DPX
-    shot_plates_main_dpx:
-        definition: '@plates_root/main/{Rush}/{Rush}.{SEQ}.dpx'
-        root_name: 'project_storage'
+#    # TODO: Not in use, commenting out and will remove after testing.
+#    shot_plates_main_dpx:
+#        definition: '@plates_root/main/{Rush}/{Rush}.{SEQ}.dpx'
+#        root_name: 'project_storage'
+
     shot_plates_main_proxy_dpx:
         definition: '@plates_root/main/proxy/{Rush}.{SEQ}.dpx'
         root_name: 'project_storage'
-    shot_plates_main_reformat_dpx:
-        definition: '@plates_root/main/reformat/{Rush}.{SEQ}.dpx'        
-    shot_plates_bg_dpx:
-        definition: '@plates_root/background/{Rush}/{Rush}.{SEQ}.dpx'
-        root_name: 'project_storage'
+
+#    # TODO: Not in use, commenting out and will remove after testing.
+#    shot_plates_main_reformat_dpx:
+#        definition: '@plates_root/main/reformat/{Rush}.{SEQ}.dpx'
+#        root_name: 'project_storage'
+
+#    # TODO: Not in use, commenting out and will remove after testing.
+#    shot_plates_bg_dpx:
+#        definition: '@plates_root/background/{Rush}/{Rush}.{SEQ}.dpx'
+#        root_name: 'project_storage'
+
     shot_plates_bg_proxy_dpx:
         definition: '@plates_root/background/proxy/{Rush}.{SEQ}.dpx'
         root_name: 'project_storage'
-    shot_plates_bg_reformat_dpx:
-        definition: '@plates_root/background/reformat/{Rush}.{SEQ}.dpx'
-        root_name: 'project_storage'
-    shot_rushes_ref_dpx:
-        definition: '@plates_root/reference/{Rush}/{Rush}.{SEQ}.dpx'
-        root_name: 'project_storage'
-    shot_rushes_elem_dpx:
-        definition: '@plates_root/element/{Rush}/{Rush}.{SEQ}.dpx'
-        root_name: 'project_storage'
+
+#    # TODO: Not in use, commenting out and will remove after testing.
+#    shot_plates_bg_reformat_dpx:
+#        definition: '@plates_root/background/reformat/{Rush}.{SEQ}.dpx'
+#        root_name: 'project_storage'
+
+#    # TODO: Not in use, commenting out and will remove after testing.
+#    shot_rushes_ref_dpx:
+#        definition: '@plates_root/reference/{Rush}/{Rush}.{SEQ}.dpx'
+#        root_name: 'project_storage'
+
+#    # TODO: Not in use, commenting out and will remove after testing.
+#    shot_rushes_elem_dpx:
+#        definition: '@plates_root/element/{Rush}/{Rush}.{SEQ}.dpx'
+#        root_name: 'project_storage'
+
     shot_render_process_version_dpx:
         definition: '@shot_render_root/{task_name}/{Shot}_v{version}/{Shot}_v{version}.{SEQ}.dpx'
         root_name: 'project_storage'
+
     # EXR
-    shot_plates_main_exr:
-        definition: '@plates_root/main/{Rush}/{Rush}.{SEQ}.exr'
-        root_name: 'project_storage'
+#    # TODO: Not in use, commenting out and will remove after testing.
+#    shot_plates_main_exr:
+#        definition: '@plates_root/main/{Rush}/{Rush}.{SEQ}.exr'
+#        root_name: 'project_storage'
+
     shot_plates_main_proxy_exr:
         definition: '@plates_root/main/proxy/{Rush}.{SEQ}.exr'
         root_name: 'project_storage'
-    shot_plates_main_reformat_exr:
-        definition: '@plates_root/main/reformat/{Rush}.{SEQ}.exr'
-        root_name: 'project_storage'
-    shot_plates_bg_exr:
-        definition: '@plates_root/background/{Rush}/{Rush}.{SEQ}.exr'
-        root_name: 'project_storage'
+
+#    # TODO: Not in use, commenting out and will remove after testing.
+#    shot_plates_main_reformat_exr:
+#        definition: '@plates_root/main/reformat/{Rush}.{SEQ}.exr'
+#        root_name: 'project_storage'
+
+#    # TODO: Not in use, commenting out and will remove after testing.
+#    shot_plates_bg_exr:
+#        definition: '@plates_root/background/{Rush}/{Rush}.{SEQ}.exr'
+#        root_name: 'project_storage'
+
     shot_plates_bg_proxy_exr:
         definition: '@plates_root/background/proxy/{Rush}.{SEQ}.exr'
         root_name: 'project_storage'
-    shot_plates_bg_reformat_exr:
-        definition: '@plates_root/background/reformat/{Rush}.{SEQ}.exr'
-        root_name: 'project_storage'
-    shot_rushes_ref_exr:
-        definition: '@plates_root/reference/{Rush}/{Rush}.{SEQ}.exr'
-        root_name: 'project_storage'
-    shot_rushes_elem_exr:
-        definition: '@plates_root/element/{Rush}/{Rush}.{SEQ}.exr'
-        root_name: 'project_storage'
+
+#    # TODO: Not in use, commenting out and will remove after testing.
+#    shot_plates_bg_reformat_exr:
+#        definition: '@plates_root/background/reformat/{Rush}.{SEQ}.exr'
+#        root_name: 'project_storage'
+
+#    # TODO: Not in use, commenting out and will remove after testing.
+#    shot_rushes_ref_exr:
+#        definition: '@plates_root/reference/{Rush}/{Rush}.{SEQ}.exr'
+#        root_name: 'project_storage'
+
+#    # TODO: Not in use, commenting out and will remove after testing.
+#    shot_rushes_elem_exr:
+#        definition: '@plates_root/element/{Rush}/{Rush}.{SEQ}.exr'
+#        root_name: 'project_storage'
+
     shot_render_process_version_exr:
         definition: '@shot_render_root/{task_name}/{Shot}_v{version}/{Shot}_v{version}.{SEQ}.exr'
         root_name: 'project_storage'
+
     # RETIME FCURVE EXPORTS
     shot_retime_curve:
             definition: '@shot_root/export/retime/{Shot}[_{name}]_v{version}.txt'
             root_name: 'project_storage'
 
+    # TODO: Usage should be replaced with shot_root.
     # global shot root locations for the different locations to save to
     shot_render_global:
         definition: '@shot_root/'
         root_name: 'project_storage'
 
-    # global asset root locations for the different locations to save to
-    asset_render_global:
-        definition: '@asset_root/'
-        root_name: 'asset_storage'
+#    # TODO: Not in use, commenting out and will remove after testing.
+#    # global asset root locations for the different locations to save to
+#    asset_render_global:
+#        definition: '@asset_root/'
+#        root_name: 'asset_storage'
 
     # templates
     showtools_template:

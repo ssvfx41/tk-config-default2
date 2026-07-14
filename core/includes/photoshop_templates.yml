@@ -1,12 +1,14 @@
 paths:
-    ## Workfiles
+    # Work files
     # The location of WIP script files
     psd_asset_work:
         definition: '@asset_task_root/psd/{Asset}_{task_name}[_{name}]_v{version}.psd'
         root_name: 'asset_storage'
+
     psd_shot_work:
         definition: '@shot_task_root/psd/{Shot}_{task_name}[_{name}]_v{version}.psd'
         root_name: 'project_storage'
+
     # The location of backups of WIP files
     psd_shot_snapshot:
         definition: '@shot_task_root/nuke/snapshots/{Shot}_{task_name}[_{name}]_v{version}.{timestamp}.psd'
@@ -17,22 +19,28 @@ paths:
     psd_asset_version_dpx:
         definition: '@asset_render_root/psd/{task_name}/version/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}[_{name}]_v{version}.dpx'
         root_name: 'asset_storage'
+
     psd_asset_version_exr:
         definition: '@asset_render_root/psd/{task_name}/version/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}[_{name}]_v{version}.exr'
         root_name: 'asset_storage'
+
     psd_asset_version_jpeg:
         definition: '@asset_render_root/psd/{task_name}/version/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}[_{name}]_v{version}.jpeg'
         root_name: 'asset_storage'
+
     # Shot
     psd_shot_version_dpx:
         definition: '@shot_render_root/psd/{task_name}/version/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}[_{name}]_v{version}.{SEQ}.dpx'
         root_name: 'project_storage'
+
     psd_shot_version_exr:
         definition: '@shot_render_root/psd/{task_name}/version/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}[_{name}]_v{version}.{SEQ}.exr'
         root_name: 'project_storage'
+
     psd_shot_version_jpeg:
         definition: '@shot_render_root/psd/{task_name}/version/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}[_{name}]_v{version}.{SEQ}.jpeg'
         root_name: 'project_storage'
+
     psd_shot_version_tif:
         definition: '@shot_render_root/psd/{task_name}/version/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}[_{name}]_v{version}.{SEQ}.tif'
         root_name: 'project_storage'

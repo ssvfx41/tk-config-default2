@@ -34,6 +34,11 @@ keys:
         type: str
         alias: name
 
+strings:
+    # Define a new Mari project name
+    mari_asset_project_name: "{mari.project_name} - Asset {asset_name}, {task_name}"
+    mari_shot_project_name: "{mari.project_name} - Shot {shot_name}, {task_name}"
+
 # The paths section contains all the the key locations where files are to be stored
 # by Sgtk Apps. Each path is made up of several keys (like {version} or {shot}) and
 # these are defined in the keys section above.
@@ -52,14 +57,11 @@ paths:
     asset_mari_texture_exr:
         definition: '@asset_task_root/publish/mari/v{version}/{mari.channel}_v{version}/exr/{Asset}_{mari.channel}[_{mari.layer}].v{version}.{UDIM}.exr'
         root_name: 'asset_storage'
+
     asset_mari_texture_tx:
         definition: '@asset_task_root/publish/mari/v{version}/{mari.channel}_v{version}/tx/{Asset}_{mari.channel}[_{mari.layer}].v{version}.{UDIM}.tx'
         root_name: 'asset_storage'
+
     asset_mari_texture_rat:
         definition: '@asset_task_root/publish/mari/v{version}/{mari.channel}_v{version}/rat/{Asset}_{mari.channel}[_{mari.layer}].v{version}.{UDIM}.rat'
         root_name: 'asset_storage'
-
-strings:
-    # Define a new Mari project name
-    mari_asset_project_name: "{mari.project_name} - Asset {asset_name}, {task_name}"
-    mari_shot_project_name: "{mari.project_name} - Shot {shot_name}, {task_name}"
