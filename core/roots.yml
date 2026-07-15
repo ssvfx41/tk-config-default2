@@ -70,6 +70,13 @@ caches: {
   windows_path: \\pix_assets\project_caches
   }
 
+review: {
+  shotgun_storage_id: 3762,
+  linux_path: /mnt/project_review,
+  mac_path: null,
+  windows_path: \\pix_assets\project_review
+  }
+
 records: {
   shotgun_storage_id: 2277,
   linux_path: /mnt/tech_records/tech_records,
