@@ -44,17 +44,17 @@ keys:
     Shot:
         type: str
     Rush:
-        type: str    
+        type: str
     ext:
-        type: str    
+        type: str
     sg_asset_type:
         type: str
     ampm:
-        type: str    
+        type: str
     Asset:
         type: str
     Playlist:
-        type: str        
+        type: str
     name:
         type: str
         filter_by: '^[0-9a-zA-Z-]+$'
@@ -63,7 +63,7 @@ keys:
         filter_by: '^[0-9a-zA-Z-]+$'
     Codec:
         type: str
-        filter_by: alphanumeric        
+        filter_by: alphanumeric
     iteration:
         type: int
     version:
@@ -85,9 +85,6 @@ keys:
     SEQ:
         type: sequence
         format_spec: "04"
-#    SEQ6:
-#        type: sequence
-#        format_spec: "06"
     eye:
         type: str
 
@@ -153,7 +150,6 @@ keys:
         shotgun_entity_type: Task
         shotgun_field_name: content
 
-
     # Maya supports two extension types.
     camera_extension:
         type: str
@@ -178,6 +174,7 @@ keys:
     dcc:
         type: str
         choices:
+            3de: 3DEqualizer
             maya: Maya
             houdini: Houdini
 
@@ -185,7 +182,6 @@ keys:
         type: str
         filter_by: '^[0-9a-zA-Z- ]+$'
 
-#
 # The paths section contains all the the key locations where files are to be stored
 # by Sgtk Apps. Each path is made up of several keys (like {version} or {shot}) and
 # these are defined in the keys section above.
@@ -199,10 +195,8 @@ keys:
 # configuration to span multiple root points, for example because you want to store
 # renders on a different server, you could define an additional root in Shotgun, and
 # then switch any relevant templates to point to that one instead.
-#
 
 paths:
-
     # Common  path definitions to use as shorthand in order to avoid repetitive and verbose
     # templates. This also makes it easy to change any of the common root paths and have the
     # changes apply to all templates that use them.
@@ -214,10 +208,12 @@ paths:
     shot_root:
         definition: 'shots/{Sequence}/{Shot}'
         root_name: 'project_storage'
+
     asset_root:
         definition: 'assets/{sg_asset_type}/{Asset}'
         root_name: 'asset_storage'
 
+    # ---------------------------------
     # TODO: Instead of one task root we now have several based on what data is
     #   in that location. So there is a workFile, export, render and review root.
     #   So these maybe can be removed in favour of more specific data root templates.
@@ -227,27 +223,40 @@ paths:
     asset_task_root:
         definition: 'assets/{sg_asset_type}/{Asset}/pipeline_task/{task_name}'
         root_name: 'asset_storage'
+    # ---------------------------------
 
-    # Task working file root.
+    # Work file root locations.
     shot_task_work_file:
         definition: '@shot_root/workFile/{task_name}'
         root_name: 'project_storage'
+
     asset_task_work_file:
         definition: '@asset_root/workFile/{task_name}'
         root_name: 'asset_storage'
 
-    # Render root locations for assets and shots
+    # Render root locations.
     shot_render_root: 
         definition: '@shot_root/render/{task_name}'
         root_name: 'project_storage'
+
     asset_render_root:
         definition: '@asset_root/render/{task_name}'
         root_name: 'asset_storage'
-    
+
+    # Export root locations.
+    shot_export_root:
+        definition: '@shot_root/export/{task_name}'
+        root_name: 'project_storage'
+
+    asset_export_root:
+        definition: '@asset_root/export/{task_name}'
+        root_name: 'project_storage'
+
     # Entity temp data root.
     temp_shot_root:
         definition: '@shot_root/temp'
         root_name: 'project_storage'
+
     temp_asset_root:
         definition: '@asset_root/temp'
         root_name: 'project_storage'
@@ -256,11 +265,22 @@ paths:
     temp_shot_render_root:
         definition: '@temp_shot_root/render'
         root_name: 'asset_storage'
+
     temp_asset_render_root:
         definition: '@temp_asset_root/render'
         root_name: 'asset_storage'
 
-    # Json data files saved during artist submission.
+    # Caches roots.
+    shot_caches_root:
+        definition: '@shot_root/{task_name}'
+        root_name: 'caches'
+
+    asset_caches_root:
+        definition: '@asset_root/{task_name}'
+        root_name: 'caches'
+
+    # --------------------------------
+    # JSON data files saved during artist submission.
     # TODO: These can be removed once the submitter has been updated to use the project_config api.
     info_json_file:
         definition: '@temp_shot_root/json/{Shot}_{task_name}[_{name}]_v{version}.json'
@@ -273,6 +293,7 @@ paths:
     alembic_asset_json:
         definition: '@temp_asset_root/json/{Asset}_{task_name}_alembic_v{version}.json'
         root_name: 'asset_storage'
+    # --------------------------------
 
 #    # TODO: Not in use, commenting out and will remove after testing.
 #    deadline_temp_folder:
@@ -293,6 +314,7 @@ paths:
 #        definition: 'shots/'
 #        root_name: 'project_storage'
 
+    # Path to work templates. Used during file setup.
     workfile_templates:
         definition: 'admin/workfile_templates'
         root_name: 'project_storage'
@@ -324,6 +346,8 @@ paths:
 #        definition: '@processing_records/pump'
 #        root_name: 'project_storage'
 
+    # -----------------------------------
+    # TODO: These can be removed once the correct publish location has been added.
     publish_records:
         definition: '@processing_records/publish'
         root_name: 'project_storage'
@@ -335,12 +359,15 @@ paths:
     publish_asset_records:
         definition: '@publish_records/assets'
         root_name: 'project_storage'
+    # -----------------------------------
 
 #    # TODO: Not in use, commenting out and will remove after testing.
 #    general_review_process_json:
 #        definition: '@processing_root/json/processing_review_settings.json'
 #        root_name: 'project_storage'
-    
+
+    # -----------------------------------
+    # TODO: These can be removed once the submitter has been updated.
     alembic_review_process_json:
         definition: '@processing_root/json/processing_incoming_alembic.json'
         root_name: 'project_storage'
@@ -360,6 +387,7 @@ paths:
     asset_review_process_json:
         definition: '@processing_root/json/asset_processing_review_settings.json'
         root_name: 'project_storage'
+    # -----------------------------------
 
 #    # TODO: Not in use, commenting out and will remove after testing.
 #    artist_work_render:
@@ -530,11 +558,11 @@ paths:
             definition: '@shot_root/export/retime/{Shot}[_{name}]_v{version}.txt'
             root_name: 'project_storage'
 
-    # TODO: Usage should be replaced with shot_root.
-    # global shot root locations for the different locations to save to
-    shot_render_global:
-        definition: '@shot_root/'
-        root_name: 'project_storage'
+#    # TODO: Usage should be replaced with shot_root.
+#    # global shot root locations for the different locations to save to
+#    shot_render_global:
+#        definition: '@shot_root/'
+#        root_name: 'project_storage'
 
 #    # TODO: Not in use, commenting out and will remove after testing.
 #    # global asset root locations for the different locations to save to
