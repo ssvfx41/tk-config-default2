@@ -29,9 +29,6 @@ settings.tk-multi-publish2.standalone:
   enable_manual_load: true
 
   publish_plugins:
-  # - name: Slap Comp for Review
-  #   hook: "{config}/tk-multi-publish2/basic/desktop/slap_comp.py"
-  #   settings: {}
   - name: Version for review
     hook: "{self}/upload_version.py:{config}/tk-multi-publish2/basic/general/upload_version.py"
     settings: {}
@@ -66,9 +63,6 @@ settings.tk-multi-publish2.3dsmaxplus.asset_step: &settings_tk-multi-publish2_3d
   - name: Publish to ShotGrid
     hook: "{self}/publish_file.py"
     settings: {}
-  # - name: Upload for review
-  #   hook: "{self}/upload_version.py"
-  #   settings: {}
   - name: Begin file versioning
     hook: "{engine}/tk-multi-publish2/basic/start_version_control.py"
     settings: {}
@@ -92,9 +86,6 @@ settings.tk-multi-publish2.3dsmaxplus.shot_step: &settings_tk-multi-publish2_3ds
   - name: Publish to ShotGrid
     hook: "{self}/publish_file.py"
     settings: {}
-  # - name: Upload for review
-  #   hook: "{self}/upload_version.py"
-  #   settings: {}
   - name: Begin file versioning
     hook: "{engine}/tk-multi-publish2/basic/start_version_control.py"
     settings: {}
@@ -341,9 +332,6 @@ settings.tk-multi-publish2.nuke.asset_step:
     hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/nuke/nuke_publish_script.py"
     settings:
         Publish Template: nuke_asset_publish
-  # - name: Submit for Review
-  #   hook: "{engine}/tk-multi-publish2/basic/submit_for_review.py"
-  #   settings: {}
   help_url: *help_url
   location: "@apps.tk-multi-publish2.location"
 
@@ -360,9 +348,6 @@ settings.tk-multi-publish2.nuke.shot_step:
   - name: Publish Render to ShotGrid
     hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/nuke/publish_file.py"
     settings: {}
-  # - name: Upload for review
-  #   hook: "{self}/upload_version.py"
-  #   settings: {}
   - name: Begin file versioning
     hook: "{engine}/tk-multi-publish2/basic/nuke_start_version_control.py"
     settings: {}
@@ -370,13 +355,6 @@ settings.tk-multi-publish2.nuke.shot_step:
     hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/nuke/nuke_publish_script.py"
     settings:
         Publish Template: nuke_shot_publish
-  # - name: Submit for Review
-  #   hook: "{engine}/tk-multi-publish2/basic/submit_for_review.py"
-  #   settings: {}
-  # - name: Update Flame Clip
-  #   hook: "{engine}/tk-multi-publish2/basic/nuke_update_flame_clip.py"
-  #   settings:
-  #       Flame Clip Template: flame_shot_clip
   help_url: *help_url
   location: "@apps.tk-multi-publish2.location"
 
@@ -673,21 +651,20 @@ settings.tk-multi-publish2.vred.asset_step:
 
 # asset_step
 settings.tk-multi-publish2.3dequalizer.asset_step:
-  # pre_publish: "{config}/tk-multi-publish2/basic/3dequalizer/pre_publish.py"
   collector: "{self}/collector.py:{config}/tk-multi-publish2/basic/_3dequalizer/collector.py"
   collector_settings:
-      Work Template: 3dequalizer_asset_work
+      Work Template: 3de_asset_work
   publish_plugins:
 
   - name: Publish Session to ShotGrid
     hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/_3dequalizer/publish_session.py"
     settings:
-        Publish Template: 3dequalizer_asset_publish
+        Publish Template: 3de_asset_publish
 
   - name: Publish Lens to ShotGrid
     hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/_3dequalizer/publish_lens.py"
     settings:
-        Publish Template: 3dequalizer_asset_lens_publish
+        Publish Template: 3de_asset_lens_publish
 
   help_url: *help_url
   location: "@apps.tk-multi-publish2.location"
@@ -697,29 +674,26 @@ settings.tk-multi-publish2.3dequalizer.asset_step:
 settings.tk-multi-publish2.3dequalizer.shot_step:
   collector: "{self}/collector.py:{config}/tk-multi-publish2/basic/_3dequalizer/collector.py"
   collector_settings:
-      Work Template: 3dequalizer_shot_work
-      #Playblast Render Template: 3dequalizer_shot_playblast_publish
-      #Playblast cone Render Template: 3dequalizer_shot_playblast_cones_publish
-      #Playblast wire Render Template: 3dequalizer_shot_playblast_wire_publish
-      Undist Render Template: 3dequalizer_shot_undist_plates_publish
-      Undist Node Template: 3dequalizer_shot_dist_publish
+      Work Template: 3de_shot_work
+      Undist Render Template: 3de_shot_undistort_plates_publish
+      Undist Node Template: 3de_shot_dist_publish
   publish_plugins:
   - name: Publish Session to ShotGrid
     hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/_3dequalizer/publish_session.py"
     settings:
-        Publish Template: 3dequalizer_shot_publish
+        Publish Template: 3de_shot_publish
 
   - name: Publish Camera to ShotGrid
     hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/_3dequalizer/publish_camera.py"
     settings:
-        Publish Template: 3dequalizer_shot_camera_publish
-        Publish UndPlates Template: 3dequalizer_shot_undist_plates_publish
+        Publish Template: 3de_shot_camera_publish
+        Publish UndPlates Template: 3de_shot_undistort_plates_publish
         Cameras: ["*"]
 
   - name: Publish Alembic Camera to ShotGrid
     hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/_3dequalizer/publish_camera_ABC.py"
     settings:
-        Publish Template: 3dequalizer_shot_camera_publish
+        Publish Template: 3de_shot_camera_publish
 
   - name: Publish Generated Data
     hook: "{self}/publish_file.py"
@@ -728,7 +702,7 @@ settings.tk-multi-publish2.3dequalizer.shot_step:
   - name: Publish Lens to ShotGrid
     hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/_3dequalizer/publish_lens.py"
     settings:
-        Publish Template: 3dequalizer_shot_lens_publish
-   
+        Publish Template: 3de_shot_lens_publish
+
   help_url: *help_url
-  location: "@apps.tk-multi-publish2.location" 
+  location: "@apps.tk-multi-publish2.location"

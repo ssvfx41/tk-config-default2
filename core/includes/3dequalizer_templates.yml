@@ -20,29 +20,30 @@
 # this file. For more information, see the Shotgun Pipeline Toolkit Documentation.
 
 keys:
-    3dequalizer.lens_name:
-        type: str
-        filter_by: '^[0-9a-zA-Z_]+$'
+# TODO: Not in use, commenting out and will remove after testing.
+#    3dequalizer.lens_name:
+#        type: str
+#        filter_by: '^[0-9a-zA-Z_]+$'
 
-    3dequalizer.camera_name:
-        type: str
-        filter_by: '^[0-9a-zA-Z_]+$'
+#    3dequalizer.camera_name:
+#        type: str
+#        filter_by: '^[0-9a-zA-Z_]+$'
 
-    3dequalizer.dist_name:
-        type: str
-        filter_by: '^[0-9a-zA-Z_]+$'
+#    3dequalizer.dist_name:
+#        type: str
+#        filter_by: '^[0-9a-zA-Z_]+$'
 
-    3dequalizer.pointGroup_name:
-        type: str
-        filter_by: '^[0-9a-zA-Z_]+$'
+#    3dequalizer.pointGroup_name:
+#        type: str
+#        filter_by: '^[0-9a-zA-Z_]+$'
 
-    # 3dequalizer supports two extension types.
-    3dequalizer_extension:
-        type: str
-        choices:
-            3de: 3dequalizer Project (.3de)
-        default: 3de
-        alias: extension
+#    # 3dequalizer supports two extension types.
+#    3dequalizer_extension:
+#        type: str
+#        choices:
+#            3de: 3dequalizer Project (.3de)
+#        default: 3de
+#        alias: extension
 
     3DESEQ:
         type: sequence
@@ -59,129 +60,120 @@ keys:
         alias: extension
 
 paths:
-    # ### Shot Templates
-    3dequalizer_cache_shot_root:
-        definition: '@shot_root/3dequalizer/{task_name}/caches'
+    ##############
+    # Work Files #
+    ##############
+    # Work file folder used in the File Open app.
+    3de_shot_work_area:
+        definition: '@shot_work_file_root/3de'
         root_name: 'project_storage'
 
-    # define the location of a work area
-    3dequalizer_shot_work_area:
-        definition: '@shot_task_root/3dequalizer'
+    3de_asset_work_area:
+        definition: '@asset_work_file_root/3de'
+        root_name: 'asset_storage'
+
+    # Artist work file templates.
+    3de_shot_work:
+        definition: '@3de_shot_work_area/{Shot}_{task_name}_[{name}_]v{version}.3de'
         root_name: 'project_storage'
 
-    # define the location of a publish area
-    3dequalizer_shot_publish_area:
-        definition: '@shot_task_root/publish/3dequalizer'
+    3de_asset_work:
+        definition: '@3de_asset_work_area/{Asset}_{task_name}_[{name}_]v{version}.3de'
+        root_name: 'asset_storage'
+
+    # Artist work file publish locations.
+    3de_shot_publish_area:
+        definition: '@shot_work_file_publish_root/3de'
         root_name: 'project_storage'
 
-    # The location of WIP files
-    3dequalizer_shot_work:
-        definition: '@shot_task_root/3dequalizer/scenes/{Shot}_{task_name}[_{name}]_v{version}.{3dequalizer_extension}'
+    3de_asset_publish_area:
+        definition: '@asset_work_file_publish_root/3de'
+        root_name: 'asset_storage'
+
+    # Location of published 3de files
+    3de_shot_publish:
+        definition: '@3de_shot_publish_area/{Shot}_{task_name}_[{name}_]v{version}.3de'
         root_name: 'project_storage'
 
-    # The location of published 3dequalizer files
-    3dequalizer_shot_publish:
-        definition: '@shot_task_root/publish/3dequalizer/{Shot}_{task_name}[_{name}]_v{version}.{3dequalizer_extension}'
+    3de_asset_publish:
+        definition: '@3de_asset_publish_area/{Asset}_{task_name}_[{name}_]v{version}.3de'
+        root_name: 'asset_storage'
+
+    # -------------------------------------------------
+    # TODO: These should be in the Nuke templates instead.
+    # Location of distort Nuke files.
+    3de_shot_dist_publish:
+        definition: '@shot_work_file_publish_root/nuke/{Shot}_{task_name}_distNode_[{name}_]v{version}.nk'
         root_name: 'project_storage'
 
-    # the Location of 3dequalizer published Cameras
-    3dequalizer_shot_camera_publish:
-        definition: '@3dequalizer_cache_shot_root/alembic/{Shot}_{task_name}_camera-cache[_{name}]_v{version}/{Shot}_{task_name}_camera-cache[_{name}]_v{version}.{3dequalizer_camera_extension}'
-        root_name: 'caches'
-
-    # the Location of 3dequalizer published distortion Node's
-    3dequalizer_shot_dist_publish:
-        definition: '@shot_task_root/publish/3dequalizer/distNode/{Shot}_{task_name}[_{name}]_v{version}.nk'
-        root_name: 'project_storage'
-
-    # the Location of 3dequalizer published distortion Renderscript's
     3dequalizer_shot_distRender_publish:
-        definition: '@shot_task_root/publish/3dequalizer/distRender/{Shot}_{task_name}[_{name}]_v{version}.nk'
+        definition: '@shot_work_file_publish_root/nuke/{Shot}_{task_name}_distRender_[{name}_]v{version}.nk'
+        root_name: 'project_storage'
+    # -------------------------------------------------
+
+    ###########
+    # Renders #
+    ###########
+    3de_shot_render_publish_root:
+        definition: '@shot_render_publish_root/3de'
         root_name: 'project_storage'
 
-    # the location of 3dequalizer published undistorted plates
-    3dequalizer_shot_undist_plates_publish:
-        definition: '@shot_task_root/publish/3dequalizer/undistRender/v{version}/{Shot}_{task_name}[_{name}]_v{version}.{3DESEQ}.jpg'
-        root_name: 'project_storage'
-    
-    # the location of 3dequalizer published playblast plates
-    3dequalizer_shot_playblast_publish_root:
-        definition: '@shot_task_root/publish/3dequalizer/playblast/v{version}/standard'
+    # Undistorted renders.
+    3de_shot_undistort_plates_publish:
+        definition: '@3de_shot_render_publish_root/undistort/[_{name}]_v{version}/{Shot}_{task_name}_undistort_[{name}_]v{version}.{3DESEQ}.jpg'
         root_name: 'project_storage'
 
-    3dequalizer_shot_playblast_publish:
-        definition: '@3dequalizer_shot_playblast_publish_root/{Shot}_{task_name}[_{name}]_v{version}.{3DESEQ}.jpg'
+    # Playblast renders.
+    3de_shot_playblast_publish:
+        definition: '@3de_shot_render_publish_root/playblast/[_{name}]_v{version}/{Shot}_{task_name}_[{name}_]v{version}.{3DESEQ}.jpg'
         root_name: 'project_storage'
 
-    # the location of 3dequalizer published playblast plates
-    3dequalizer_shot_playblast_cones_publish_root:
-        definition: '@shot_task_root/publish/3dequalizer/playblast/v{version}/cones'
+    # Cones renders.
+    3de_shot_cones_publish:
+        definition: '@3de_shot_render_publish_root/cones/[_{name}]_v{version}/{Shot}_{task_name}_cones_[{name}_]v{version}.{3DESEQ}.jpg'
         root_name: 'project_storage'
 
-    3dequalizer_shot_playblast_cones_publish:
-        definition: '@3dequalizer_shot_playblast_cones_publish_root/{Shot}_{task_name}[_{name}]_cones_v{version}.{3DESEQ}.jpg'
-        root_name: 'project_storage'
-    
-    # the location of 3dequalizer published playblast plates
-    3dequalizer_shot_playblast_wire_publish_root:
-        definition: '@shot_task_root/publish/3dequalizer/playblast/v{version}/wire'
+    # Wire renders.
+    3de_shot_wire_publish:
+        definition: '@3de_shot_render_publish_root/wire/[_{name}]_v{version}/{Shot}_{task_name}_wire_[{name}_]v{version}.{3DESEQ}.jpg'
         root_name: 'project_storage'
 
-    3dequalizer_shot_playblast_wire_publish:
-        definition: '@3dequalizer_shot_playblast_wire_publish_root/{Shot}_{task_name}[_{name}]_wire_v{version}.{3DESEQ}.jpg'
-        root_name: 'project_storage'
-
-    # the Location of 3dequalizer published Lenses
-    3dequalizer_shot_lens_publish:
-        definition: '@shot_task_root/publish/3dequalizer/lenses/{Shot}_{task_name}[_{name}]_v{version}.txt'
-        root_name: 'project_storage'
-
-    # ### Asset Work Templates
-    # define the location of a work area
-    3dequalizer_asset_work_area:
-        definition: '@asset_task_root/work/3dequalizer'
-        root_name: 'asset_storage'
-
-    # define the location of publish area
-    3dequalizer_asset_publish_area:
-        definition: '@asset_task_root/publish/3dequalizer'
-        root_name: 'asset_storage'
-
-    # The location of WIP files
-    3dequalizer_asset_work:
-        definition: '@asset_task_root/work/3dequalizer/scenes/{Asset}_{task_name}[_{name}]_v{version}.{3dequalizer_extension}'
-        root_name: 'asset_storage'
-
-    # The location of published 3dequalizer files
-    3dequalizer_asset_publish:
-        definition: '@asset_task_root/publish/3dequalizer/{Asset}_{task_name}[_{name}]_v{version}.{3dequalizer_extension}'
-        root_name: 'asset_storage'
-
-    # the Location of 3dequalizer published Cameras
-    3dequalizer_asset_camera_publish:
-        definition: '@asset_task_root/publish/3dequalizer/cameras/{Asset}_{task_name}[_{name}]_v{version}.{3dequalizer_camera_extension}'
-        root_name: 'asset_storage'
-
-    # the Location of 3dequalizer published Lenses
-    3dequalizer_asset_lens_publish:
-        definition: '@asset_task_root/publish/3dequalizer/lenses/{Asset}_{task_name}[_{name}]_v{version}.txt'
-        root_name: 'asset_storage'
-
-    # 3dequalizer Object export
-    3dequalizer_shot_export_obj:
-        definition: '@shot_root/3d_export/obj/{task_name}/{Shot}_{task_name}_v{version}/{Shot}_{task_name}_v{version}.obj'
+    ####################
+    # Exports / Caches #
+    ####################
+    # Published Cameras.
+    3de_shot_camera_publish:
+        definition: '@shot_cache_root/3de/camera/[{name}_]v{version}/{Shot}_{task_name}_camera-cache_[{name}_]v{version}.{3dequalizer_camera_extension}'
         root_name: 'caches'
 
-    # Render location for asset renders
-    3dequalizer_asset_renders_step:
-        definition: '@asset_render_root/3dequalizera/{task_name}/version'
-        root_name: 'asset_storage'
+    3de_asset_camera_publish:
+        definition: '@asset_cache_root/3de/camera/[{name}_]v{version}/{Asset}_{task_name}_camera-cache_[{name}_]v{version}.{3dequalizer_camera_extension}'
+        root_name: 'caches'
 
-    3dequalizer_asset_renders_stub:
-        definition: '@asset_render_root/3dequalizer/{task_name}/version/{Asset}_{task_name}[_{name}]_v{version}'
+    # Object exports.
+    3de_shot_export_obj:
+        definition: '@shot_cache_root/3de/obj/v{version}/{Shot}_{task_name}_v{version}.obj'
+        root_name: 'caches'
+
+    # Published lens exports.
+    3de_shot_lens_publish:
+        definition: '@shot_export_root/3de/lens/[{name}_]v{version}/{Shot}_{task_name}_[{name}_]v{version}.txt'
+        root_name: 'project_storage'
+
+    3de_asset_lens_publish:
+        definition: '@asset_export_root/3de/lens/[{name}_]v{version}/{Asset}_{task_name}_[{name}_]v{version}.txt'
         root_name: 'asset_storage'
 
 #    # TODO: Not in use, commenting out and will remove after testing.
+#    # Render location for asset renders
+#    3dequalizer_asset_renders_step:
+#        definition: '@asset_render_root/3dequalizera/{task_name}/version'
+#        root_name: 'asset_storage'
+#
+#    3dequalizer_asset_renders_stub:
+#        definition: '@asset_render_root/3dequalizer/{task_name}/version/{Asset}_{task_name}[_{name}]_v{version}'
+#        root_name: 'asset_storage'
+#
 #    3dequalizer_deadline_temp:
 #        definition: 'admin/processing/temp/deadline'
 #        root_name: 'project_storage'
