@@ -224,34 +224,81 @@ paths:
         definition: 'assets/{sg_asset_type}/{Asset}/pipeline_task/{task_name}'
         root_name: 'asset_storage'
     # ---------------------------------
-
-    # Work file root locations.
-    shot_task_work_file:
-        definition: '@shot_root/workFile/{task_name}'
+    ##############
+    # Work Files #
+    ##############
+    # Artist working file roots
+    shot_work_file_root:
+        definition: '@shot_root/workFile/{task_name}/work'
         root_name: 'project_storage'
 
-    asset_task_work_file:
-        definition: '@asset_root/workFile/{task_name}'
+    asset_work_file_root:
+        definition: '@asset_root/workFile/{task_name}/work'
         root_name: 'asset_storage'
 
-    # Render root locations.
+    # Artist work file publish roots
+    shot_work_file_publish_root:
+        definition: '@shot_root/workFile/{task_name}/publish'
+        root_name: 'project_storage'
+
+    asset_work_file_publish_root:
+        definition: '@asset_root/workFile/{task_name}/publish'
+        root_name: 'asset_storage'
+
+    ###########
+    # Renders #
+    ###########
+    # Artist working render roots
     shot_render_root: 
-        definition: '@shot_root/render/{task_name}'
+        definition: '@shot_root/render/{task_name}/work'
         root_name: 'project_storage'
 
     asset_render_root:
-        definition: '@asset_root/render/{task_name}'
+        definition: '@asset_root/render/{task_name}/work'
         root_name: 'asset_storage'
 
-    # Export root locations.
+    # Artist publish render roots
+    shot_render_publish_root:
+        definition: '@shot_root/render/{task_name}/publish'
+        root_name: 'project_storage'
+
+    asset_render_publish_root:
+        definition: '@asset_root/render/{task_name}/publish'
+        root_name: 'asset_storage'
+
+    ####################
+    # Exports / Caches #
+    ####################
+    # Artist working export root.
     shot_export_root:
         definition: '@shot_root/export/{task_name}'
         root_name: 'project_storage'
 
     asset_export_root:
         definition: '@asset_root/export/{task_name}'
+        root_name: 'asset_storage'
+
+    # Artist published exports root. Published caches and exports are saved to the
+    # 'caches' storage. This is because exported data can be reconstructed from the
+    # source work file and so the data is considered temporary and is removed after
+    # a project has wrapped.
+    shot_cache_root:
+        definition: '@shot_root/{task_name}'
+        root_name: 'caches'
+
+    asset_cache_root:
+        definition: '@asset_root/{task_name}'
+        root_name: 'caches'
+
+    # TODO: Move to Nuke templates
+    # Retime FCurve exports.
+    shot_retime_curve:
+        definition: '@shot_export_root/nuke/retime/v{version}/{Shot}[_{name}]_v{version}.txt'
         root_name: 'project_storage'
 
+    ########
+    # Temp #
+    ########
     # Entity temp data root.
     temp_shot_root:
         definition: '@shot_root/temp'
@@ -259,25 +306,16 @@ paths:
 
     temp_asset_root:
         definition: '@asset_root/temp'
+        root_name: 'asset_storage'
+
+    # Entity temp render root.
+    temp_shot_render_root:
+        definition: '@temp_shot_root/render/{task_name}'
         root_name: 'project_storage'
 
-    # Temp render locations.
-    temp_shot_render_root:
-        definition: '@temp_shot_root/render'
-        root_name: 'asset_storage'
-
     temp_asset_render_root:
-        definition: '@temp_asset_root/render'
+        definition: '@temp_asset_root/render/{task_name}'
         root_name: 'asset_storage'
-
-    # Caches roots.
-    shot_caches_root:
-        definition: '@shot_root/{task_name}'
-        root_name: 'caches'
-
-    asset_caches_root:
-        definition: '@asset_root/{task_name}'
-        root_name: 'caches'
 
     # --------------------------------
     # JSON data files saved during artist submission.
@@ -552,11 +590,6 @@ paths:
     shot_render_process_version_exr:
         definition: '@shot_render_root/{task_name}/{Shot}_v{version}/{Shot}_v{version}.{SEQ}.exr'
         root_name: 'project_storage'
-
-    # RETIME FCURVE EXPORTS
-    shot_retime_curve:
-            definition: '@shot_root/export/retime/{Shot}[_{name}]_v{version}.txt'
-            root_name: 'project_storage'
 
 #    # TODO: Usage should be replaced with shot_root.
 #    # global shot root locations for the different locations to save to
