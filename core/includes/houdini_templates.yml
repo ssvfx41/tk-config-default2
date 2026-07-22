@@ -52,12 +52,12 @@ keys:
         default: "$F4"
         alias: HSEQ
 
-    HSEQ1:
-        type: str
+#    HSEQ1:
+#        type: str
 
-    point_cache_ext:
-        type: str
-        filter_by: '^(pc2|obj|geo|bgeo|bgeo.gz|pc)$'
+#    point_cache_ext:
+#        type: str
+#        filter_by: '^(pc2|obj|geo|bgeo|bgeo.gz|pc)$'
 
     # Houdini supports three extension types.
     houdini_extension:
@@ -79,19 +79,19 @@ keys:
         type: str
         alias: type
 
-strings:
-    # Houdini Workfile names minus the file extension
-    # Asset work file name
-    houdini_asset_hipfile: "{Asset}_{task_name}[_{name}]_v{version}"
-    houdini_asset_node_outfile: "{Asset}_{task_name}[_{name}][_{houdini.node}]_v{version}"
-    houdini_asset_node_version: "{Asset}_{task_name}[_{houdini.node}]_v{version}"
+#strings:
+#    # Houdini Workfile names minus the file extension
+#    # Asset work file name
+#    houdini_asset_hipfile: "{Asset}_{task_name}_[{name}_]v{version}"
+#    houdini_asset_node_outfile: "{Asset}_{task_name}[_{name}][_{houdini.node}]_v{version}"
+#    houdini_asset_node_version: "{Asset}_{task_name}[_{houdini.node}]_v{version}"
+#
+#    # Shot work file names
+#    houdini_shot_hipfile: "{Shot}_{task_name}_[{name}_]v{version}"
+#    houdini_shot_node_outfile: "{Shot}_{task_name}[_{name}][_{houdini.node}]_v{version}"
+#    houdini_shot_node_version: "{Shot}_{task_name}[_{houdini.node}]_v{version}"
 
-    # Shot work file names
-    houdini_shot_hipfile: "{Shot}_{task_name}[_{name}]_v{version}"
-    houdini_shot_node_outfile: "{Shot}_{task_name}[_{name}][_{houdini.node}]_v{version}"
-    houdini_shot_node_version: "{Shot}_{task_name}[_{houdini.node}]_v{version}"
-
-# The paths section contains all the the key locations where files are to be stored
+# The paths section contains all the key locations where files are to be stored
 # by Sgtk Apps. Each path is made up of several keys (like {version} or {shot}) and
 # these are defined in the keys section above.
 #
@@ -106,336 +106,433 @@ strings:
 # then switch any relevant templates to point to that one instead.
 
 paths:
-    # houdini_cache_root: shots/cache
-    # Asset Context = assets/{sg_asset_type}/{Asset}
-    houdini_cache_shot_root:
-        definition: '@shot_root/houdini/{task_name}/caches'
-        root_name: 'project_storage'
-
-    houdini_cache_asset_root:
-        definition: '@asset_root/pipeline_task/{task_name}/caches/houdini'
-        root_name: 'asset_storage'
-
-    houdini_shot_temp_root:
-        definition: '@shot_root/renders/houdini/{task_name}'
-        root_name: 'project_storage'
-
-    houdini_asset_temp_root:
-        definition: '@asset_root/renders/houdini/{task_name}'
-        root_name: 'asset_storage'
-
-    # ### Shot Work Templates
-    # define the location of a work area
+    ##############
+    # Work Files #
+    ##############
+    # Work file folder used in the File Open app.
     houdini_shot_work_area:
-        definition: '@shot_task_root/houdini'
+        definition: '@shot_work_file_root/houdini'
         root_name: 'project_storage'
 
-    # define the location of a publish area
-    houdini_shot_publish_area:
-        definition: '@shot_task_root/publish/houdini'
-        root_name: 'project_storage'
-
-    # The location of WIP files
-    houdini_shot_work:
-        definition: '@houdini_shot_work_area/scenes/@houdini_shot_hipfile.{houdini_extension}'
-        root_name: 'project_storage'
-
-    # The location of backups of WIP files
-    houdini_shot_snapshot:
-        definition: '@houdini_shot_work_area/snapshots/@houdini_shot_hipfile.{timestamp}.{houdini_extension}'
-        root_name: 'project_storage'
-
-    # The location of published houdini files
-    houdini_shot_publish:
-        definition: '@houdini_shot_publish_area/@houdini_shot_hipfile.{houdini_extension}'
-        root_name: 'project_storage'
-
-    houdini_shot_node_param_publish:
-        definition: '@houdini_shot_publish_area/{Shot}_{task_name}[_{name}]_v{version}/node/{houdini.node}/{houdini.context}/{houdini.node.type}.idx'
-        root_name: 'project_storage'
-
-    houdini_shot_node_network_publish:
-        definition: '@houdini_shot_publish_area/{Shot}_{task_name}[_{name}]_v{version}/{houdini.context}/{houdini.node}/{houdini.node}.cpio'
-        root_name: 'project_storage'
-
-    # ### Asset Work Templates
-    # define the location of a work area
     houdini_asset_work_area:
-        definition: '@asset_task_root/work/houdini'
+        definition: '@asset_work_file_root/houdini'
         root_name: 'asset_storage'
 
-    # define the location of a publish area
-    houdini_asset_publish_area:
-        definition: '@asset_task_root/publish/houdini'
-        root_name: 'asset_storage'
+    # Artist work file templates.
+    houdini_shot_work:
+        definition: '@houdini_shot_work_area/{Shot}_{task_name}_[{name}_]v{version}.{houdini_extension}'
+        root_name: 'project_storage'
 
-    # The location of WIP files
     houdini_asset_work:
-        definition: '@asset_task_root/work/houdini/scenes/@houdini_asset_hipfile.{houdini_extension}'
+        definition: '@houdini_asset_work_area/{Asset}_{task_name}[_{name}]_v{version}.{houdini_extension}'
         root_name: 'asset_storage'
 
-    # The location of backups of WIP files
+    # Location of temporary snapshots.
+    houdini_shot_snapshot:
+        definition: '@houdini_shot_work_area/snapshots/{Shot}_{task_name}_[{name}_]v{version}.{timestamp}.{houdini_extension}'
+        root_name: 'project_storage'
+
     houdini_asset_snapshot:
-        definition: '@asset_task_root/work/houdini/snapshots/@houdini_asset_hipfile.{timestamp}.{houdini_extension}'
+        definition: '@houdini_asset_work_area/snapshots/{Asset}_{task_name}_[{name}_]v{version}.{timestamp}.{houdini_extension}'
         root_name: 'asset_storage'
 
-    # The location of published houdini files
-    houdini_asset_publish:
-        definition: '@asset_task_root/publish/houdini/@houdini_asset_hipfile.{houdini_extension}'
+    # Publish folder used in File Open app.
+    houdini_shot_publish_area:
+        definition: '@shot_work_file_publish_root/houdini'
+        root_name: 'project_storage'
+
+    houdini_asset_publish_area:
+        definition: '@asset_work_file_publish_root/houdini'
         root_name: 'asset_storage'
+
+    # Location of published work files.
+    houdini_shot_publish:
+        definition: '@houdini_shot_publish_area/{Shot}_{task_name}_[{name}_]v{version}.{houdini_extension}'
+        root_name: 'project_storage'
+
+    houdini_asset_publish:
+        definition: '@houdini_asset_publish_area/{Asset}_{task_name}_[{name}_]v{version}.{houdini_extension}'
+        root_name: 'asset_storage'
+
+    ###########
+    # Renders #
+    ###########
+    # Render working location.
+    houdini_shot_render_root:
+        definition: '@shot_render_root/houdini'
+        root_name: 'project_storage'
+
+    houdini_asset_render_root:
+        definition: '@asset_render_root/houdini'
+        root_name: 'asset_storage'
+
+    # Render publish location.
+    houdini_shot_render_publish_root:
+        definition: '@shot_render_publish_root/houdini'
+        root_name: 'project_storage'
+
+    houdini_asset_render_publish_root:
+        definition: '@asset_render_publish_root/houdini'
+        root_name: 'asset_storage'
+
+    # Render publish version root.
+    houdini_shot_render_step_ver:
+        definition: '@houdini_shot_render_publish_root/version'
+        root_name: 'project_storage'
+
+    houdini_asset_render_step_ver:
+        definition: '@houdini_asset_render_publish_root/version'
+        root_name: 'asset_storage'
+
+    # Exr render outputs.
+    houdini_shot_render_exr:
+        definition: '@houdini_shot_render_step_ver/{Shot}_{task_name}_[{name}_]v{version}/[{houdini.node}/]{Shot}_{task_name}[_{houdini.node}]_v{version}.{HSEQ}.exr'
+        root_name: 'project_storage'
+
+    houdini_asset_render_exr:
+        definition: '@houdini_asset_render_step_ver/{Asset}_{task_name}_[{name}_]v{version}/[{houdini.node}/]{Asset}_{task_name}[_{houdini.node}]_v{version}.{HSEQ}.exr'
+        root_name: 'asset_storage'
+
+    # Multi-exr render outputs.
+    houdini_shot_render_multi_exr:
+        definition: '@houdini_shot_render_step_ver/{Shot}_{task_name}_[{name}_]v{version}/[{houdini.node}/]{pass_group}/{Shot}_{task_name}[_{houdini.node}]_v{version}_{pass_group}.{HSEQ}.exr'
+        root_name: 'project_storage'
+
+    houdini_asset_render_multi_exr:
+        definition: '@houdini_asset_render_step_ver/{Asset}_{task_name}_[{name}_]v{version}/[{houdini.node}/]{pass_group}/{Asset}_{task_name}[_{houdini.node}]_v{version}_{pass_group}.{HSEQ}.exr'
+        root_name: 'asset_storage'
+
+    # Tiled multi-exr render outputs.
+    houdini_shot_render_multi_tiled_exr:
+        definition: '@houdini_shot_render_step_ver/{Shot}_{task_name}_[{name}_]v{version}/[{houdini.node}/]{Shot}_{task_name}[_{houdini.node}]_v{version}_{channel_group}.{tile_index}.{HSEQ}.exr'
+        root_name: 'project_storage'
+
+    # Extra image plane (deep rasters) render outputs.
+    houdini_shot_extra_plane:
+        definition: '@houdini_shot_render_publish_root/{aov_name}/{Shot}_{task_name}_[{name}_]v{version}/[{houdini.node}/]{Shot}_{task_name}_{aov_name}[_{houdini.node}]_v{version}.{HSEQ}.exr'
+        root_name: 'project_storage'
+
+    houdini_asset_extra_plane:
+        definition: '@houdini_asset_render_publish_root/{aov_name}/{Asset}_{task_name}_[{name}_]v{version}/[{houdini.node}/]{Asset}_{task_name}_{aov_name}[_{houdini.node}]_v{version}.{HSEQ}.exr'
+        root_name: 'asset_storage'
+
+    # Playblast flipbook render root.
+    houdini_shot_playblast_root:
+        definition: '@houdini_shot_render_publish_root/flip'
+        root_name: 'project_storage'
+
+    houdini_asset_playblast_root:
+        definition: '@houdini_asset_render_publish_root/flip'
+        root_name: 'asset_storage'
+
+    # Playblast flipbook jpg render.
+    houdini_shot_playblast_publishing:
+        definition: '@houdini_shot_playblast_root/{Shot}_{task_name}_[{name}_]pb_v{version}/{Shot}_{task_name}_[{name}_]pb_v{version}.{HSEQ}.jpg'
+        root_name: 'project_storage'
+
+    houdini_asset_playblast_publishing:
+        definition: '@houdini_asset_playblast_root/{Asset}_{task_name}_[{name}_]pb_v{version}/{Asset}_{task_name}_[{name}_]pb_v{version}.{HSEQ}.jpg'
+        root_name: 'asset_storage'
+
+    # Playblast review movies.
+    houdini_shot_playblast_mov:
+        definition: '@shot_review_root/houdini/flip/[{name}_]v{version}/{Shot}_{task_name}[_{name}]_pb_v{version}.mov'
+        root_name: 'review'
+
+    houdini_asset_playblast_mov:
+        definition: '@asset_review_root/houdini/flip/[{name}_]v{version}/{Asset}_{task_name}[_{name}]_pb_v{version}.mov'
+        root_name: 'review'
+
+#    # Temp root?
+#    # TODO: Why is this here? Not a temp location, doesn't make sense.
+#    houdini_shot_temp_root:
+#        definition: '@shot_root/renders/houdini/{task_name}'
+#        root_name: 'project_storage'
+#
+#    houdini_asset_temp_root:
+#        definition: '@asset_root/renders/houdini/{task_name}'
+#        root_name: 'asset_storage'
+
+    ###########
+    # Exports #
+    ###########
+    # Export working file root, used for wip or working exports.
+    houdini_shot_export_root:
+        definition: '@shot_export_root/houdini'
+        root_name: 'project_storage'
+
+    houdini_asset_export_root:
+        definition: '@asset_export_root/houdini'
+        root_name: 'asset_storage'
+
+    # Export published file root.
+    houdini_shot_export_publish_root:
+        definition: '@shot_export_publish_root/houdini'
+        root_name: 'project_storage'
+
+    houdini_asset_export_publish_root:
+        definition: '@asset_export_publish_root/houdini'
+        root_name: 'asset_storage'
+
+    # Node Param Exports.
+    houdini_shot_node_param_publish:
+        definition: '@houdini_shot_export_publish_root/node/{Shot}_{task_name}[_{name}]_v{version}/{houdini.context}/{houdini.node}/{houdini.node.type}.idx'
+        root_name: 'project_storage'
 
     houdini_asset_node_param_publish:
-        definition: '@houdini_asset_publish_area/{Asset}_{task_name}[_{name}]_v{version}/{houdini.context}/{houdini.node}/{houdini.node.type}.preset'
+        definition: '@houdini_asset_export_publish_root/node/{Asset}_{task_name}[_{name}]_v{version}/{houdini.context}/{houdini.node}/{houdini.node.type}.preset'
         root_name: 'asset_storage'
+
+    # Node Network Exports.
+    houdini_shot_node_network_publish:
+        definition: '@houdini_shot_export_publish_root/nodeNet/{Shot}_{task_name}[_{name}]_v{version}/{houdini.context}/{houdini.node}/{houdini.node}.cpio'
+        root_name: 'project_storage'
 
     houdini_asset_node_network_publish:
-        definition: '@houdini_asset_publish_area/{Asset}_{task_name}[_{name}]_v{version}/{houdini.context}/{houdini.node}/{houdini.node}.cpio'
+        definition: '@houdini_asset_export_publish_root/nodeNet/{Asset}_{task_name}[_{name}]_v{version}/{houdini.context}/{houdini.node}/{houdini.node}.cpio'
         root_name: 'asset_storage'
 
-    # ### Shot Output Templates
-    # Rendered images go to render root
-    houdini_shot_render_step:
-        definition: '@shot_render_root/houdini/{task_name}'
-        root_name: 'project_storage'
-
-    houdini_shot_render_step_ver:
-        definition: '@shot_render_root/houdini/{task_name}/version'
-        root_name: 'project_storage'
-
-    houdini_shot_render_root:
-        definition: '@houdini_shot_render_step_ver/@houdini_shot_hipfile'
-        root_name: 'project_storage'
-
-    houdini_shot_render_exr:
-        definition: '@houdini_shot_render_root/[{houdini.node}/]@houdini_shot_node_version.{HSEQ}.exr'
-        root_name: 'project_storage'
-
-    houdini_shot_render_multi_exr:
-        definition: '@houdini_shot_render_root/[{houdini.node}/]{pass_group}/@houdini_shot_node_version_{pass_group}.{HSEQ}.exr'
-        root_name: 'project_storage'
-
-    houdini_shot_render_multi_tiled_exr:
-        definition: '@houdini_shot_render_root/[{houdini.node}/]@houdini_shot_node_version_{channel_group}.{tile_index}.{HSEQ}.exr'
-        root_name: 'project_storage'
-
-    # Additional mantra SHOT outputs stay in the project folder
-    # ifd is "compiled" hip scene for rendering mantra still has to render it
+    # Ifd outputs. '.ifd' is a compiled file that contains a complete description of the
+    # scene and how to render it.
     houdini_shot_ifd:
-        definition: '@houdini_shot_render_step/ifds/@houdini_shot_hipfile/[{houdini.node}/]@houdini_shot_node_version.{HSEQ}.ifd'
+        definition: '@houdini_shot_export_publish_root/ifd/{Shot}_{task_name}_[{name}_]v{version}/[{houdini.node}/]{Shot}_{task_name}[_{houdini.node}]_v{version}.{HSEQ}.ifd'
         root_name: 'project_storage'
 
-    houdini_shot_vdb:
-        definition: '@houdini_shot_render_step/vdbs/@houdini_shot_hipfile/[{houdini.node}/]@houdini_shot_node_version.{HSEQ}.vdb'
-        root_name: 'project_storage'
+    houdini_asset_ifd:
+        definition: '@houdini_asset_export_publish_root/ifd/{Asset}_{task_name}_[{name}_]v{version}/[{houdini.node}/]{Asset}_{task_name}[_{houdini.node}]_v{version}.{HSEQ}.ifd'
+        root_name: 'asset_storage'
 
-    # potentially very large file size deep camera maps
+    # Dcm (Deep Camera Maps) outputs. Rendered images with semi-transparent volumes
+    # between the camera and the nearest opaque surface which stores depth information.
+    # File size is potentially very large.
     houdini_shot_dcm:
-        definition: '@houdini_shot_render_step/dcm/@houdini_shot_hipfile/[{houdini.node}/]@houdini_shot_node_version.{HSEQ}.dcm'
+        definition: '@houdini_shot_export_root/dcm/{Shot}_{task_name}_[{name}_]v{version}/[{houdini.node}/]{Shot}_{task_name}[_{houdini.node}]_v{version}.{HSEQ}.dcm'
         root_name: 'project_storage'
 
-    houdini_shot_extra_plane:
-        definition: '@houdini_shot_render_root/[{houdini.node}/]@houdini_shot_node_version_{aov_name}.{HSEQ}.exr'
-        root_name: 'project_storage'
+    houdini_asset_dcm:
+        definition: '@houdini_asset_export_root/dcm/{Asset}_{task_name}_[{name}_]v{version}/[{houdini.node}/]{Asset}_{task_name}[_{houdini.node}]_v{version}.{HSEQ}.dcm'
+        root_name: 'asset_storage'
 
-    # Additional geometry Shot node outputs
-    houdini_shot_work_geo_cache:
-        definition: '@houdini_shot_cache_root/geometry/@houdini_shot_hipfile/[{houdini.node}/]@houdini_shot_node_version.{HSEQ}.bgeo.sc'
+    ##########
+    # Caches #
+    ##########
+    # Working caches root, saved to a temp folder.
+    houdini_shot_cache_temp_root:
+        definition: '@shot_cache_temp_root/houdini'
         root_name: 'caches'
 
-    # Alembic caches
+    houdini_asset_cache_temp_root:
+        definition: '@asset_cache_temp_root/houdini'
+        root_name: 'caches'
+
+    # Geometry cache node working outputs.
+    houdini_shot_work_geo_cache:
+        definition: '@houdini_shot_cache_temp_root/geo/{Shot}_{task_name}_[{name}_]v{version}/[{houdini.node}/]{Shot}_{task_name}[_{houdini.node}]_v{version}.{HSEQ}.bgeo.sc'
+        root_name: 'caches'
+
+    houdini_asset_work_geo_cache:
+        definition: '@houdini_asset_cache_temp_root/geo/{Asset}_{task_name}_[{name}_]v{version}/[{houdini.node}/]{Asset}_{task_name}[_{houdini.node}]_v{version}.{HSEQ}.bgeo.sc'
+        root_name: 'caches'
+
+    # Vdb working outputs. '.vdb' contains OpenVDB volumes, a kind of geometry primitive object
+    # that stores data in a three-dimensional grid of voxels.
+    houdini_shot_vdb:
+        definition: '@houdini_shot_cache_temp_root/vdb/{Shot}_{task_name}_[{name}_]v{version}/[{houdini.node}/]{Shot}_{task_name}[_{houdini.node}]_v{version}.{HSEQ}.vdb'
+        root_name: 'caches'
+
+    houdini_asset_vdb:
+        definition: '@houdini_asset_cache_temp_root/vdb/{Asset}_{task_name}_[{name}_]v{version}/[{houdini.node}/]{Asset}_{task_name}[_{houdini.node}]_v{version}.{HSEQ}.vdb'
+        root_name: 'caches'
+
+    # Still alembic working cache outputs.
+    houdini_shot_work_alembic_cache_still:
+        definition: '@houdini_shot_cache_temp_root/{Shot}_{task_name}_[{name}_]v{version}/[{houdini.node}/]{Shot}_{task_name}[_{houdini.node}]_v{version}.abc'
+        root_name: 'caches'
+
+    houdini_asset_work_alembic_cache_still:
+        definition: '@houdini_asset_cache_temp_root/{Asset}_{task_name}_[{name}_]v{version}/[{houdini.node}/]{Asset}_{task_name}[_{houdini.node}]_v{version}.abc'
+        root_name: 'caches'
+
+    # Animated alembic working cache outputs.
+    houdini_shot_work_alembic_cache:
+        definition: '@houdini_shot_cache_temp_root/{Shot}_{task_name}_[{name}_]v{version}/[{houdini.node}/]{Shot}_{task_name}[_{houdini.node}]_v{version}.{HSEQ}.abc'
+        root_name: 'caches'
+
+    houdini_asset_work_alembic_cache:
+        definition: '@houdini_asset_cache_temp_root/{Asset}_{task_name}_[{name}_]v{version}/[{houdini.node}/]{Asset}_{task_name}[_{houdini.node}]_v{version}.{HSEQ}.abc'
+        root_name: 'caches'
+
+    # Published caches root.
+    houdini_shot_cache_root:
+        definition: '@shot_cache_root/houdini'
+        root_name: 'caches'
+
+    houdini_asset_cache_root:
+        definition: '@asset_cache_root/houdini'
+        root_name: 'caches'
+
+    # Published bgeo.sc outputs.
+    # Still geo.
+    houdini_shot_cache_bgeo:
+        definition: '@houdini_shot_cache_root/geo/{Shot}_{task_name}_geometry-cache[_{name}]_v{version}/{Shot}_{task_name}_geometry-cache_{houdini.node}_v{version}.bgeo.sc'
+        root_name: 'caches'
+
+    houdini_asset_cache_bgeo:
+        definition: '@houdini_asset_cache_root/geo/{Asset}_{task_name}_geometry-cache[_{name}]_v{version}/{Asset}_{task_name}_geometry-cache_{houdini.node}_v{version}.bgeo.sc'
+        root_name: 'caches'
+
+    # Animated geo.
+    houdini_shot_cache_bgeo_anim:
+        definition: '@houdini_shot_cache_root/geo/{Shot}_{task_name}_geometry-cache[_{name}]_v{version}/{Shot}_{task_name}_geometry-cache_{houdini.node}_v{version}.{HSEQ}.bgeo.sc'
+        root_name: 'caches'
+
+    houdini_asset_cache_bgeo_anim:
+        definition: '@houdini_asset_cache_root/geo/{Asset}_{task_name}_geometry-cache[_{name}]_v{version}/{Asset}_{task_name}_geometry-cache_{houdini.node}_v{version}.{HSEQ}.bgeo.sc'
+        root_name: 'caches'
+
+    # Published VDB cache files.
+    houdini_shot_cache_vdb_anim:
+        definition: '@houdini_shot_cache_root/vdb/{Shot}_{task_name}_vdb-cache[_{name}]_v{version}/{Shot}_{task_name}_vdb-cache[_{name}]_{houdini.node}_v{version}.{HSEQ}.vdb'
+        root_name: 'caches'
+
+    houdini_asset_cache_vdb_anim:
+        definition: '@houdini_asset_cache_root/vdb/{Asset}_{task_name}_vdb-cache[_{name}]_v{version}/{Asset}_{task_name}_vdb-cache[_{name}]_{houdini.node}_v{version}.{HSEQ}.vdb'
+        root_name: 'caches'
+
+    # Standins.
+    houdini_shot_cache_standin:
+        definition: '@houdini_shot_cache_root/standin/{Shot}_{task_name}_standin_cache[_{name}]_v{version}/{Shot}_{task_name}_standin-cache_{houdini.node}_v{version}.ass'
+        root_name: 'caches'
+
+    houdini_asset_cache_standin:
+        definition: '@houdini_asset_cache_root/standin/{Asset}_{task_name}_standin_cache[_{name}]_v{version}/{Asset}_{task_name}_standin-cache_{houdini.node}_v{version}.ass'
+        root_name: 'caches'
+
+    # Animated standins.
+    houdini_shot_cache_standin_anim:
+        definition: '@houdini_shot_cache_root/standin/{Shot}_{task_name}_standin_cache[_{name}]_v{version}/{Shot}_{task_name}_standin-cache_{houdini.node}_v{version}.{HSEQ}.ass'
+        root_name: 'caches'
+
+    houdini_asset_cache_standin_anim:
+        definition: '@houdini_asset_cache_root/standin/{Asset}_{task_name}_standin_cache[_{name}]_v{version}/{Asset}_{task_name}_standin-cache_{houdini.node}_v{version}.{HSEQ}.ass'
+        root_name: 'caches'
+
+    # Alembic cache publish roots.
     houdini_shot_alembic_root:
         definition: '@houdini_shot_cache_root/alembic'
         root_name: 'caches'
 
-    houdini_shot_work_alembic_cache_still:
-        definition: '@houdini_shot_alembic_root/@houdini_shot_hipfile/[{houdini.node}/]@houdini_shot_node_version.abc'
+    houdini_asset_alembic_root:
+        definition: '@houdini_asset_cache_root/alembic'
         root_name: 'caches'
 
-    houdini_shot_work_alembic_cache:
-        definition: '@houdini_shot_alembic_root/@houdini_shot_hipfile/[{houdini.node}/]@houdini_shot_node_version.{HSEQ}.abc'
+    # Alembic cache publishes.
+    houdini_shot_cache_alembic_abc:
+        definition: '@houdini_shot_alembic_root/{Shot}_{task_name}_alembic-cache[_{name}]_v{version}/{Shot}_{task_name}_alembic-cache_{houdini.node}_v{version}.abc'
         root_name: 'caches'
 
-    # Shot Simulation Caches
-    houdini_shottask_simulation_cache:
-        definition: '@houdini_shot_cache_root/sim/@houdini_shot_hipfile/[{houdini.node}/]@houdini_shot_node_version.{HSEQ}.sim'
+    houdini_asset_cache_alembic_abc:
+        definition: '@houdini_asset_alembic_root/{Asset}_{task_name}_alembic-cache[_{name}]_v{version}/{Asset}_{task_name}_alembic-cache_{houdini.node}_v{version}.abc'
         root_name: 'caches'
 
-    houdini_shottask_simulation_cache_sc:
-        definition: '@houdini_shot_cache_root/sim/@houdini_shot_hipfile/[{houdini.node}/]@houdini_shot_node_version.{HSEQ}.sim.sc'
+    # Simulation roots.
+    houdini_shot_simulation_root:
+        definition: '@houdini_shot_cache_root/sim'
         root_name: 'caches'
 
-    houdini_shottask_simulation_cache_gz:
-        definition: '@houdini_shot_cache_root/sim/@houdini_shot_hipfile/[{houdini.node}/]@houdini_shot_node_version.{HSEQ}.sim.gz'
+    houdini_asset_simulation_root:
+        definition: '@houdini_asset_cache_root/sim'
         root_name: 'caches'
 
-    # root shot cache template
-    # for both templates and Houdini variables
-    houdini_shot_cache_root:
-        definition: '@houdini_shot_temp_root'
+    # Simulation cache outputs.
+    houdini_shot_simulation_cache:
+        definition: '@houdini_shot_simulation_root/{Shot}_{task_name}_[{name}_]v{version}/[{houdini.node}/]{Shot}_{task_name}[_{houdini.node}]_v{version}.{HSEQ}.sim'
         root_name: 'caches'
 
-    # Shot render temp file
+    houdini_asset_simulation_cache:
+        definition: '@houdini_asset_simulation_root/{Asset}_{task_name}_[{name}_]v{version}/[{houdini.node}/]{Asset}_{task_name}[_{houdini.node}]_v{version}.{HSEQ}.sim'
+        root_name: 'caches'
+
+    # Compressed simulation outputs.
+    # '.sim.sc' is for files using Blosc compression.
+    houdini_shot_simulation_cache_sc:
+        definition: '@houdini_shot_simulation_root/{Shot}_{task_name}_[{name}_]v{version}/[{houdini.node}/]{Shot}_{task_name}[_{houdini.node}]_v{version}.{HSEQ}.sim.sc'
+        root_name: 'caches'
+
+    houdini_asset_simulation_cache_sc:
+        definition: '@houdini_asset_simulation_root/{Asset}_{task_name}_[{name}_]v{version}/[{houdini.node}/]{Asset}_{task_name}[_{houdini.node}]_v{version}.{HSEQ}.sim.sc'
+        root_name: 'caches'
+
+    # '.sim.gz' is for files using GZIP compression.
+    houdini_shot_simulation_cache_gz:
+        definition: '@houdini_shot_simulation_root/{Shot}_{task_name}_[{name}_]v{version}/[{houdini.node}/]{Shot}_{task_name}[_{houdini.node}]_v{version}.{HSEQ}.sim.gz'
+        root_name: 'caches'
+
+    houdini_asset_simulation_cache_gz:
+        definition: '@houdini_asset_simulation_cache/{Asset}_{task_name}_[{name}_]v{version}/[{houdini.node}/]{Asset}_{task_name}[_{houdini.node}]_v{version}.{HSEQ}.sim.gz'
+        root_name: 'caches'
+
+    # Shot render template files.
+    # @shot_context/renders/houdini/{task_name}/{cache_type}/{Shot}_{task_name}_[{name}_]v{version}/[{houdini.node}/]{Shot}_{task_name}[_{houdini.node}]_v{version}.{HSEQ}.{cache_type}
     houdini_shot_temp_render_cache:
-        definition: '@houdini_shot_temp_root/{cache_type}/@houdini_shot_hipfile/[{houdini.node}/]@houdini_shot_node_version.{HSEQ}.{cache_type}'
+        definition: '@houdini_shot_cache_root/render/{cache_type}/{Shot}_{task_name}_[{name}_]v{version}/[{houdini.node}/]{Shot}_{task_name}[_{houdini.node}]_v{version}.{HSEQ}.{cache_type}'
         root_name: 'caches'
+
+    houdini_asset_temp_render_cache:
+        definition: '@houdini_asset_cache_root/render/{cache_type}/{Asset}_{task_name}_[{name}_]v{version}/[{houdini.node}/]{Asset}_{task_name}[_{houdini.node}]_v{version}.{HSEQ}.{cache_type}'
+        root_name: 'caches'
+
+    # -----------------------------------------------------------------------
+#    # houdini_cache_root: shots/cache
+#    # Asset Context = assets/{sg_asset_type}/{Asset}
+#    houdini_cache_shot_root:
+#        definition: '@shot_root/houdini/{task_name}/caches'
+#        root_name: 'project_storage'
+#
+#    houdini_cache_asset_root:
+#        definition: '@asset_root/pipeline_task/{task_name}/caches/houdini'
+#        root_name: 'asset_storage'
+
+    # ### Shot Output Templates
+#    # Rendered images go to render root
+#    houdini_shot_render_step:
+#        definition: '@shot_render_root/houdini/{task_name}'
+#        root_name: 'project_storage'
+#
+#    houdini_shot_render_root:
+#        definition: '@houdini_shot_render_step_ver/@houdini_shot_hipfile'
+#        root_name: 'project_storage'
 
     # Playblast output
-    houdini_shot_playblast_root:
-        definition: '@shot_render_root/houdini/{task_name}/flip'
-        root_name: 'project_storage'
-
-    houdini_shot_playblast_output:
-        definition: '@houdini_shot_playblast_root/@houdini_shot_hipfile/{Shot}_{task_name}[_{name}]_pb_v{version}'
-        root_name: 'project_storage'
-
-    houdini_shot_playblast_publishing:
-        definition: '@houdini_shot_playblast_output.{HSEQ}.jpg'
-        root_name: 'project_storage'
-
-    houdini_shot_playblast_mov:
-        definition: '@houdini_shot_playblast_output.mov'
-        root_name: 'project_storage'
+#    houdini_shot_playblast_output:
+#        definition: '@houdini_shot_playblast_root/@houdini_shot_hipfile/{Shot}_{task_name}[_{name}]_pb_v{version}'
+#        root_name: 'project_storage'
 
     # ### Asset Output Templates
-    # Rendered images
-    houdini_asset_render_step:
-        definition: '@asset_render_root/houdini/{task_name}'
-        root_name: 'asset_storage'
-
-    houdini_asset_render_step_ver:
-        definition: '@asset_render_root/houdini/{task_name}/version'
-        root_name: 'asset_storage'
-
-    houdini_asset_render_root:
-        definition: '@houdini_asset_render_step_ver/@houdini_asset_hipfile'
-        root_name: 'asset_storage'
-
-    houdini_asset_render_exr:
-        definition: '@houdini_asset_render_root/[{houdini.node}/]@houdini_asset_node_version.{HSEQ}.exr'
-        root_name: 'asset_storage'
-
-    houdini_asset_render_multi_exr:
-        definition: '@houdini_asset_render_root/[{houdini.node}/]{pass_group}/@houdini_asset_node_version_{pass_group}.{HSEQ}.exr'
-        root_name: 'asset_storage'
-
-    # Additional mantra outputs
-    houdini_asset_ifd:
-        definition: '@houdini_asset_render_step/ifds/@houdini_asset_hipfile/[{houdini.node}/]@houdini_asset_node_version.{HSEQ}.ifd'
-        root_name: 'asset_storage'
-
-    houdini_asset_vdb:
-        definition: '@houdini_asset_render_step/vdbs/@houdini_asset_hipfile/[{houdini.node}/]@houdini_asset_node_version.{HSEQ}.vdb'
-        root_name: 'asset_storage'
-
-    houdini_asset_dcm:
-        definition: '@houdini_asset_render_step/dcms/@houdini_asset_hipfile/[{houdini.node}/]@houdini_asset_node_version.{HSEQ}.dcm'
-        root_name: 'asset_storage'
-
-    houdini_asset_extra_plane:
-        definition: '@houdini_asset_render_root_{aov_name}/[{houdini.node}/]@houdini_asset_node_version.{HSEQ}.exr'
-        root_name: 'asset_storage'
-
-    # Additional geometry Asset cache node outputs
-    houdini_asset_work_geo_cache:
-        definition: '@houdini_asset_cache_root/geometry/@houdini_asset_hipfile/[{houdini.node}/]@houdini_asset_node_version.{HSEQ}.bgeo.sc'
-        root_name: 'caches'
+#    # Rendered images
+#    houdini_asset_render_step:
+#        definition: '@asset_render_root/houdini/{task_name}'
+#        root_name: 'asset_storage'
+#
+#    houdini_asset_render_root:
+#        definition: '@houdini_asset_render_step_ver/@houdini_asset_hipfile'
+#        root_name: 'asset_storage'
 
     # Alembic caches
     # /assets/{sg_asset_type}/{Asset}/pipeline_task/{task_name}/caches/houdini/
-    houdini_asset_alembic_root:
-        definition: '@houdini_cache_asset_root/geometry'
-        root_name: 'caches'
-
-    houdini_asset_work_alembic_cache_still:
-        definition: '@houdini_asset_alembic_root/@houdini_asset_hipfile/[{houdini.node}/]@houdini_asset_node_version.abc'
-        root_name: 'caches'
-
-    houdini_asset_work_alembic_cache:
-        definition: '@houdini_asset_alembic_root/@houdini_asset_hipfile/[{houdini.node}/]@houdini_asset_node_version.{HSEQ}.abc'
-        root_name: 'caches'
-
-    # root shot cache template
-    # for both templates and Houdini variables
-    houdini_asset_cache_root:
-        definition: '@houdini_asset_temp_root'
-        root_name: 'caches'
-
     # Asset render temp file
-    houdini_asset_temp_render_cache:
-        definition: '@houdini_asset_temp_root/{cache_type}/@houdini_asset_hipfile/[{houdini.node}/]@houdini_asset_node_version.{HSEQ}.{cache_type}'
-        root_name: 'caches'
+#    # playblast output
+#    houdini_asset_playblast_output:
+#        definition: '@houdini_asset_playblast_root/@houdini_asset_hipfile/{Asset}_{task_name}[_{name}]_pb_v{version}'
+#        root_name: 'asset_storage'
 
-    # playblast output
-    houdini_asset_playblast_root:
-        definition: '@asset_render_root/houdini/{task_name}/flip'
-        root_name: 'asset_storage'
+#    # ### Shot Caches Templates
+#    houdini_shot_cache_bgeo_area:
+#        definition: '@houdini_shot_cache_root/geometry/{Shot}_{task_name}_geometry-cache[_{name}]_v{version}'
+#        root_name: 'caches'
+#
+#    # ### Asset Caches Templates
+#    houdini_asset_cache_bgeo_area:
+#        definition: '@houdini_asset_cache_root/geometry/{Asset}_{task_name}_geometry-cache[_{name}]_v{version}'
+#        root_name: 'caches'
 
-    houdini_asset_playblast_output:
-        definition: '@houdini_asset_playblast_root/@houdini_asset_hipfile/{Asset}_{task_name}[_{name}]_pb_v{version}'
-        root_name: 'asset_storage'
-
-    houdini_asset_playblast_publishing:
-        definition: '@houdini_asset_playblast_output.{HSEQ}.jpg'
-        root_name: 'asset_storage'
-
-    houdini_asset_playblast_mov:
-        definition: '@houdini_asset_playblast_output.mov'
-        root_name: 'asset_storage'
-
-    # ### Shot Caches Templates
-    houdini_shot_cache_alembic_abc:
-        definition: '@houdini_cache_shot_root/alembic/{Shot}_{task_name}_alembic-cache[_{name}]_v{version}/{Shot}_{task_name}_alembic-cache_{houdini.node}_v{version}.abc'
-        root_name: 'caches'
-
-    houdini_shot_cache_bgeo_area:
-        definition: '@houdini_cache_shot_root/geometry/{Shot}_{task_name}_geometry-cache[_{name}]_v{version}'
-        root_name: 'caches'
-
-    houdini_shot_cache_bgeo:
-        definition: '@houdini_shot_cache_bgeo_area/{Shot}_{task_name}_geometry-cache_{houdini.node}_v{version}.bgeosc'
-        root_name: 'caches'
-
-    houdini_shot_cache_bgeo_anim:
-        definition: '@houdini_shot_cache_bgeo_area/{Shot}_{task_name}_geometry-cache_{houdini.node}_v{version}.{HSEQ}.bgeosc'
-        root_name: 'caches'
-
-    houdini_shot_cache_vdb_anim:
-        definition: '@houdini_cache_shot_root/vdb/{Shot}_{task_name}_vdb-cache[_{name}]_v{version}/{Shot}_{task_name}_vdb-cache_{houdini.node}_v{version}.{HSEQ}.vdb'
-        root_name: 'caches'
-
-    houdini_shot_cache_standin:
-        definition: '@houdini_cache_shot_root/standin/{Shot}_{task_name}_standin_cache[_{name}]_v{version}/{Shot}_{task_name}_standin-cache_{houdini.node}_v{version}.ass'
-        root_name: 'caches'
-
-    houdini_shot_cache_standin_anim:
-        definition: '@houdini_cache_shot_root/standin/{Shot}_{task_name}_standin_cache[_{name}]_v{version}/{Shot}_{task_name}_standin-cache_{houdini.node}_v{version}.{HSEQ}.ass'
-        root_name: 'caches'
-
-    # ### Asset Caches Templates
-    houdini_asset_cache_alembic_abc:
-        definition: '@houdini_cache_asset_root/alembic/{Asset}_{task_name}_alembic-cache[_{name}]_v{version}/{Asset}_{task_name}_alembic-cache_{houdini.node}_v{version}.abc'
-        root_name: 'caches'
-
-    houdini_asset_cache_bgeo_area:
-        definition: '@houdini_cache_asset_root/geometry/{Asset}_{task_name}_geometry-cache[_{name}]_v{version}'
-        root_name: 'caches'
-
-    houdini_asset_cache_bgeo:
-        definition: '@houdini_asset_cache_bgeo_area/{Asset}_{task_name}_geometry-cache_{houdini.node}_v{version}.bgeosc'
-        root_name: 'caches'
-
-    houdini_asset_cache_bgeo_anim:
-        definition: '@houdini_asset_cache_bgeo_area/{Asset}_{task_name}_geometry-cache_{houdini.node}_v{version}.{HSEQ}.bgeosc'
-        root_name: 'caches'
-
-    houdini_asset_cache_vdb_anim:
-        definition: '@houdini_cache_asset_root/vdb/{Asset}_{task_name}_vdb-cache[_{name}]_v{version}/{Asset}_{task_name}_vdb-cache_{houdini.node}_v{version}.{HSEQ}.vdb'
-        root_name: 'caches'
-
-    houdini_asset_cache_standin:
-        definition: '@houdini_cache_asset_root/standin/{Asset}_{task_name}[_{name}]_v{version}/{Asset}_{task_name}_standin-cache_{houdini.node}_v{version}.ass'
-        root_name: 'caches'
-
-    houdini_asset_cache_standin_anim:
-        definition: '@houdini_cache_asset_root/standin/{Asset}_{task_name}[_{name}]_v{version}/{Asset}_{task_name}_standin-cache_{houdini.node}_v{version}.{HSEQ}.ass'
-        root_name: 'caches'
