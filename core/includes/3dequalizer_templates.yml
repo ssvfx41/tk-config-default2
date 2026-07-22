@@ -81,7 +81,16 @@ paths:
         definition: '@3de_asset_work_area/{Asset}_{task_name}_[{name}_]v{version}.3de'
         root_name: 'asset_storage'
 
-    # Artist work file publish locations.
+    # Location of temporary snapshots.
+    3de_shot_snapshot:
+        definition: '@3de_shot_work_area/snapshots/{Shot}_{task_name}_[{name}_]v{version}.{timestamp}.3de'
+        root_name: 'project_storage'
+
+    3de_asset_snapshot:
+        definition: '@3de_asset_work_area/snapshots/{Asset}_{task_name}_[{name}_]v{version}.{timestamp}.3de'
+        root_name: 'asset_storage'
+
+    # Publish folder used in File Open app.
     3de_shot_publish_area:
         definition: '@shot_work_file_publish_root/3de'
         root_name: 'project_storage'
@@ -90,7 +99,7 @@ paths:
         definition: '@asset_work_file_publish_root/3de'
         root_name: 'asset_storage'
 
-    # Location of published 3de files
+    # Location of published work files.
     3de_shot_publish:
         definition: '@3de_shot_publish_area/{Shot}_{task_name}_[{name}_]v{version}.3de'
         root_name: 'project_storage'
@@ -141,27 +150,36 @@ paths:
     ####################
     # Exports / Caches #
     ####################
+    # 3DE caches root.
+    3de_shot_cache_root:
+        definition: '@shot_cache_root/3de'
+        root_name: 'caches'
+
+    3de_asset_cache_root:
+        definition: '@asset_cache_root/3de'
+        root_name: 'caches'
+
     # Published Cameras.
     3de_shot_camera_publish:
-        definition: '@shot_cache_root/3de/camera/[{name}_]v{version}/{Shot}_{task_name}_camera-cache_[{name}_]v{version}.{3dequalizer_camera_extension}'
+        definition: '@3de_shot_cache_root/camera/[{name}_]v{version}/{Shot}_{task_name}_camera-cache_[{name}_]v{version}.{3dequalizer_camera_extension}'
         root_name: 'caches'
 
     3de_asset_camera_publish:
-        definition: '@asset_cache_root/3de/camera/[{name}_]v{version}/{Asset}_{task_name}_camera-cache_[{name}_]v{version}.{3dequalizer_camera_extension}'
+        definition: '@3de_asset_cache_root/camera/[{name}_]v{version}/{Asset}_{task_name}_camera-cache_[{name}_]v{version}.{3dequalizer_camera_extension}'
         root_name: 'caches'
 
     # Object exports.
     3de_shot_export_obj:
-        definition: '@shot_cache_root/3de/obj/v{version}/{Shot}_{task_name}_v{version}.obj'
+        definition: '@3de_shot_cache_root/obj/v{version}/{Shot}_{task_name}_v{version}.obj'
         root_name: 'caches'
 
     # Published lens exports.
     3de_shot_lens_publish:
-        definition: '@shot_export_root/3de/lens/[{name}_]v{version}/{Shot}_{task_name}_[{name}_]v{version}.txt'
+        definition: '@3de_shot_cache_root/lens/[{name}_]v{version}/{Shot}_{task_name}_[{name}_]v{version}.txt'
         root_name: 'project_storage'
 
     3de_asset_lens_publish:
-        definition: '@asset_export_root/3de/lens/[{name}_]v{version}/{Asset}_{task_name}_[{name}_]v{version}.txt'
+        definition: '@3de_asset_cache_root/lens/[{name}_]v{version}/{Asset}_{task_name}_[{name}_]v{version}.txt'
         root_name: 'asset_storage'
 
 #    # TODO: Not in use, commenting out and will remove after testing.
