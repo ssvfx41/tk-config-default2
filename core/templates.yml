@@ -266,22 +266,52 @@ paths:
         definition: '@asset_root/render/{task_name}/publish'
         root_name: 'asset_storage'
 
-    ####################
-    # Exports / Caches #
-    ####################
+    ##########
+    # Review #
+    ##########
+    # Artist reviewable media root.
+    shot_review_root:
+        definition: '@shot_root/{task_name}'
+        root_name: 'review'
+
+    asset_review_root:
+        definition: '@asset_root/{task_name}'
+        root_name: 'review'
+
+    ###########
+    # Exports #
+    ###########
     # Artist working export root.
     shot_export_root:
-        definition: '@shot_root/export/{task_name}'
+        definition: '@shot_root/export/{task_name}/work'
         root_name: 'project_storage'
 
     asset_export_root:
-        definition: '@asset_root/export/{task_name}'
+        definition: '@asset_root/export/{task_name}/work'
         root_name: 'asset_storage'
 
-    # Artist published exports root. Published caches and exports are saved to the
-    # 'caches' storage. This is because exported data can be reconstructed from the
-    # source work file and so the data is considered temporary and is removed after
-    # a project has wrapped.
+    # Artist published export root.
+    shot_export_publish_root:
+        definition: '@shot_root/export/{task_name}/publish'
+        root_name: 'project_storage'
+
+    asset_export_publish_root:
+        definition: '@asset_root/export/{task_name}/publish'
+        root_name: 'asset_storage'
+
+    # TODO: Move to Nuke templates
+    # Retime FCurve exports.
+    shot_retime_curve:
+        definition: '@shot_export_publish_root/nuke/retime/[{name}_]v{version}/{Shot}_[{name}_]v{version}.txt'
+        root_name: 'project_storage'
+
+    ##########
+    # Caches #
+    ##########
+    # Artist published caches root. Cache files are saved to the 'caches' storage.
+    # This is because  caches tend to be very large files, and can be reconstructed
+    # from the source work file and so the data is considered temporary and is removed
+    # after a project has wrapped.
     shot_cache_root:
         definition: '@shot_root/{task_name}'
         root_name: 'caches'
@@ -290,11 +320,14 @@ paths:
         definition: '@asset_root/{task_name}'
         root_name: 'caches'
 
-    # TODO: Move to Nuke templates
-    # Retime FCurve exports.
-    shot_retime_curve:
-        definition: '@shot_export_root/nuke/retime/[{name}_]v{version}/{Shot}_[{name}_]v{version}.txt'
-        root_name: 'project_storage'
+    # Artist cache temp root, used for working caches that haven't been published yet.
+    shot_cache_temp_root:
+        definition: '@shot_cache_root/temp'
+        root_name: 'caches'
+
+    asset_cache_temp_root:
+        definition: '@asset_cache_root/temp'
+        root_name: 'caches'
 
     ########
     # Temp #
