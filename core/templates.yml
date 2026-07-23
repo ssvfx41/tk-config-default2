@@ -175,7 +175,11 @@ keys:
         type: str
         choices:
             3de: 3DEqualizer
+            3dsmax: 3DS Max
+            mari: Mari
             maya: Maya
+            nuke: Nuke
+            psd: Photoshop
             houdini: Houdini
 
     sc_template_name:
