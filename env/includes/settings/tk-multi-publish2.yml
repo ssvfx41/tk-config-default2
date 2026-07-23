@@ -73,7 +73,7 @@ settings.tk-multi-publish2.3dsmaxplus.asset_step: &settings_tk-multi-publish2_3d
   - name: Publish to ShotGrid
     hook: "{self}/publish_file.py:{engine}/tk-multi-publish2/basic/publish_session_geometry.py"
     settings:
-        Publish Template: asset_alembic_cache
+        Publish Template: max_asset_cache_alembic
   help_url: *help_url
   location: "@apps.tk-multi-publish2.location"
 
