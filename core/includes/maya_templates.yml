@@ -20,23 +20,23 @@
 # this file. For more information, see the Shotgun Pipeline Toolkit Documentation.
 
 keys:
-    maya.render.output:
-        alias: output
-        type: str
-        filter_by: alphanumeric
+#    maya.render.output:
+#        alias: output
+#        type: str
+#        filter_by: alphanumeric
 
-    maya.cache.output:
-        alias: output
-        type: str
-        filter_by: alphanumeric
+#    maya.cache.output:
+#        alias: output
+#        type: str
+#        filter_by: alphanumeric
 
     maya.layer_name:
         type: str
         filter_by: '^[0-9a-zA-Z_]+$'
 
-    maya.camera_name:
-        type: str
-        filter_by: '^[0-9a-zA-Z_]+$'
+#    maya.camera_name:
+#        type: str
+#        filter_by: '^[0-9a-zA-Z_]+$'
 
     maya.techpass_name:
         alias: tech_pass
@@ -52,15 +52,15 @@ keys:
         default: ma
         alias: extension
 
-    # image extension descriptor.
-    image_extension:
-        type: str
-        choices:
-            jpg: Joint Photographic Group (.JPG)
-            exr: OpenEXR (.exr)
-            dpx: Digital Picture Exchange (.dpx)
-        default: exr
-        alias: format
+#    # image extension descriptor.
+#    image_extension:
+#        type: str
+#        choices:
+#            jpg: Joint Photographic Group (.JPG)
+#            exr: OpenEXR (.exr)
+#            dpx: Digital Picture Exchange (.dpx)
+#        default: exr
+#        alias: format
 
 paths:
     ##############
