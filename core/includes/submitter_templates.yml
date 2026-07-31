@@ -8,6 +8,7 @@
 #        type: str
 #        filter_by: '^[0-9a-zA-Z_]+$'
 
+# TODO: None of these are referenced, can they be removed? Remove from includes.
 paths:
     ### Shot Locations ###
     shot_submission_json_file:
