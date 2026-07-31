@@ -16,13 +16,13 @@ keys:
         default: matchmove
         alias: task_name
 
-strings:
-    outsource_name: '{Shot}_{outsource_task}_v{version}'
-    outsource_descriptor_name: '{Shot}_{name}_v{version}'
+#strings:
+#    outsource_name: '{Shot}_{outsource_task}_v{version}'
+#    outsource_descriptor_name: '{Shot}_{name}_v{version}'
 
 paths:
     incoming_outsource_shot_folder_root:
-        definition: 'admin/incoming/outsource/shots/{vendor}/{YYYY}_{MM}_{DD}/@outsource_name'
+        definition: 'admin/incoming/outsource/shots/{vendor}/{YYYY}_{MM}_{DD}/{Shot}_{outsource_task}_v{version}'
         root_name: 'project_storage'
 
     incoming_outsource_shot_subfolder_root:
@@ -38,7 +38,7 @@ paths:
         root_name: 'project_storage'
 
     maya_shot_outsource_work_file:
-        definition: '@incoming_outsource_shot_folder_root/@outsource_name.{maya_extension}'
+        definition: '@incoming_outsource_shot_folder_root/{Shot}_{outsource_task}_v{version}.{maya_extension}'
         root_name: 'project_storage'
 
     maya_shot_outsource_notes:
@@ -46,7 +46,7 @@ paths:
         root_name: 'project_storage'
 
     incoming_outsource_shot_nuke_render:
-        definition: '@incoming_outsource_shot_subfolder_root/[{name}/]@outsource_descriptor_name[.{SEQ}].{ext}'
+        definition: '@incoming_outsource_shot_subfolder_root/[{name}/]{Shot}_{name}_v{version}[.{SEQ}].{ext}'
         root_name: 'project_storage'
 
     incoming_outsource_shot_matchmove_render:
@@ -58,7 +58,7 @@ paths:
         root_name: 'project_storage'
 
     incoming_outsource_render_copy:
-        definition: '@shot_render_root/maya/{task_name}/v{version}/{outsource_render}/[{name}/]@outsource_descriptor_name[.{SEQ}].{ext}'
+        definition: '@shot_render_root/maya/{task_name}/v{version}/{outsource_render}/[{name}/]{Shot}_{name}_v{version}[.{SEQ}].{ext}'
         root_name: 'project_storage'
 
     incoming_outsource_camera_copy:
