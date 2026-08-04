@@ -31,19 +31,25 @@ except ImportError:
         roots.append(local_pipe)
         os.environ["SSVFX_PIPELINE"] = local_pipe
 
+    source_roots = ["master"]
+    test_env = os.getenv("TEST_ENV", False)
+    if test_env:
+        source_roots.insert(0, "testEnv")
+
+    sg_path = None
     for root_path in roots:
         if not root_path:
             continue
 
-        test_env = os.getenv("TEST_ENV", False)
-        if not test_env:
-            source_root = "master"
-        else:
-            source_root = "testEnv"
+        for source_root in source_roots:
+            sg_path = os.path.join(root_path, source_root, "ssvfx_sg")
+            if not os.path.exists(sg_path):
+                continue
 
-        sg_path = os.path.join(root_path, source_root, "ssvfx_sg")
-        if os.path.exists(sg_path):
             sys.path.append(os.path.normpath(sg_path))
+            break
+
+        if sg_path:
             break
 
     from ss_config.hooks.tk_multi_launchapp.before_app_launch import SsBeforeAppLaunch
