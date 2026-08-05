@@ -23,5 +23,5 @@ entity_type: "Asset"
 # (this is std shotgun API syntax)
 # any values starting with $ are resolved into path objects
 filters:
-    - { "path": "project", "relation": "is", "values": [ "$asset_storage" ] }
+    - { "path": "project", "relation": "is", "values": [ "$project_assets" ] }
     - { "path": "sg_asset_type", "relation": "is", "values": [ "$asset_type"] }
