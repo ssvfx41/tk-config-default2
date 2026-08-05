@@ -16,21 +16,48 @@ to set environment variables or run scripts as part of the app initialization.
 import os
 import sys
 
-roots = [os.getenv('SSVFX_PIPELINE_DEV'), os.getenv('SSVFX_PIPELINE'), "//ssvfx_pipeline/pipeline_repo"]
-for root_path in roots:
-    if not root_path:
-        continue
-    sg_path = os.path.join(root_path, 'master', 'ssvfx_sg')
-    if os.path.exists(sg_path):
-        sys.path.append(os.path.normpath(sg_path))
-        break
 
-from ss_config.hooks.tk_multi_launchapp.before_app_launch import SsBeforeAppLaunch
+try:
+    from ss_config.hooks.tk_multi_launchapp.before_app_launch import SsBeforeAppLaunch
+
+except ImportError:
+    roots = [os.getenv("SSVFX_PIPELINE_DEV"), os.getenv("SSVFX_PIPELINE")]
+    if not any(roots):
+        if sys.platform.startswith("win"):
+            local_pipe = "\\\\ssvfx_pipeline\\pipeline_repo"
+        else:
+            local_pipe = "/mnt/pipeline_repo"
+
+        roots.append(local_pipe)
+        os.environ["SSVFX_PIPELINE"] = local_pipe
+
+    source_roots = ["master"]
+    test_env = os.getenv("TEST_ENV", False)
+    if test_env:
+        source_roots.insert(0, "testEnv")
+
+    sg_path = None
+    for root_path in roots:
+        if not root_path:
+            continue
+
+        for source_root in source_roots:
+            sg_path = os.path.join(root_path, source_root, "ssvfx_sg")
+            if not os.path.exists(sg_path):
+                continue
+
+            sys.path.append(os.path.normpath(sg_path))
+            break
+
+        if sg_path:
+            break
+
+    from ss_config.hooks.tk_multi_launchapp.before_app_launch import SsBeforeAppLaunch
 
 
 class BeforeAppLaunch(SsBeforeAppLaunch):
     """
     Hook to set up the system prior to app launch.
-    set's up the environment variables for Nuke, Maya, Houdini and 3DsMax
+    sets up the environment variables for Nuke, Maya, Houdini and 3DsMax
     """
     pass
