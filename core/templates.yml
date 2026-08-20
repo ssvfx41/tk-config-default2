@@ -287,20 +287,20 @@ paths:
     ###########
     # Artist working export root.
     shot_export_root:
-        definition: '@shot_root/export/{task_name}/work'
+        definition: '@shot_root/export/work'
         root_name: 'project_storage'
 
     asset_export_root:
-        definition: '@asset_root/export/{task_name}/work'
+        definition: '@asset_root/export/work'
         root_name: 'asset_storage'
 
     # Artist published export root.
     shot_export_publish_root:
-        definition: '@shot_root/export/{task_name}/publish'
+        definition: '@shot_root/export/publish'
         root_name: 'project_storage'
 
     asset_export_publish_root:
-        definition: '@asset_root/export/{task_name}/publish'
+        definition: '@asset_root/export/publish'
         root_name: 'asset_storage'
 
     # TODO: Move to Nuke templates

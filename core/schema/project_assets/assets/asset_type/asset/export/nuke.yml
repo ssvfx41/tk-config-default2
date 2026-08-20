@@ -9,16 +9,8 @@
 # not expressly granted therein are reserved by Shotgun Software Inc.
 
 # the type of dynamic content
-type: "shotgun_task"
+type: "static"
 
-# the shotgun entity type to connect to
-entity_type: "Task"
+# defer creation and only create this folder when Maya starts
+defer_creation: "tk-nuke"
 
-# the shotgun field to use for the folder name
-name: "content"
-
-#This change adds an optional associated_entity_type parameter 
-#to the folder configs which allows a user to explicitly specify 
-#the type of the parent folder to bind the task or step to.
-#Pointing towards root "Shot" folder in this case
-associated_entity_type: "Asset"
