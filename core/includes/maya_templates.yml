@@ -170,12 +170,23 @@ paths:
         root_name: 'asset_storage'
 
     # Playblast JPGs.
+    # Playblast tool automatically adds extension and frame numbers, so a template
+    # without these elements is required for generation.
+    maya_shot_playblast_output:
+        definition: '@maya_shot_render_publish_root/playblast/{Shot}_{task_name}[_{maya.techpass_name}][_{name}]_pb_v{version}/{Shot}_{task_name}[_{maya.techpass_name}][_{name}]_pb_v{version}'
+        root_name: 'project_storage'
+
+    maya_asset_playblast_output:
+        definition: '@maya_asset_render_publish_root/playblast/{Asset}_{task_name}[_{maya.techpass_name}][_{name}]_pb_v{version}/{Asset}_{task_name}[_{maya.techpass_name}][_{name}]_pb_v{version}'
+        root_name: 'asset_storage'
+
+    # Templates including frames and extension used by the submitter tool.
     maya_shot_playblast_publishing:
-        definition: '@maya_shot_render_publish_root/playblast/{Shot}_{task_name}[_{maya.techpass_name}][_{name}]_pb_v{version}/{Shot}_{task_name}[_{maya.techpass_name}][_{name}]_pb_v{version}.{SEQ}.jpg'
+        definition: '@maya_shot_playblast_output.{SEQ}.jpg'
         root_name: 'project_storage'
 
     maya_asset_playblast_publishing:
-        definition: '@maya_asset_render_publish_root/playblast/{Asset}_{task_name}[_{maya.techpass_name}][_{name}]_pb_v{version}/{Asset}_{task_name}[_{maya.techpass_name}][_{name}]_pb_v{version}.{SEQ}.jpg'
+        definition: '@maya_asset_playblast_output.{SEQ}.jpg'
         root_name: 'asset_storage'
 
 #    # TODO: Not being referenced by anything, commenting out for now.
@@ -195,13 +206,6 @@ paths:
     ##########
     # Review #
     ##########
-    maya_shot_playblast_output:
-        definition: '@shot_review_root/maya/playblast/{Shot}_{task_name}[_{maya.techpass_name}][_{name}]_pb_v{version}/{Shot}_{task_name}[_{maya.techpass_name}][_{name}]_pb_v{version}'
-        root_name: 'review'
-
-    maya_asset_playblast_output:
-        definition: '@asset_review_root/maya/playblast/{Asset}_{task_name}[_{maya.techpass_name}][_{name}]_pb_v{version}/{Asset}_{task_name}[_{maya.techpass_name}][_{name}]_pb_v{version}'
-        root_name: 'review'
 
 #    # TODO: Not in use, commenting out and will remove after testing.
 #    maya_shot_quicktime_quick:
