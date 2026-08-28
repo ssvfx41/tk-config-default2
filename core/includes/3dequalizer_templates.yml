@@ -108,17 +108,14 @@ paths:
         definition: '@3de_asset_publish_area/{Asset}_{task_name}_[{name}_]v{version}.3de'
         root_name: 'asset_storage'
 
-    # -------------------------------------------------
-    # TODO: These should be in the Nuke templates instead.
     # Location of distort Nuke files.
     3de_shot_dist_publish:
         definition: '@shot_work_file_publish_root/nuke/{Shot}_{task_name}_distNode_[{name}_]v{version}.nk'
         root_name: 'project_storage'
 
-    3dequalizer_shot_distRender_publish:
+    3de_shot_distRender_publish:
         definition: '@shot_work_file_publish_root/nuke/{Shot}_{task_name}_distRender_[{name}_]v{version}.nk'
         root_name: 'project_storage'
-    # -------------------------------------------------
 
     ###########
     # Renders #
@@ -129,57 +126,65 @@ paths:
 
     # Undistorted renders.
     3de_shot_undistort_plates_publish:
-        definition: '@3de_shot_render_publish_root/undistort/[_{name}]_v{version}/{Shot}_{task_name}_undistort_[{name}_]v{version}.{3DESEQ}.jpg'
+        definition: '@3de_shot_render_publish_root/undistort/{Shot}_{task_name}_[{name}_]undistort_v{version}/{Shot}_{task_name}_undistort_[{name}_]v{version}.{3DESEQ}.jpg'
         root_name: 'project_storage'
 
     # Playblast renders.
     3de_shot_playblast_publish:
-        definition: '@3de_shot_render_publish_root/playblast/[_{name}]_v{version}/{Shot}_{task_name}_[{name}_]v{version}.{3DESEQ}.jpg'
+        definition: '@3de_shot_render_publish_root/playblast/{Shot}_{task_name}_[{name}_]pb_v{version}/{Shot}_{task_name}[_{name}]_pb_v{version}.{3DESEQ}.jpg'
         root_name: 'project_storage'
 
     # Cones renders.
     3de_shot_cones_publish:
-        definition: '@3de_shot_render_publish_root/cones/[_{name}]_v{version}/{Shot}_{task_name}_cones_[{name}_]v{version}.{3DESEQ}.jpg'
+        definition: '@3de_shot_render_publish_root/cones/{Shot}_{task_name}_[{name}_]cones_v{version}/{Shot}_{task_name}_cones_[{name}_]v{version}.{3DESEQ}.jpg'
         root_name: 'project_storage'
 
     # Wire renders.
     3de_shot_wire_publish:
-        definition: '@3de_shot_render_publish_root/wire/[_{name}]_v{version}/{Shot}_{task_name}_wire_[{name}_]v{version}.{3DESEQ}.jpg'
+        definition: '@3de_shot_render_publish_root/wire/{Shot}_{task_name}_[{name}_]wire_v{version}/{Shot}_{task_name}_wire_[{name}_]v{version}.{3DESEQ}.jpg'
         root_name: 'project_storage'
 
     ####################
     # Exports / Caches #
     ####################
     # 3DE caches root.
-    3de_shot_cache_root:
-        definition: '@shot_cache_root/3de'
-        root_name: 'caches'
+#    3de_shot_cache_root:
+#        definition: '@shot_cache_root/3de'
+#        root_name: 'caches'
+#
+#    3de_asset_cache_root:
+#        definition: '@asset_cache_root/3de'
+#        root_name: 'caches'
 
-    3de_asset_cache_root:
-        definition: '@asset_cache_root/3de'
-        root_name: 'caches'
+    3de_shot_export_publish_root:
+        definition: '@shot_export_publish_root/3de'
+        root_name: 'project_storage'
+
+    3de_asset_export_publish_root:
+        definition: '@asset_export_publish_root/3de'
+        root_name: 'asset_storage'
 
     # Published Cameras.
     3de_shot_camera_publish:
-        definition: '@3de_shot_cache_root/camera/[{name}_]v{version}/{Shot}_{task_name}_camera-cache_[{name}_]v{version}.{3dequalizer_camera_extension}'
-        root_name: 'caches'
+        definition: '@3de_shot_export_publish_root/camera/{Shot}_{task_name}_camera-cache_[{name}_]v{version}.{3dequalizer_camera_extension}'
+        root_name: 'project_storage'
 
     3de_asset_camera_publish:
-        definition: '@3de_asset_cache_root/camera/[{name}_]v{version}/{Asset}_{task_name}_camera-cache_[{name}_]v{version}.{3dequalizer_camera_extension}'
-        root_name: 'caches'
+        definition: '@3de_asset_export_publish_root/camera/{Asset}_{task_name}_camera-cache_[{name}_]v{version}.{3dequalizer_camera_extension}'
+        root_name: 'asset_storage'
 
     # Object exports.
     3de_shot_export_obj:
-        definition: '@3de_shot_cache_root/obj/v{version}/{Shot}_{task_name}_v{version}.obj'
-        root_name: 'caches'
+        definition: '@3de_shot_export_publish_root/obj/{Shot}_{task_name}_v{version}.obj'
+        root_name: 'project_storage'
 
     # Published lens exports.
     3de_shot_lens_publish:
-        definition: '@3de_shot_cache_root/lens/[{name}_]v{version}/{Shot}_{task_name}_[{name}_]v{version}.txt'
+        definition: '@3de_shot_export_publish_root/lens/{Shot}_{task_name}_[{name}_]v{version}.txt'
         root_name: 'project_storage'
 
     3de_asset_lens_publish:
-        definition: '@3de_asset_cache_root/lens/[{name}_]v{version}/{Asset}_{task_name}_[{name}_]v{version}.txt'
+        definition: '@3de_asset_export_publish_root/lens/{Asset}_{task_name}_[{name}_]v{version}.txt'
         root_name: 'asset_storage'
 
 #    # TODO: Not in use, commenting out and will remove after testing.
