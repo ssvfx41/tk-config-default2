@@ -217,17 +217,17 @@ paths:
         definition: 'assets/{sg_asset_type}/{Asset}'
         root_name: 'asset_storage'
 
-    # ---------------------------------
-    # TODO: Instead of one task root we now have several based on what data is
-    #   in that location. So there is a workFile, export, render and review root.
-    #   So these maybe can be removed in favour of more specific data root templates.
-    shot_task_root:
-        definition: 'shots/{Sequence}/{Shot}/pipeline_task/{task_name}'
-        root_name: 'project_storage'
-    asset_task_root:
-        definition: 'assets/{sg_asset_type}/{Asset}/pipeline_task/{task_name}'
-        root_name: 'asset_storage'
-    # ---------------------------------
+#    # ---------------------------------
+#    # TODO: Instead of one task root we now have several based on what data is
+#    #   in that location. So there is a workFile, export, render and review root.
+#    #   So these maybe can be removed in favour of more specific data root templates.
+#    shot_task_root:
+#        definition: 'shots/{Sequence}/{Shot}/pipeline_task/{task_name}'
+#        root_name: 'project_storage'
+#    asset_task_root:
+#        definition: 'assets/{sg_asset_type}/{Asset}/pipeline_task/{task_name}'
+#        root_name: 'asset_storage'
+#    # ---------------------------------
     ##############
     # Work Files #
     ##############
@@ -306,7 +306,7 @@ paths:
     # TODO: Move to Nuke templates
     # Retime FCurve exports.
     shot_retime_curve:
-        definition: '@shot_export_publish_root/nuke/retime/[{name}_]v{version}/{Shot}_[{name}_]v{version}.txt'
+        definition: '@shot_export_publish_root/nuke/retime/{Shot}_[{name}_]v{version}.txt'
         root_name: 'project_storage'
 
     ##########
