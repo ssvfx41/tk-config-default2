@@ -86,11 +86,11 @@ paths:
 
     # The location of backups of WIP files
     maya_shot_snapshot:
-        definition: '@shot_task_root/maya/snapshots/{Shot}_{task_name}[_{name}]_v{version}_{timestamp}.{maya_extension}'
+        definition: '@maya_shot_work_area/snapshots/{Shot}_{task_name}[_{name}]_v{version}_{timestamp}.{maya_extension}'
         root_name: 'project_storage'
 
     maya_asset_snapshot:
-        definition: '@asset_task_root/work/maya/snapshots/{Asset}_{task_name}[_{name}]_v{version}_{timestamp}.{maya_extension}'
+        definition: '@maya_asset_work_area/snapshots/{Asset}_{task_name}[_{name}]_v{version}_{timestamp}.{maya_extension}'
         root_name: 'asset_storage'
 
     # define the location of a publish area
