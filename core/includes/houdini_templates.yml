@@ -218,11 +218,11 @@ paths:
 
     # Playblast flipbook render root.
     houdini_shot_playblast_root:
-        definition: '@houdini_shot_render_publish_root/flip'
+        definition: '@houdini_shot_render_publish_root/playblast'
         root_name: 'project_storage'
 
     houdini_asset_playblast_root:
-        definition: '@houdini_asset_render_publish_root/flip'
+        definition: '@houdini_asset_render_publish_root/playblast'
         root_name: 'asset_storage'
 
     # Playblast flipbook jpg render.
@@ -236,11 +236,11 @@ paths:
 
     # Playblast review movies.
     houdini_shot_playblast_mov:
-        definition: '@shot_review_root/houdini/flip/[{name}_]v{version}/{Shot}_{task_name}[_{name}]_pb_v{version}.mov'
+        definition: '@shot_review_root/houdini/playblast/[{name}_]v{version}/{Shot}_{task_name}[_{name}]_pb_v{version}.mov'
         root_name: 'review'
 
     houdini_asset_playblast_mov:
-        definition: '@asset_review_root/houdini/flip/[{name}_]v{version}/{Asset}_{task_name}[_{name}]_pb_v{version}.mov'
+        definition: '@asset_review_root/houdini/playblast/[{name}_]v{version}/{Asset}_{task_name}[_{name}]_pb_v{version}.mov'
         root_name: 'review'
 
 #    # Temp root?
