@@ -100,6 +100,15 @@ paths:
 #        root_name: 'project_storage'
 
     ###########
+    # Exports #
+    ###########
+
+    # Retime FCurve exports.
+    shot_retime_curve:
+        definition: '@shot_export_publish_root/nuke/retime/{Shot}_[{name}_]v{version}.txt'
+        root_name: 'project_storage'
+
+    ###########
     # Renders #
     ###########
 

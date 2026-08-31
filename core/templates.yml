@@ -303,12 +303,6 @@ paths:
         definition: '@asset_root/export/publish'
         root_name: 'asset_storage'
 
-    # TODO: Move to Nuke templates
-    # Retime FCurve exports.
-    shot_retime_curve:
-        definition: '@shot_export_publish_root/nuke/retime/{Shot}_[{name}_]v{version}.txt'
-        root_name: 'project_storage'
-
     ##########
     # Caches #
     ##########
