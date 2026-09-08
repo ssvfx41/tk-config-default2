@@ -182,7 +182,7 @@ settings.tk-multi-workfiles2.houdini.project:
   entities:
   - caption: Assets
     entity_type: Asset
-    hierarchy: [sg_asset_type, sg_element, tags, code]
+    hierarchy: [sg_asset_type, code]
     filters: *filter_by_omit_hold
     sub_hierarchy:
       entity_type: Task
@@ -210,7 +210,7 @@ settings.tk-multi-workfiles2.houdini.asset_step:
   entities:
   - caption: Assets
     entity_type: Asset
-    hierarchy: [sg_asset_type, sg_element, tags, code]
+    hierarchy: [sg_asset_type, code]
     filters: *filter_by_omit_hold
     sub_hierarchy:
       entity_type: Task
@@ -238,7 +238,7 @@ settings.tk-multi-workfiles2.houdini.shot_step:
   entities:
   - caption: Assets
     entity_type: Asset
-    hierarchy: [sg_asset_type, sg_element, tags,  code]
+    hierarchy: [sg_asset_type,  code]
     filters: *filter_by_omit_hold
     sub_hierarchy:
       entity_type: Task
