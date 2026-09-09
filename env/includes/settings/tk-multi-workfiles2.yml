@@ -30,7 +30,6 @@ includes:
 # and these 'transit' areas can be project, shot, or sequence level.
 filter_by_omit_hold: &filter_by_omit_hold  [{filter_operator: all, filters: [[sg_status_list, is_not, omt],[sg_status_list, is_not, hld],[sg_status_list, is_not, awt]]}]
 
-
 settings.tk-multi-workfiles2: &settings_tk-multi-workfiles2
   allow_task_creation: false
   entities:
@@ -264,7 +263,6 @@ settings.tk-multi-workfiles2.houdini.shot_step:
 # project
 settings.tk-multi-workfiles2.maya.project:
   allow_task_creation: false
-  # launch_at_startup: true
   entities:
   - caption: Assets
     entity_type: Asset
@@ -351,7 +349,6 @@ settings.tk-multi-workfiles2.maya.shot_step:
 # project
 settings.tk-multi-workfiles2.nuke.project:
   allow_task_creation: false
-  # launch_at_startup: true
   entities:
   - caption: Assets
     entity_type: Asset
@@ -798,10 +795,10 @@ settings.tk-multi-workfiles2.3dequalizer:
 # asset_step
 settings.tk-multi-workfiles2.3dequalizer.asset_step:
   allow_task_creation: false
-  template_publish: 3dequalizer_asset_publish
-  template_publish_area: 3dequalizer_asset_publish_area
-  template_work: 3dequalizer_asset_work
-  template_work_area: 3dequalizer_asset_work_area
+  template_publish: 3de_asset_publish
+  template_publish_area: 3de_asset_publish_area
+  template_work: 3de_asset_work
+  template_work_area: 3de_asset_work_area
   entities:
   - caption: Assets
     entity_type: Asset
@@ -827,10 +824,10 @@ settings.tk-multi-workfiles2.3dequalizer.asset_step:
 # shot_step
 settings.tk-multi-workfiles2.3dequalizer.shot_step:
   allow_task_creation: false
-  template_publish: 3dequalizer_shot_publish
-  template_publish_area: 3dequalizer_shot_publish_area
-  template_work: 3dequalizer_shot_work
-  template_work_area: 3dequalizer_shot_work_area
+  template_publish: 3de_shot_publish
+  template_publish_area: 3de_shot_publish_area
+  template_work: 3de_shot_work
+  template_work_area: 3de_shot_work_area
   entities:
   - caption: Assets
     entity_type: Asset
