@@ -48,7 +48,7 @@ settings.tk-multi-workfiles2: &settings_tk-multi-workfiles2
   - caption: Shots
     entity_type: Shot
     filters: *filter_by_omit_hold
-    hierarchy: [sg_episode, sg_sequence, code]
+    hierarchy: [sg_sequence, code]
     sub_hierarchy:
       entity_type: Task
       filters: [{filter_operator: any, 
@@ -75,7 +75,7 @@ settings.tk-multi-workfiles2.launch_at_startup:
   - caption: Shots
     entity_type: Shot
     filters: *filter_by_omit_hold
-    hierarchy: [sg_episode, sg_sequence, code]
+    hierarchy: [sg_sequence, code]
     sub_hierarchy:
       entity_type: Task
       filters: *filter_by_omit_hold
@@ -193,7 +193,7 @@ settings.tk-multi-workfiles2.houdini.project:
   - caption: Shots
     entity_type: Shot
     filters: *filter_by_omit_hold
-    hierarchy: [sg_episode, code]
+    hierarchy: [sg_sequence, code]
     sub_hierarchy:
       entity_type: Task
       filters: *filter_by_omit_hold
@@ -278,7 +278,7 @@ settings.tk-multi-workfiles2.maya.project:
   - caption: Shots
     entity_type: Shot
     filters: *filter_by_omit_hold
-    hierarchy: [sg_episode, code]
+    hierarchy: [sg_sequence, code]
     sub_hierarchy:
       entity_type: Task
       filters: *filter_by_omit_hold
@@ -365,7 +365,7 @@ settings.tk-multi-workfiles2.nuke.project:
   - caption: Shots
     entity_type: Shot
     filters: *filter_by_omit_hold
-    hierarchy: [sg_episode, code]
+    hierarchy: [sg_sequence, code]
     sub_hierarchy:
       entity_type: Task
       filters: *filter_by_omit_hold
@@ -424,7 +424,7 @@ settings.tk-multi-workfiles2.nuke.shot_step:
   - caption: Shots
     entity_type: Shot
     filters: *filter_by_omit_hold
-    hierarchy: [sg_episode, code]
+    hierarchy: [sg_sequence, code]
     sub_hierarchy:
       entity_type: Task
       filters: *filter_by_omit_hold
@@ -753,7 +753,7 @@ settings.tk-multi-workfiles2.mari:
   - caption: Shots
     entity_type: Shot
     filters: 
-    hierarchy: [sg_episode, code]
+    hierarchy: [sg_sequence, code]
     sub_hierarchy:
       entity_type: Task
       filters:
@@ -786,7 +786,7 @@ settings.tk-multi-workfiles2.3dequalizer:
   - caption: Shots
     entity_type: Shot
     filters: *filter_by_omit_hold
-    hierarchy: [sg_episode, code]
+    hierarchy: [sg_sequence, code]
     sub_hierarchy:
       entity_type: Task
       filters: *filter_by_omit_hold
