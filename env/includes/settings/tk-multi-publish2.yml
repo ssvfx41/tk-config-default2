@@ -262,6 +262,10 @@ settings.tk-multi-publish2.maya.asset_step:
     hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/maya/publish_ma_file.py"
     settings:
       Publish Template: maya_asset_publish
+  - name: Publish Playblast
+    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/maya/publish_playblast.py"
+    settings:
+      Publish Template: resolve_asset_review_mov
   help_url: *help_url
   location: "@apps.tk-multi-publish2.location"
 
@@ -314,6 +318,10 @@ settings.tk-multi-publish2.maya.shot_step:
     hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/maya/publish_ma_file.py"
     settings:
       Publish Template: maya_shot_publish
+  - name: Publish Playblast
+    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/maya/publish_playblast.py"
+    settings:
+      Publish Template: resolve_shot_review_mov
   help_url: *help_url
   location: "@apps.tk-multi-publish2.location"
 
