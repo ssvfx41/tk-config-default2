@@ -41,23 +41,23 @@
 # core, this requirement has been lifted and the root can be named anything.
 # ------------------------------------------------------------------------------
 
-project_storage_pix:
+project_storage: {
+  description: 'Main project data storage, contains all Shots data and default project directories.',
 
-    description: A top-level root folder for production data. Project folders
-        will be created beneath this location.
+  # Paths are populated by the correct storage root during setup.
+  linux_path: /mnt/project_pipeline,
+  mac_path: null,
+  windows_path: \\pix_artist\project_pipeline,
 
-    # these paths will be populated by the associated local storage in Shotgun
-    # at setup time.
-    mac_path: null
-    linux_path: /mnt/project_pipeline
-    windows_path: \\pix_artist\project_pipeline
-    # If needed the storage ID can be explicitly set with the following key:
-    # shotgun_storage_id: {LocalStorage_entity_id}
+  # Indicates this is the default storage for templates where the storage isn't defined.
+  default: true
 
-    # indicates that this is the default storage root
-    default: true
+  # Storage ID is explicitly defined during setup with the following key:
+  # shotgun_storage_id: {LocalStorage_entity_id}
+  }
 
 asset_storage: {
+  description: 'Asset and caches project data storage, contains all Assets data and 3D Caches.',
   linux_path: /mnt/assets_assettest,
   mac_path: null,
   windows_path: \\pix_assets\assets_assettest
@@ -68,6 +68,13 @@ caches: {
   linux_path: /mnt/project_caches,
   mac_path: null, 
   windows_path: \\pix_assets\project_caches
+  }
+
+review: {
+  shotgun_storage_id: 3762,
+  linux_path: /mnt/project_review,
+  mac_path: null,
+  windows_path: \\pix_artist\project_review
   }
 
 records: {

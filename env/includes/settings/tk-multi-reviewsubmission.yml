@@ -19,7 +19,7 @@ includes:
 
 # asset
 settings.tk-multi-reviewsubmission.nuke.asset:
-  movie_path_template: nuke_asset_render_movie
+  movie_path_template: nuke_asset_render_mov
   slate_logo: icons/review_submit_logo.png
   location: "@apps.tk-multi-reviewsubmission.location"
 

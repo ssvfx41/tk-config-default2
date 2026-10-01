@@ -2,30 +2,29 @@
 #####  OUTSOURCE SUBMITTER TEMPLATES  #####
 ###########################################
 
+# TODO: Not in use, commenting out and will remove after testing.
 keys:
     underscore_name:
         type: str
         filter_by: '^[0-9a-zA-Z_]+$'
 
-# strings:
-#     outsource_name: '{Shot}_{outsource_task}_v{version}'
-#     outsource_descriptor_name: '{Shot}_{name}_v{version}'
-
+# TODO: None of these are referenced, can they be removed? Remove from includes.
 paths:
     ### Shot Locations ###
-    shot_submission_json_file: 
+    shot_submission_json_file:
         definition: '@processing_root/temp/json/submissions/{Shot}/{Shot}_{task_name}[_{maya.techpass_name}][_{underscore_name}]_v{version}.json'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
 
     ### Asset Locations ###
-    asset_submission_json_file: 
+    asset_submission_json_file:
         definition: '@processing_root/temp/json/submissions/{sg_asset_type}/{Asset}/{Asset}_{task_name}[_{maya.techpass_name}][_{underscore_name}]_v{version}.json'
-        root_name: 'project_storage_pix'
+        root_name: 'project_storage'
 
     ### Review Locations ###
-    resolve_shot_review_mov: 
-        definition: 'editorial/resolve/review/{YYYY}{MM}{DD}_Resolve_Review/{ampm}/{Shot}_{task_name}[_{maya.techpass_name}][_{underscore_name}][_{process}]_v{version}.mov'
-        root_name: 'project_storage_pix'
-    resolve_asset_review_mov: 
-        definition: 'editorial/resolve/review/{YYYY}{MM}{DD}_Resolve_Review/{ampm}/{Asset}_{task_name}[_{maya.techpass_name}][_{underscore_name}][_{process}]_v{version}.mov'
-        root_name: 'project_storage_pix'
+    resolve_shot_review_mov:
+        definition: '@shot_review_root/resolve/review/{Shot}_{task_name}[_{maya.techpass_name}][_{underscore_name}][_{process}]_v{version}.mov'
+        root_name: 'review'
+
+    resolve_asset_review_mov:
+        definition: '@asset_review_root/resolve/review/{Asset}_{task_name}[_{maya.techpass_name}][_{underscore_name}][_{process}]_v{version}.mov'
+        root_name: 'review'
