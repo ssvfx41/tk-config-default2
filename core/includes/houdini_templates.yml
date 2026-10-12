@@ -137,10 +137,13 @@ paths:
         definition: '@houdini_shot_publish_area/@houdini_shot_hipfile.{houdini_extension}'
         root_name: 'project_storage_pix'
     houdini_shot_node_param_publish:
-        definition: '@houdini_shot_publish_area/{Shot}_{task_name}[_{name}]_v{version}/node/{houdini.node}/{houdini.context}/{houdini.node.type}.idx'
+        definition: '@houdini_shot_publish_area/{Shot}_{task_name}[_{name}]_v{version}/node/{houdini.node}/{houdini.context}/{houdini.node.type}.preset'
         root_name: 'project_storage_pix'
     houdini_shot_node_network_publish:
         definition: '@houdini_shot_publish_area/{Shot}_{task_name}[_{name}]_v{version}/{houdini.context}/{houdini.node}/{houdini.node}.cpio'
+        root_name: 'project_storage_pix'
+    houdini_shot_node_publish:
+        definition: '@houdini_shot_export_publish_root/nodeSingle/{Shot}_{task_name}[_{name}]_v{version}/{houdini.context}/{houdini.node}/{houdini.node}.cpio'
         root_name: 'project_storage_pix'
     ######################################## ASSET WORK
     # define the location of a work area
@@ -169,6 +172,10 @@ paths:
     houdini_asset_node_network_publish:
         definition: '@houdini_asset_publish_area/{Asset}_{task_name}[_{name}]_v{version}/{houdini.context}/{houdini.node}/{houdini.node}.cpio'
         root_name: 'asset_storage'
+    houdini_asset_node_publish:
+        definition: '@houdini_asset_export_publish_root/nodeSingle/{Asset}_{task_name}[_{name}]_v{version}/{houdini.context}/{houdini.node}/{houdini.node}.cpio'
+        root_name: 'asset_storage'
+
     ######################################## SHOT OUTPUT
     # Rendered images go to render root
     houdini_shot_render_step:
