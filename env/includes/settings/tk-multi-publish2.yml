@@ -219,6 +219,8 @@ settings.tk-multi-publish2.maya.asset_step:
       Work Template: maya_asset_work
       Generated ABC Template: maya_asset_cache_alembic_file
       Generated ASS Template: maya_asset_cache_standin_file
+      Playblast Seq Template: maya_asset_playblast_publishing
+      Playblast Mov Template: resolve_asset_review_mov
   publish_plugins:
   - name: Begin file versioning
     hook: "{engine}/tk-multi-publish2/basic/start_version_control.py"
@@ -263,7 +265,7 @@ settings.tk-multi-publish2.maya.asset_step:
     settings:
       Publish Template: maya_asset_publish
   - name: Publish Playblast
-    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/maya/publish_playblast.py"
+    hook: "{self}/upload_version.py:{config}/tk-multi-publish2/basic/maya/publish_playblast.py"
     settings:
       Publish Template: resolve_asset_review_mov
   help_url: *help_url
@@ -277,6 +279,8 @@ settings.tk-multi-publish2.maya.shot_step:
       Work Template: maya_shot_work
       Generated ABC Template: maya_shot_cache_alembic_abc
       Generated ASS Template: maya_shot_cache_standin_ass
+      Playblast Seq Template: maya_shot_playblast_publishing
+      Playblast Mov Template: resolve_shot_review_mov
   publish_plugins:
   - name: Begin file versioning
     hook: "{engine}/tk-multi-publish2/basic/start_version_control.py"
@@ -319,9 +323,9 @@ settings.tk-multi-publish2.maya.shot_step:
     settings:
       Publish Template: maya_shot_publish
   - name: Publish Playblast
-    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/maya/publish_playblast.py"
+    hook: "{self}/upload_version.py:{config}/tk-multi-publish2/basic/maya/publish_playblast.py"
     settings:
-      Publish Template: resolve_shot_review_mov
+      Publish Template: {}
   help_url: *help_url
   location: "@apps.tk-multi-publish2.location"
 
