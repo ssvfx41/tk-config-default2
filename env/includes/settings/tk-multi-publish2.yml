@@ -141,9 +141,13 @@ settings.tk-multi-publish2.houdini.asset_step:
     settings:
         Publish Template: houdini_asset_publish
   - name: Publish Node Preset
-    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/houdini/publish_node.py"
+    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/houdini/publish_node_preset.py"
     settings:
       Publish Template: houdini_asset_node_param_publish
+  - name: Publish Node
+    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/houdini/publish_node.py"
+    settings:
+      Publish Template: houdini_asset_node_publish
   - name: Publish Node Network
     hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/houdini/publish_node_network.py"
     settings:
@@ -175,9 +179,13 @@ settings.tk-multi-publish2.houdini.shot_step:
     settings:
         Publish Template: houdini_shot_publish
   - name: Publish Node Preset
-    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/houdini/publish_node.py"
+    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/houdini/publish_node_preset.py"
     settings:
       Publish Template: houdini_shot_node_param_publish
+  - name: Publish Node
+    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/houdini/publish_node.py"
+    settings:
+      Publish Template: houdini_shot_node_publish
   - name: Publish Node Network
     hook: "{self}/publish_file.py:{config}/tk-multi-publish2/basic/houdini/publish_node_network.py"
     settings:
