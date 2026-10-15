@@ -44,6 +44,7 @@ except ImportError:
         for source_root in source_roots:
             sg_path = os.path.join(root_path, source_root, "ssvfx_sg")
             if not os.path.exists(sg_path):
+                sg_path = None
                 continue
 
             sys.path.append(os.path.normpath(sg_path))
