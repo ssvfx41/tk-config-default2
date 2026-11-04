@@ -35,7 +35,7 @@ keys:
         type: str
         filter_by: alphanumeric
         default: rgba
-
+        
     houdini_ext:
         type: str
         filter_by: '^(geo|bgeo|ifd|vdb)(\.gz|\.sc)?$'
@@ -276,11 +276,20 @@ paths:
 
     # Node Param Exports.
     houdini_shot_node_param_publish:
-        definition: '@houdini_shot_export_publish_root/node/{Shot}_{task_name}[_{name}]_v{version}/{houdini.context}/{houdini.node}/{houdini.node.type}.idx'
+        definition: '@houdini_shot_export_publish_root/node/{Shot}_{task_name}[_{name}]_v{version}/{houdini.context}/{houdini.node}/{houdini.node.type}.preset'
         root_name: 'project_storage'
 
     houdini_asset_node_param_publish:
         definition: '@houdini_asset_export_publish_root/node/{Asset}_{task_name}[_{name}]_v{version}/{houdini.context}/{houdini.node}/{houdini.node.type}.preset'
+        root_name: 'asset_storage'
+
+    # Node publish
+    houdini_shot_node_publish:
+        definition: '@houdini_shot_export_publish_root/nodeSingle/{Shot}_{task_name}[_{name}]_v{version}/{houdini.context}/{houdini.node}/{houdini.node}.cpio'
+        root_name: 'project_storage_pix'
+
+    houdini_asset_node_publish:
+        definition: '@houdini_asset_export_publish_root/nodeSingle/{Asset}_{task_name}[_{name}]_v{version}/{houdini.context}/{houdini.node}/{houdini.node}.cpio'
         root_name: 'asset_storage'
 
     # Node Network Exports.
