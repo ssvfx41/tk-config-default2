@@ -6,35 +6,6 @@ keys:
         type: str
         filter_by: alphanumeric
 
-#    plate.variant:
-#        alias: variant
-#        type: str
-#        filter_by: alphanumeric
-
-#    plate.res:
-#        alias: resolution
-#        type: str
-#        filter_by: alphanumeric
-
-#strings:
-#    # when a review Version in Shotgun is created inside of Nuke, this is the
-#    # name that is being given to it (the code field)
-#    nuke_quick_shot_version_name: "{Shot}_DAILIES_{iteration}"
-#    nuke_quick_asset_version_name: "{Asset}_DAILIES_{iteration}"
-#
-#    nuke_shot_version_name: "{Shot}_{nuke.output}_v{version}.{iteration}"
-#    nuke_asset_version_name: "{Asset}_{nuke.output}_v{version}.{iteration}"
-#
-#    # non-version shot strings
-#    shot_denoise_string: "{Shot}_denoise_{task_name}[_{nuke.output}]_v{version}"
-#    shot_stmap_string: "{Shot}_STMap_{task_name}[_{nuke.output}]_v{version}"
-#    shot_smartvector_string: "{Shot}_SmartVector_{task_name}[_{nuke.output}]_v{version}"
-#
-#    # non-version asset strings
-#    asset_denoise_string: "{Asset}_denoise_{task_name}[_{nuke.output}]_v{version}"
-#    asset_stmap_string: "{Asset}_STMap_{task_name}[_{nuke.output}]_v{version}"
-#    asset_smartvector_string: "{Asset}_SmartVector_{task_name}[_{nuke.output}]_v{version}"
-
 paths:
     ##############
     # Work Files #
@@ -84,25 +55,9 @@ paths:
         definition: '@nuke_asset_publish_area/{Asset}_{task_name}[_{name}]_v{version}.nk'
         root_name: 'asset_storage'
 
-#    # The location of WIP script files
-#    # TODO: Not in use, commenting out and will remove after testing.
-#    nuke_shot_submission_root:
-#        definition: '@shot_task_root/submission/nuke/'
-#        root_name: 'project_storage'
-
-#    # TODO: These are ancient templates, not currently in use. All references are commented out for testing.
-#    nuke_review_template:
-#        definition: 'admin/outgoing/submissions/nuke_script/nuke_submission_review.nk'
-#        root_name: 'project_storage'
-#
-#    nuke_review_template2:
-#        definition: 'admin/processing/nuke_scripts/processing_review.nk'
-#        root_name: 'project_storage'
-
     ###########
     # Exports #
     ###########
-
     # Retime FCurve exports.
     shot_retime_curve:
         definition: '@shot_export_publish_root/nuke/retime/{Shot}_[{name}_]v{version}.txt'
@@ -111,13 +66,6 @@ paths:
     ###########
     # Renders #
     ###########
-
-    # ### Shot Output Templates
-#    # TODO: Duplicate template, either replace or add dcc.
-#    nuke_shot_render_area:
-#        definition: '@shot_root/renders'
-#        root_name: 'project_storage'
-
     # Render working location.
     nuke_shot_render_root:
         definition: '@shot_render_root/nuke'
@@ -126,40 +74,6 @@ paths:
     nuke_asset_render_root:
         definition: '@asset_render_root/nuke'
         root_name: 'asset_storage'
-
-#    # sequence render roots
-#    # TODO: check if directory template is needed for renders.
-#    nuke_shot_render_root:
-#        definition: '@shot_render_root/nuke/{task_name}/version/{Shot}_{task_name}[_{nuke.output}]_v{version}'
-#        root_name: 'project_storage'
-#
-#    nuke_asset_render_root:
-#        definition: '@asset_render_root/nuke/{task_name}/version/{Asset}_{task_name}[_{nuke.output}]_v{version}'
-#        root_name: 'asset_storage'
-
-#    nuke_shot_render_pub_root:
-#        definition: '@shot_render_root/nuke/{task_name}/publish/{Shot}_{task_name}_v{version}'
-#        root_name: 'project_storage'
-#
-#    nuke_shot_element_render_root:
-#        definition: '@shot_render_root/nuke/{task_name}/element/{Shot}_elem[_{nuke.output}]_v{version}'
-#        root_name: 'project_storage'
-#
-#    nuke_shot_denoise_render_root:
-#        definition: '@shot_render_root/nuke/element/denoise/{Shot}_denoise_{task_name}[_{nuke.output}]_v{version}'
-#        root_name: 'project_storage'
-#
-#    nuke_shot_stmap_render_root:
-#        definition: '@shot_render_root/nuke/element/STMap/{Shot}_STMap_{task_name}[_{nuke.output}]_v{version}'
-#        root_name: 'project_storage'
-#
-#    nuke_shot_smartvector_render_root:
-#        definition: '@shot_render_root/nuke/element/SmartVector/{Shot}_SmartVector_{task_name}[_{nuke.output}]_v{version}'
-#        root_name: 'project_storage'
-#
-#    nuke_shot_test_render_root:
-#        definition: '@temp_shot_root/renders/nuke/{task_name}/test/{Shot}_test[_{nuke.output}]_v{version}'
-#        root_name: 'project_storage'
 
     # Working version outputs.
     # JPEGs
@@ -498,34 +412,3 @@ paths:
     nuke_asset_render_filmstrip:
         definition: '@asset_review_root/filmstrip/{Asset}_{task_name}[_{name}]_v{version}.png'
         root_name: 'review'
-
-
-#    # TODO: Not in use, commenting out and will remove after testing.
-#    nuke_asset_render_movie:
-#        definition: '@temp_asset_render_root/nuke/{task_name}/review/{Asset}_{task_name}_review[_{nuke.output}]_v{version}/{Asset}_{nuke.output}_v{version}.mov'
-#        root_name: 'review'
-#
-#    nuke_asset_quicktime_quick:
-#        definition: '@temp_asset_render_root/nuke/{task_name}/review/quickdaily/{Asset}_{task_name}_v{version}/{Asset}_{name}_{iteration}.mov'
-#        root_name: 'review'
-
-    # ### Asset Output Templates
-#    nuke_asset_publish_root:
-#        definition: '@asset_render_root/nuke/{task_name}/publish'
-#        root_name: 'asset_storage'
-#
-#    nuke_asset_element_render_root:
-#        definition: '@asset_render_root/nuke/{task_name}/element/{Asset}_elem[_{nuke.output}]_v{version}'
-#        root_name: 'asset_storage'
-#
-#    nuke_asset_denoise_render_root:
-#        definition: '@asset_render_root/nuke/element/denoise/{Asset}_denoise_{task_name}[_{nuke.output}]_v{version}'
-#        root_name: 'asset_storage'
-#
-#    nuke_asset_stmap_render_root:
-#        definition: '@asset_render_root/nuke/element/STMap/{Asset}_STMap_{task_name}[_{nuke.output}]_v{version}'
-#        root_name: 'asset_storage'
-#
-#    nuke_asset_smartvector_render_root:
-#        definition: '@asset_render_root/nuke/element/SmartVector/{Asset}_SmartVector_{task_name}[_{nuke.output}]_v{version}'
-#        root_name: 'asset_storage'

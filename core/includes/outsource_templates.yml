@@ -5,7 +5,6 @@
 keys:
     outsource_render:
         type: str
-        # choices: ['nuke', 'renders', 'UD']
         filter_by: '^[0-9a-zA-Z-]+$'
 
     outsource_task:
@@ -15,10 +14,6 @@ keys:
         choices: ['matchmove', 'DMP']
         default: matchmove
         alias: task_name
-
-#strings:
-#    outsource_name: '{Shot}_{outsource_task}_v{version}'
-#    outsource_descriptor_name: '{Shot}_{name}_v{version}'
 
 paths:
     incoming_outsource_shot_folder_root:

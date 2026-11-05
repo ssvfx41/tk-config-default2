@@ -20,31 +20,6 @@
 # this file. For more information, see the Shotgun Pipeline Toolkit Documentation.
 
 keys:
-# TODO: Not in use, commenting out and will remove after testing.
-#    3dequalizer.lens_name:
-#        type: str
-#        filter_by: '^[0-9a-zA-Z_]+$'
-
-#    3dequalizer.camera_name:
-#        type: str
-#        filter_by: '^[0-9a-zA-Z_]+$'
-
-#    3dequalizer.dist_name:
-#        type: str
-#        filter_by: '^[0-9a-zA-Z_]+$'
-
-#    3dequalizer.pointGroup_name:
-#        type: str
-#        filter_by: '^[0-9a-zA-Z_]+$'
-
-#    # 3dequalizer supports two extension types.
-#    3dequalizer_extension:
-#        type: str
-#        choices:
-#            3de: 3dequalizer Project (.3de)
-#        default: 3de
-#        alias: extension
-
     3DESEQ:
         type: sequence
         format_spec: "04"
@@ -147,15 +122,6 @@ paths:
     ####################
     # Exports / Caches #
     ####################
-    # 3DE caches root.
-#    3de_shot_cache_root:
-#        definition: '@shot_cache_root/3de'
-#        root_name: 'caches'
-#
-#    3de_asset_cache_root:
-#        definition: '@asset_cache_root/3de'
-#        root_name: 'caches'
-
     3de_shot_export_publish_root:
         definition: '@shot_export_publish_root/3de'
         root_name: 'project_storage'
@@ -186,17 +152,3 @@ paths:
     3de_asset_lens_publish:
         definition: '@3de_asset_export_publish_root/lens/{Asset}_{task_name}_[{name}_]v{version}.txt'
         root_name: 'asset_storage'
-
-#    # TODO: Not in use, commenting out and will remove after testing.
-#    # Render location for asset renders
-#    3dequalizer_asset_renders_step:
-#        definition: '@asset_render_root/3dequalizera/{task_name}/version'
-#        root_name: 'asset_storage'
-#
-#    3dequalizer_asset_renders_stub:
-#        definition: '@asset_render_root/3dequalizer/{task_name}/version/{Asset}_{task_name}[_{name}]_v{version}'
-#        root_name: 'asset_storage'
-#
-#    3dequalizer_deadline_temp:
-#        definition: 'admin/processing/temp/deadline'
-#        root_name: 'project_storage'

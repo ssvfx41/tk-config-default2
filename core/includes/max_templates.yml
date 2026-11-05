@@ -9,7 +9,6 @@ keys:
         type: str
         filter_by: alphanumeric
 
-paths:
     ##############
     # Work Files #
     ##############
@@ -106,10 +105,6 @@ paths:
     max_asset_render_png:
         definition: '@max_asset_render_publish_root/version/{Asset}_{task_name}[_{3dsmax.render.output}]_v{version}/{Asset}_{task_name}[_{3dsmax.render.output}]_v{version}.png'
         root_name: 'asset_storage'
-
-#    max_shot_render_exr_pub:
-#        definition: '@shot_render_root/3dsmax/{task_name}/publish/{Shot}_{task_name}_v{version}/{Shot}_{task_name}_v{version}.exr'
-#        root_name: 'project_storage'
 
     ##########
     # Caches #

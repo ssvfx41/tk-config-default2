@@ -52,13 +52,6 @@ keys:
         default: "$F4"
         alias: HSEQ
 
-#    HSEQ1:
-#        type: str
-
-#    point_cache_ext:
-#        type: str
-#        filter_by: '^(pc2|obj|geo|bgeo|bgeo.gz|pc)$'
-
     # Houdini supports three extension types.
     houdini_extension:
         type: str
@@ -78,18 +71,6 @@ keys:
     houdini.node.type:
         type: str
         alias: type
-
-#strings:
-#    # Houdini Workfile names minus the file extension
-#    # Asset work file name
-#    houdini_asset_hipfile: "{Asset}_{task_name}_[{name}_]v{version}"
-#    houdini_asset_node_outfile: "{Asset}_{task_name}[_{name}][_{houdini.node}]_v{version}"
-#    houdini_asset_node_version: "{Asset}_{task_name}[_{houdini.node}]_v{version}"
-#
-#    # Shot work file names
-#    houdini_shot_hipfile: "{Shot}_{task_name}_[{name}_]v{version}"
-#    houdini_shot_node_outfile: "{Shot}_{task_name}[_{name}][_{houdini.node}]_v{version}"
-#    houdini_shot_node_version: "{Shot}_{task_name}[_{houdini.node}]_v{version}"
 
 # The paths section contains all the key locations where files are to be stored
 # by Sgtk Apps. Each path is made up of several keys (like {version} or {shot}) and
@@ -242,16 +223,6 @@ paths:
     houdini_asset_playblast_mov:
         definition: '@asset_review_root/houdini/playblast/[{name}_]v{version}/{Asset}_{task_name}[_{name}]_pb_v{version}.mov'
         root_name: 'review'
-
-#    # Temp root?
-#    # TODO: Why is this here? Not a temp location, doesn't make sense.
-#    houdini_shot_temp_root:
-#        definition: '@shot_root/renders/houdini/{task_name}'
-#        root_name: 'project_storage'
-#
-#    houdini_asset_temp_root:
-#        definition: '@asset_root/renders/houdini/{task_name}'
-#        root_name: 'asset_storage'
 
     ###########
     # Exports #
@@ -490,58 +461,3 @@ paths:
     houdini_asset_temp_render_cache:
         definition: '@houdini_asset_cache_root/render/{cache_type}/{Asset}_{task_name}_[{name}_]v{version}/[{houdini.node}/]{Asset}_{task_name}[_{houdini.node}]_v{version}.{HSEQ}.{cache_type}'
         root_name: 'caches'
-
-    # -----------------------------------------------------------------------
-#    # houdini_cache_root: shots/cache
-#    # Asset Context = assets/{sg_asset_type}/{Asset}
-#    houdini_cache_shot_root:
-#        definition: '@shot_root/houdini/{task_name}/caches'
-#        root_name: 'project_storage'
-#
-#    houdini_cache_asset_root:
-#        definition: '@asset_root/pipeline_task/{task_name}/caches/houdini'
-#        root_name: 'asset_storage'
-
-    # ### Shot Output Templates
-#    # Rendered images go to render root
-#    houdini_shot_render_step:
-#        definition: '@shot_render_root/houdini/{task_name}'
-#        root_name: 'project_storage'
-#
-#    houdini_shot_render_root:
-#        definition: '@houdini_shot_render_step_ver/@houdini_shot_hipfile'
-#        root_name: 'project_storage'
-
-    # Playblast output
-#    houdini_shot_playblast_output:
-#        definition: '@houdini_shot_playblast_root/@houdini_shot_hipfile/{Shot}_{task_name}[_{name}]_pb_v{version}'
-#        root_name: 'project_storage'
-
-    # ### Asset Output Templates
-#    # Rendered images
-#    houdini_asset_render_step:
-#        definition: '@asset_render_root/houdini/{task_name}'
-#        root_name: 'asset_storage'
-#
-#    houdini_asset_render_root:
-#        definition: '@houdini_asset_render_step_ver/@houdini_asset_hipfile'
-#        root_name: 'asset_storage'
-
-    # Alembic caches
-    # /assets/{sg_asset_type}/{Asset}/pipeline_task/{task_name}/caches/houdini/
-    # Asset render temp file
-#    # playblast output
-#    houdini_asset_playblast_output:
-#        definition: '@houdini_asset_playblast_root/@houdini_asset_hipfile/{Asset}_{task_name}[_{name}]_pb_v{version}'
-#        root_name: 'asset_storage'
-
-#    # ### Shot Caches Templates
-#    houdini_shot_cache_bgeo_area:
-#        definition: '@houdini_shot_cache_root/geometry/{Shot}_{task_name}_geometry-cache[_{name}]_v{version}'
-#        root_name: 'caches'
-#
-#    # ### Asset Caches Templates
-#    houdini_asset_cache_bgeo_area:
-#        definition: '@houdini_asset_cache_root/geometry/{Asset}_{task_name}_geometry-cache[_{name}]_v{version}'
-#        root_name: 'caches'
-
