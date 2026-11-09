@@ -325,7 +325,7 @@ class UploadVersionPlugin(HookBaseClass):
             item.properties['version_data'] = version_data
 
         # Get the output paths based on context 
-        nuke_review_template = publisher.engine.get_template_by_name("nuke_review_template2")
+        # nuke_review_template = publisher.engine.get_template_by_name("nuke_review_template2")
 
         resolve_fields = {
             'task_name': item.context.task['name'],
@@ -362,17 +362,17 @@ class UploadVersionPlugin(HookBaseClass):
                                                                          "%02d" % (now.day),
                                                                          str(ampm))
         temp_root = temp_root_template.apply_fields(resolve_fields)
-        nuke_review_file = nuke_review_template.apply_fields(fields)
+        # nuke_review_file = nuke_review_template.apply_fields(fields)
         review_process_json = review_process_json_template.apply_fields(fields)
 
         temp_root = re.sub("(\s+)", "-", temp_root)
-        nuke_review_file = re.sub("(\s+)", "-", nuke_review_file)
+        # nuke_review_file = re.sub("(\s+)", "-", nuke_review_file)
         review_process_json = re.sub("(\s+)", "-", review_process_json)
 
         self.logger.debug("Using review JSON: %s" % (review_process_json))
         self.test_template(item, temp_root, 'temp_root')
         self.test_template(item, review_process_json, 'review_process_json')
-        self.test_template(item, nuke_review_file, 'nuke_review_script')
+        # self.test_template(item, nuke_review_file, 'nuke_review_script')
 
         # Get entity info from SG
         entity_filter = [

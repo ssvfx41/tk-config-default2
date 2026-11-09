@@ -1,38 +1,69 @@
 paths:
-    ## Workfiles
-    # The location of WIP script files
-    psd_asset_work:
-        definition: '@asset_root/psd/{Asset}_{task_name}[_{name}]_v{version}.psd'
-        root_name: 'asset_storage'
+    ##############
+    # Work Files #
+    ##############
+    # Artist working files.
     psd_shot_work:
-        definition: '@shot_root/psd/{Shot}_{task_name}[_{name}]_v{version}.psd'
-        root_name: 'project_storage_pix'
-    # The location of backups of WIP files
-    psd_shot_snapshot:
-        definition: '@shot_root/nuke/snapshots/{Shot}_{task_name}[_{name}]_v{version}.{timestamp}.psd'
-        root_name: 'project_storage_pix'
+        definition: '@shot_work_file_root/psd/{Shot}_{task_name}[_{name}]_v{version}.psd'
+        root_name: 'project_storage'
 
-    ## Output
-    # Asset
-    psd_asset_version_dpx:
-        definition: '@asset_render_root/psd/{task_name}/version/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}[_{name}]_v{version}.dpx'
+    psd_asset_work:
+        definition: '@asset_work_file_root/psd/{Asset}_{task_name}[_{name}]_v{version}.psd'
         root_name: 'asset_storage'
-    psd_asset_version_exr:
-        definition: '@asset_render_root/psd/{task_name}/version/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}[_{name}]_v{version}.exr'
+
+    # Location of temporary snapshots.
+    psd_shot_snapshot:
+        definition: '@shot_work_file_root/psd/snapshots/{Shot}_{task_name}[_{name}]_v{version}.{timestamp}.psd'
+        root_name: 'project_storage'
+
+    psd_asset_snapshot:
+        definition: '@asset_work_file_root/psd/snapshots/{Shot}_{task_name}[_{name}]_v{version}.{timestamp}.psd'
         root_name: 'asset_storage'
-    psd_asset_version_jpeg:
-        definition: '@asset_render_root/psd/{task_name}/version/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}[_{name}]_v{version}.jpeg'
+
+    # Location of published work files.
+    psd_shot_work_publish:
+        definition: '@shot_work_file_publish_root/psd/{Shot}_{task_name}[_{name}]_v{version}.psd'
+        root_name: 'project_storage'
+
+    psd_asset_work_publish:
+        definition: '@asset_work_file_publish_root/psd/{Asset}_{task_name}[_{name}]_v{version}.psd'
         root_name: 'asset_storage'
-    # Shot
-    psd_shot_version_dpx:
-        definition: '@render_root/psd/{task_name}/version/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}[_{name}]_v{version}.{SEQ}.dpx'
-        root_name: 'project_storage_pix'
-    psd_shot_version_exr:
-        definition: '@render_root/psd/{task_name}/version/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}[_{name}]_v{version}.{SEQ}.exr'
-        root_name: 'project_storage_pix'
+
+    ###########
+    # Renders #
+    ###########
+    # JPEGs
     psd_shot_version_jpeg:
-        definition: '@render_root/psd/{task_name}/version/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}[_{name}]_v{version}.{SEQ}.jpeg'
-        root_name: 'project_storage_pix'
+        definition: '@shot_render_publish_root/psd/version/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}[_{name}]_v{version}.{SEQ}.jpeg'
+        root_name: 'project_storage'
+
+    psd_asset_version_jpeg:
+        definition: '@asset_render_publish_root/psd/version/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}[_{name}]_v{version}.jpeg'
+        root_name: 'asset_storage'
+
+    # DPXs
+    psd_shot_version_dpx:
+        definition: '@shot_render_publish_root/psd/version/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}[_{name}]_v{version}.{SEQ}.dpx'
+        root_name: 'project_storage'
+
+    psd_asset_version_dpx:
+        definition: '@asset_render_publish_root/psd/version/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}[_{name}]_v{version}.dpx'
+        root_name: 'asset_storage'
+
+    # EXRs
+    psd_shot_version_exr:
+        definition: '@shot_render_publish_root/psd/version/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}[_{name}]_v{version}.{SEQ}.exr'
+        root_name: 'project_storage'
+
+    psd_asset_version_exr:
+        definition: '@asset_render_publish_root/psd/version/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}[_{name}]_v{version}.exr'
+        root_name: 'asset_storage'
+
+    # TIFs
     psd_shot_version_tif:
-        definition: '@render_root/psd/{task_name}/version/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}[_{name}]_v{version}.{SEQ}.tif'
-        root_name: 'project_storage_pix'
+        definition: '@shot_render_publish_root/psd/version/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}[_{name}]_v{version}.{SEQ}.tif'
+        root_name: 'project_storage'
+
+    psd_asset_version_tif:
+        definition: '@asset_render_publish_root/psd/version/{Shot}_{task_name}[_{name}]_v{version}/{Shot}_{task_name}[_{name}]_v{version}.{SEQ}.tif'
+        root_name: 'asset_storage'
