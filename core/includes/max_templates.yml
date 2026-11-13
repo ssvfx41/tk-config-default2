@@ -9,6 +9,7 @@ keys:
         type: str
         filter_by: alphanumeric
 
+paths:
     ##############
     # Work Files #
     ##############
